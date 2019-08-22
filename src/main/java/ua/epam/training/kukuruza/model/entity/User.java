@@ -3,7 +3,7 @@ package ua.epam.training.kukuruza.model.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class UserEntity implements Serializable {
+public class User implements Serializable {
     private Long id;
     private String login;
     private String password;
@@ -84,17 +84,17 @@ public class UserEntity implements Serializable {
             return this;
         }
 
-        public UserEntity build() {
-            return new UserEntity(id, login, password, firstName, secondName, gender,
+        public User build() {
+            return new User(id, login, password, firstName, secondName, gender,
                     year, email, phone, passportCode, userTypeId);
         }
     }
 
-    public UserEntity() {
+    public User() {
     }
 
-    public UserEntity(Long id, String login, String password, String firstName, String secondName, String gender,
-                      String year, String email, String phone, String passportCode, Integer userTypeId) {
+    public User(Long id, String login, String password, String firstName, String secondName, String gender,
+                String year, String email, String phone, String passportCode, Integer userTypeId) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -198,7 +198,7 @@ public class UserEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "UserEntity{" +
+        return "User{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
@@ -223,7 +223,7 @@ public class UserEntity implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
+        User that = (User) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(login, that.login) &&
                 Objects.equals(password, that.password) &&

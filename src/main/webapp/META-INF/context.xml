@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Context path="/" reloadable="true">
+    <Resource name="jdbc/uas_db" auth="Container" type="javax.sql.DataSource"
+              maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+              username="root" password="root" driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/uas_db?useTimezone=true&amp;serverTimezone=UTC"/>
+</Context>

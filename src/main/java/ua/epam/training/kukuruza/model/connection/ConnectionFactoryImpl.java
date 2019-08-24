@@ -40,7 +40,8 @@ public class ConnectionFactoryImpl implements IConnectionFactory {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
             DataSource ds = (DataSource) envContext.lookup("jdbc/uas_db");
-            return new ConnectionFactoryImpl(ds);
+            DataSourceProxy dsProxy = new DataSourceProxy(ds);
+            return new ConnectionFactoryImpl(dsProxy);
         } catch (NamingException e) {
             LOGGER.debug("Fail creating instance", e);
             throw new ConnectionException(e);

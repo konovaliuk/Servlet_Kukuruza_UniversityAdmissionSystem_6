@@ -10,7 +10,7 @@ public class User implements Serializable {
     private String firstName;
     private String secondName;
     private String gender;
-    private String year;
+    private Short year;
     private String email;
     private String phone;
     private String passportCode;
@@ -23,7 +23,7 @@ public class User implements Serializable {
         private String firstName;
         private String secondName;
         private String gender;
-        private String year;
+        private Short year;
         private String email;
         private String phone;
         private String passportCode;
@@ -59,7 +59,7 @@ public class User implements Serializable {
             return this;
         }
 
-        public Builder setYear(String year) {
+        public Builder setYear(Short year) {
             this.year = year;
             return this;
         }
@@ -94,7 +94,7 @@ public class User implements Serializable {
     }
 
     public User(Long id, String login, String password, String firstName, String secondName, String gender,
-                String year, String email, String phone, String passportCode, Integer userTypeId) {
+                Short year, String email, String phone, String passportCode, Integer userTypeId) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -156,11 +156,11 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public String getYear() {
+    public Short getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(Short year) {
         this.year = year;
     }
 

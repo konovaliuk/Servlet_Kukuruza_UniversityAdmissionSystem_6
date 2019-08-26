@@ -13,5 +13,5 @@ public interface IDaoGeneric<T, PK extends Serializable> {
 
     void update(T entity);
 
-    void delete(PK id);
+    boolean delete(PK id);
 }

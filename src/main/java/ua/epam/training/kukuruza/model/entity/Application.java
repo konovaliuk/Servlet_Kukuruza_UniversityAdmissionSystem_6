@@ -6,14 +6,12 @@ import java.util.Objects;
 public class Application implements Serializable {
     private Long userId;
     private Integer rating;
-    private Integer universityId;
-    private Integer specialtyId;
+    private Long specialtyUniversityLimitId;
 
     public static class Builder {
         private Long userId;
         private Integer rating;
-        private Integer universityId;
-        private Integer specialtyId;
+        private Long specialtyUniversityLimitId;
 
         public Builder setUserId(Long userId) {
             this.userId = userId;
@@ -25,29 +23,23 @@ public class Application implements Serializable {
             return this;
         }
 
-        public Builder setUniversityId(Integer universityId) {
-            this.universityId = universityId;
-            return this;
-        }
-
-        public Builder setSpecialtyId(Integer specialtyId) {
-            this.specialtyId = specialtyId;
+        public Builder setSpecialtyUniversityLimitId(Long specialtyUniversityLimitId) {
+            this.specialtyUniversityLimitId = specialtyUniversityLimitId;
             return this;
         }
 
         public Application build() {
-            return new Application(userId, rating, universityId, specialtyId);
+            return new Application(userId, rating, specialtyUniversityLimitId);
         }
     }
 
     public Application() {
     }
 
-    public Application(Long userId, Integer rating, Integer universityId, Integer specialtyId) {
+    public Application(Long userId, Integer rating, Long specialtyUniversityLimitId) {
         this.userId = userId;
         this.rating = rating;
-        this.universityId = universityId;
-        this.specialtyId = specialtyId;
+        this.specialtyUniversityLimitId = specialtyUniversityLimitId;
     }
 
     public Long getUserId() {
@@ -66,20 +58,12 @@ public class Application implements Serializable {
         this.rating = rating;
     }
 
-    public Integer getUniversityId() {
-        return universityId;
+    public Long getSpecialtyUniversityLimitId() {
+        return specialtyUniversityLimitId;
     }
 
-    public void setUniversityId(Integer universityId) {
-        this.universityId = universityId;
-    }
-
-    public Integer getSpecialtyId() {
-        return specialtyId;
-    }
-
-    public void setSpecialtyId(Integer specialtyId) {
-        this.specialtyId = specialtyId;
+    public void setSpecialtyUniversityLimitId(Long specialtyUniversityLimitId) {
+        this.specialtyUniversityLimitId = specialtyUniversityLimitId;
     }
 
     @Override
@@ -87,14 +71,13 @@ public class Application implements Serializable {
         return "Application{" +
                 "userId=" + userId +
                 ", rating=" + rating +
-                ", universityId=" + universityId +
-                ", specialtyId=" + specialtyId +
+                ", specialtyUniversityLimitId=" + specialtyUniversityLimitId +
                 '}';
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, rating, universityId, specialtyId);
+        return Objects.hash(userId, rating, specialtyUniversityLimitId);
     }
 
     @Override
@@ -104,7 +87,6 @@ public class Application implements Serializable {
         Application that = (Application) o;
         return Objects.equals(userId, that.userId) &&
                 Objects.equals(rating, that.rating) &&
-                Objects.equals(universityId, that.universityId) &&
-                Objects.equals(specialtyId, that.specialtyId);
+                Objects.equals(specialtyUniversityLimitId, that.specialtyUniversityLimitId);
     }
 }

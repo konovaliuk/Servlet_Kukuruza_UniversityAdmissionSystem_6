@@ -139,23 +139,10 @@ public class MySqlDaoHelper {
 
     private void setPrepareStatementParameters(PreparedStatement ps, Object... values) throws SQLException {
         for (int i = 0; i < values.length; i++) {
-            Object value = values[i];
-            int index = i + 1;
-
-            if (value instanceof String) {
-                ps.setString(index, (String) value);
-            } else if (value instanceof Integer) {
-                ps.setInt(index, (Integer) value);
-            } else if (value instanceof Long) {
-                ps.setLong(index, (Long) value);
-            } else if (value instanceof Short) {
-                ps.setShort(index, (Short) value);
-            } else if (value instanceof Timestamp) {
-                ps.setTimestamp(index, (Timestamp) value);
-            } else if (Objects.isNull(value)) {
-                throw new PersistenceException("Null value");
+            if (Objects.nonNull(values[i])) {
+                ps.setObject(i + 1, values[i]);
             } else {
-                throw new PersistenceException("Unsupported value type");
+                throw new PersistenceException("Null value");
             }
         }
     }

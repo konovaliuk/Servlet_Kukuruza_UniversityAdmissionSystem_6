@@ -3,7 +3,7 @@ package ua.epam.training.kukuruza.model.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class SpecialtyUniversityLimit implements Serializable {
+public class EducationOption implements Serializable {
     private Long id;
     private Integer universityId;
     private Integer specialtyId;
@@ -35,15 +35,15 @@ public class SpecialtyUniversityLimit implements Serializable {
             return this;
         }
 
-        public SpecialtyUniversityLimit build() {
-            return new SpecialtyUniversityLimit(id, universityId, specialtyId, studentLimit);
+        public EducationOption build() {
+            return new EducationOption(id, universityId, specialtyId, studentLimit);
         }
     }
 
-    public SpecialtyUniversityLimit() {
+    public EducationOption() {
     }
 
-    public SpecialtyUniversityLimit(Long id, Integer universityId, Integer specialtyId, Integer studentLimit) {
+    public EducationOption(Long id, Integer universityId, Integer specialtyId, Integer studentLimit) {
         this.id = id;
         this.universityId = universityId;
         this.specialtyId = specialtyId;
@@ -84,7 +84,7 @@ public class SpecialtyUniversityLimit implements Serializable {
 
     @Override
     public String toString() {
-        return "SpecialtyUniversityLimit{" +
+        return "EducationOption{" +
                 "id=" + id +
                 ", universityId=" + universityId +
                 ", specialtyId=" + specialtyId +
@@ -101,7 +101,7 @@ public class SpecialtyUniversityLimit implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SpecialtyUniversityLimit that = (SpecialtyUniversityLimit) o;
+        EducationOption that = (EducationOption) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(universityId, that.universityId) &&
                 Objects.equals(specialtyId, that.specialtyId) &&

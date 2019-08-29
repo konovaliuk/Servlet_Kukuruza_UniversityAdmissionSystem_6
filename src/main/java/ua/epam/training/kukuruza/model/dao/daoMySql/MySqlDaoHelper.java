@@ -139,11 +139,7 @@ public class MySqlDaoHelper {
 
     private void setPrepareStatementParameters(PreparedStatement ps, Object... values) throws SQLException {
         for (int i = 0; i < values.length; i++) {
-            if (Objects.nonNull(values[i])) {
-                ps.setObject(i + 1, values[i]);
-            } else {
-                throw new PersistenceException("Null value");
-            }
+            ps.setObject(i + 1, values[i]);
         }
     }
 

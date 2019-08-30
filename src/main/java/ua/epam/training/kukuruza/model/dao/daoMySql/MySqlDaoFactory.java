@@ -11,26 +11,30 @@ import java.util.Objects;
 public class MySqlDaoFactory extends AbstractDaoFactory {
     private static final Logger LOGGER = LogManager.getLogger(MySqlDaoFactory.class);
     private static MySqlDaoFactory instance;
-    private MySqlDaoUserType daoUserType;
-    private MySqlDaoUser daoUser;
-    private MySqlDaoUniversity daoUniversity;
-    private MySqlDaoSubject daoSubject;
-    private MySqlDaoSpecialty daoSpecialty;
-    private MySqlDaoRequest daoRequest;
-    private MySqlDaoGrade daoGrade;
-    private MySqlDaoExam daoExam;
-    private MySqlDaoEducationOption daoEducationOption;
+    private IDaoEducationOption daoEducationOption;
+    private IDaoExam daoExam;
+    private IDaoGrade daoGrade;
+    private IDaoRequest daoRequest;
+    private IDaoSpecialty daoSpecialty;
+    private IDaoSpecialtySubject daoSpecialtySubject;
+    private IDaoSubject daoSubject;
+    private IDaoUniversity daoUniversity;
+    private IDaoUser daoUser;
+    private IDaoUserExam daoUserExam;
+    private IDaoUserType daoUserType;
 
     private MySqlDaoFactory(IConnectionFactory cf) {
-        daoUserType = new MySqlDaoUserType(cf);
-        daoUser = new MySqlDaoUser(cf);
-        daoUniversity = new MySqlDaoUniversity(cf);
-        daoSubject = new MySqlDaoSubject(cf);
-        daoSpecialty = new MySqlDaoSpecialty(cf);
-        daoRequest = new MySqlDaoRequest(cf);
-        daoGrade = new MySqlDaoGrade(cf);
-        daoExam = new MySqlDaoExam(cf);
         daoEducationOption = new MySqlDaoEducationOption(cf);
+        daoExam = new MySqlDaoExam(cf);
+        daoGrade = new MySqlDaoGrade(cf);
+        daoRequest = new MySqlDaoRequest(cf);
+        daoSpecialty = new MySqlDaoSpecialty(cf);
+        daoSpecialtySubject = new MySqlDaoSpecialtySubject(cf);
+        daoSubject = new MySqlDaoSubject(cf);
+        daoUniversity = new MySqlDaoUniversity(cf);
+        daoUser = new MySqlDaoUser(cf);
+        daoUserExam = new MySqlDaoUserExam(cf);
+        daoUserType = new MySqlDaoUserType(cf);
     }
 
     public static MySqlDaoFactory getInstance() {
@@ -51,8 +55,8 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
     }
 
     @Override
-    public IDaoRequest getDaoRequest() {
-        return daoRequest;
+    public IDaoEducationOption getDaoEducationOption() {
+        return daoEducationOption;
     }
 
     @Override
@@ -66,13 +70,18 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
     }
 
     @Override
+    public IDaoRequest getDaoRequest() {
+        return daoRequest;
+    }
+
+    @Override
     public IDaoSpecialty getDaoSpecialty() {
         return daoSpecialty;
     }
 
     @Override
-    public IDaoEducationOption getDaoEducationOption() {
-        return daoEducationOption;
+    public IDaoSpecialtySubject getDaoSpecialtySubject() {
+        return daoSpecialtySubject;
     }
 
     @Override
@@ -88,6 +97,11 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
     @Override
     public IDaoUser getDaoUser() {
         return daoUser;
+    }
+
+    @Override
+    public IDaoUserExam getDaoUserExam() {
+        return daoUserExam;
     }
 
     @Override

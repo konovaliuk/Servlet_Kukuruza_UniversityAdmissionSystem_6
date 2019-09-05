@@ -11,5 +11,6 @@ public abstract class AbstractDaoFactory {
     public abstract IDaoUniversity getDaoUniversity();
     public abstract IDaoUser getDaoUser();
     public abstract IDaoUserExam getDaoUserExam();
+    public abstract IDaoUserStatus getDaoUserStatus();
     public abstract IDaoUserType getDaoUserType();
 }

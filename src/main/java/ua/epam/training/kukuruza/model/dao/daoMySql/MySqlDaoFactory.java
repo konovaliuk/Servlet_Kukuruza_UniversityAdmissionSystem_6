@@ -21,6 +21,7 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
     private IDaoUniversity daoUniversity;
     private IDaoUser daoUser;
     private IDaoUserExam daoUserExam;
+    private IDaoUserStatus daoUserStatus;
     private IDaoUserType daoUserType;
 
     private MySqlDaoFactory(IConnectionFactory cf) {
@@ -34,6 +35,7 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
         daoUniversity = new MySqlDaoUniversity(cf);
         daoUser = new MySqlDaoUser(cf);
         daoUserExam = new MySqlDaoUserExam(cf);
+        daoUserStatus = new MySqlDaoUserStatus(cf);
         daoUserType = new MySqlDaoUserType(cf);
     }
 
@@ -102,6 +104,10 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
     @Override
     public IDaoUserExam getDaoUserExam() {
         return daoUserExam;
+    }
+
+    @Override public IDaoUserStatus getDaoUserStatus() {
+        return daoUserStatus;
     }
 
     @Override

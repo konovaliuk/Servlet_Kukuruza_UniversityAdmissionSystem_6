@@ -15,6 +15,7 @@ public class User implements Serializable {
     private String phone;
     private String passportCode;
     private Integer userTypeId;
+    private Integer userStatusId;
 
     public static class Builder {
         private Long id;
@@ -28,6 +29,7 @@ public class User implements Serializable {
         private String phone;
         private String passportCode;
         private Integer userTypeId;
+        private Integer userStatusId;
 
         public Builder setId(Long id) {
             this.id = id;
@@ -84,17 +86,23 @@ public class User implements Serializable {
             return this;
         }
 
+        public Builder setUserStatusId(Integer userStatusId) {
+            this.userStatusId = userStatusId;
+            return this;
+        }
+
         public User build() {
             return new User(id, login, password, firstName, secondName, gender,
-                    year, email, phone, passportCode, userTypeId);
+                    year, email, phone, passportCode, userTypeId, userStatusId);
         }
     }
 
     public User() {
     }
 
-    public User(Long id, String login, String password, String firstName, String secondName, String gender,
-                Short year, String email, String phone, String passportCode, Integer userTypeId) {
+    public User(Long id, String login, String password, String firstName, String secondName,
+                String gender, Short year, String email, String phone,
+                String passportCode, Integer userTypeId, Integer userStatusId) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -106,6 +114,7 @@ public class User implements Serializable {
         this.phone = phone;
         this.passportCode = passportCode;
         this.userTypeId = userTypeId;
+        this.userStatusId = userStatusId;
     }
 
     public Long getId() {
@@ -196,6 +205,14 @@ public class User implements Serializable {
         this.userTypeId = userTypeId;
     }
 
+    public Integer getUserStatusId() {
+        return userStatusId;
+    }
+
+    public void setUserStatusId(Integer userStatusId) {
+        this.userStatusId = userStatusId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -205,35 +222,37 @@ public class User implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", gender='" + gender + '\'' +
-                ", year='" + year + '\'' +
+                ", year=" + year +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", passportCode='" + passportCode + '\'' +
                 ", userTypeId=" + userTypeId +
+                ", userStatusId=" + userStatusId +
                 '}';
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, login, password, firstName, secondName, gender, year,
-                email, phone, passportCode, userTypeId);
+                email, phone, passportCode, userTypeId, userStatusId);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User that = (User) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(login, that.login) &&
-                Objects.equals(password, that.password) &&
-                Objects.equals(firstName, that.firstName) &&
-                Objects.equals(secondName, that.secondName) &&
-                Objects.equals(gender, that.gender) &&
-                Objects.equals(year, that.year) &&
-                Objects.equals(email, that.email) &&
-                Objects.equals(phone, that.phone) &&
-                Objects.equals(passportCode, that.passportCode) &&
-                Objects.equals(userTypeId, that.userTypeId);
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(login, user.login) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(secondName, user.secondName) &&
+                Objects.equals(gender, user.gender) &&
+                Objects.equals(year, user.year) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(phone, user.phone) &&
+                Objects.equals(passportCode, user.passportCode) &&
+                Objects.equals(userTypeId, user.userTypeId) &&
+                Objects.equals(userStatusId, user.userStatusId);
     }
 }

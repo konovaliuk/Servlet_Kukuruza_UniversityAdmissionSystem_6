@@ -11,10 +11,10 @@ import java.util.Optional;
 public class MySqlDaoUser implements IDaoUser {
     private static final String GET_USER_BY_ID_SQL = "SELECT * FROM user WHERE id = ?";
     private static final String GET_ALL_USERS_SQL = "SELECT * FROM user";
-    private static final String INSERT_USER_SQL = "INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_USER_SQL = "INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_USER_SQL = "UPDATE user SET " +
             "login = ?, password = ?, first_name = ?, second_name = ?, gender = ?, " +
-            "year = ?, email = ?, phone = ?, passport_code = ?, user_type_id = ?, user_status_id = ? " +
+            "email = ?, phone = ?, passport_code = ?, user_type_id = ?, user_status_id = ? " +
             "WHERE id = ?";
     private static final String DELETE_USER_SQL = "DELETE FROM user WHERE id = ?";
     private MySqlDaoHelper helper = MySqlDaoHelper.getInstance();
@@ -42,7 +42,6 @@ public class MySqlDaoUser implements IDaoUser {
                 entity.getFirstName(),
                 entity.getSecondName(),
                 entity.getGender(),
-                entity.getYear(),
                 entity.getEmail(),
                 entity.getPhone(),
                 entity.getPassportCode(),
@@ -60,7 +59,6 @@ public class MySqlDaoUser implements IDaoUser {
                 entity.getFirstName(),
                 entity.getSecondName(),
                 entity.getGender(),
-                entity.getYear(),
                 entity.getEmail(),
                 entity.getPhone(),
                 entity.getPassportCode(),

@@ -10,7 +10,6 @@ public class User implements Serializable {
     private String firstName;
     private String secondName;
     private String gender;
-    private Short year;
     private String email;
     private String phone;
     private String passportCode;
@@ -24,7 +23,6 @@ public class User implements Serializable {
         private String firstName;
         private String secondName;
         private String gender;
-        private Short year;
         private String email;
         private String phone;
         private String passportCode;
@@ -61,11 +59,6 @@ public class User implements Serializable {
             return this;
         }
 
-        public Builder setYear(Short year) {
-            this.year = year;
-            return this;
-        }
-
         public Builder setEmail(String email) {
             this.email = email;
             return this;
@@ -93,7 +86,7 @@ public class User implements Serializable {
 
         public User build() {
             return new User(id, login, password, firstName, secondName, gender,
-                    year, email, phone, passportCode, userTypeId, userStatusId);
+                    email, phone, passportCode, userTypeId, userStatusId);
         }
     }
 
@@ -101,15 +94,14 @@ public class User implements Serializable {
     }
 
     public User(Long id, String login, String password, String firstName, String secondName,
-                String gender, Short year, String email, String phone,
-                String passportCode, Integer userTypeId, Integer userStatusId) {
+                String gender, String email, String phone, String passportCode,
+                Integer userTypeId, Integer userStatusId) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.secondName = secondName;
         this.gender = gender;
-        this.year = year;
         this.email = email;
         this.phone = phone;
         this.passportCode = passportCode;
@@ -165,14 +157,6 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public Short getYear() {
-        return year;
-    }
-
-    public void setYear(Short year) {
-        this.year = year;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -222,7 +206,6 @@ public class User implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", gender='" + gender + '\'' +
-                ", year=" + year +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", passportCode='" + passportCode + '\'' +
@@ -233,8 +216,8 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password, firstName, secondName, gender, year,
-                email, phone, passportCode, userTypeId, userStatusId);
+        return Objects.hash(id, login, password, firstName, secondName,
+                gender, email, phone, passportCode, userTypeId, userStatusId);
     }
 
     @Override
@@ -248,7 +231,6 @@ public class User implements Serializable {
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(secondName, user.secondName) &&
                 Objects.equals(gender, user.gender) &&
-                Objects.equals(year, user.year) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(phone, user.phone) &&
                 Objects.equals(passportCode, user.passportCode) &&

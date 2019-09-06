@@ -16,7 +16,6 @@ public class UserMapper {
     private static final String FIRST_NAME = "first_name";
     private static final String SECOND_NAME = "second_name";
     private static final String GENDER = "gender";
-    private static final String YEAR = "year";
     private static final String EMAIL = "email";
     private static final String PHONE = "phone";
     private static final String PASSPORT_CODE = "passport_code";
@@ -32,7 +31,6 @@ public class UserMapper {
                     .setFirstName(rs.getString(FIRST_NAME))
                     .setSecondName(rs.getString(SECOND_NAME))
                     .setGender(rs.getString(GENDER))
-                    .setYear(rs.getShort(YEAR))
                     .setEmail(rs.getString(EMAIL))
                     .setPhone(rs.getString(PHONE))
                     .setPassportCode(rs.getString(PASSPORT_CODE))

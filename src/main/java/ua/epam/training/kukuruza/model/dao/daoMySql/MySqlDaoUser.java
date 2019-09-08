@@ -10,6 +10,9 @@ import java.util.Optional;
 
 public class MySqlDaoUser implements IDaoUser {
     private static final String GET_USER_BY_ID_SQL = "SELECT * FROM user WHERE id = ?";
+    private static final String GET_USER_BY_EMAIL_SQL = "SELECT * FROM user WHERE email = ?";
+    private static final String GET_USER_BY_LOGIN_SQL = "SELECT * FROM user WHERE login = ?";
+    private static final String GET_USER_BY_PASSPORT_CODE_SQL = "SELECT * FROM user WHERE passport_code = ?";
     private static final String GET_ALL_USERS_SQL = "SELECT * FROM user";
     private static final String INSERT_USER_SQL = "INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_USER_SQL = "UPDATE user SET " +
@@ -32,6 +35,21 @@ public class MySqlDaoUser implements IDaoUser {
     @Override
     public List<User> getAll() {
         return helper.getAll(GET_ALL_USERS_SQL, UserMapper::map);
+    }
+
+    @Override
+    public Optional<User> getByEmail(String email) {
+        return helper.get(GET_USER_BY_EMAIL_SQL, UserMapper::map, email);
+    }
+
+    @Override
+    public Optional<User> getByLogin(String login) {
+        return helper.get(GET_USER_BY_LOGIN_SQL, UserMapper::map, login);
+    }
+
+    @Override
+    public Optional<User> getByPassportCode(String passportCode) {
+        return helper.get(GET_USER_BY_PASSPORT_CODE_SQL, UserMapper::map, passportCode);
     }
 
     @Override
@@ -71,5 +89,4 @@ public class MySqlDaoUser implements IDaoUser {
     public boolean delete(Long id) {
         return helper.delete(DELETE_USER_SQL, id);
     }
-
 }

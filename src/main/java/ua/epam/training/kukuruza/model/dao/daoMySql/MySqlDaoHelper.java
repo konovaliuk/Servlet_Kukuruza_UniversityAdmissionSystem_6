@@ -32,10 +32,10 @@ public class MySqlDaoHelper {
         return instance;
     }
 
-    public <T> Optional<T> get(String sql, Function<ResultSet, T> mapper, Object id) {
+    public <T> Optional<T> get(String sql, Function<ResultSet, T> mapper, Object parameter) {
         try (Connection c = factory.getConnection();
              PreparedStatement s = c.prepareStatement(sql)) {
-            setPrepareStatementParameters(s, id);
+            setPrepareStatementParameters(s, parameter);
             try (ResultSet rs = s.executeQuery()) {
                 if (rs.next()) {
                     T entity = mapper.apply(rs);

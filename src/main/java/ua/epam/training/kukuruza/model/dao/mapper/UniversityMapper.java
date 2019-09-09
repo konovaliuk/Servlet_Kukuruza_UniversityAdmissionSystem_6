@@ -14,11 +14,11 @@ public class UniversityMapper {
     private static final String NAME = "name";
 
     public static University map(ResultSet rs) {
-        University.Builder builder = new University.Builder();
         try {
-            builder.setId(rs.getInt(ID))
-                    .setName(rs.getString(NAME));
-            return builder.build();
+            return new University.Builder()
+                    .setId(rs.getInt(ID))
+                    .setName(rs.getString(NAME))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("Can't map ResultSet to University", e);
             throw new MapperException(e);

@@ -16,13 +16,13 @@ public class EducationOptionMapper {
     private static final String STUDENT_LIMIT = "student_limit";
 
     public static EducationOption map(ResultSet rs) {
-        EducationOption.Builder builder = new EducationOption.Builder();
         try {
-            builder.setId(rs.getLong(ID))
+            return new EducationOption.Builder()
+                    .setId(rs.getLong(ID))
                     .setUniversityId(rs.getInt(UNIVERSITY_ID))
                     .setSpecialtyId(rs.getInt(SPECIALTY_ID))
-                    .setStudentLimit(rs.getInt(STUDENT_LIMIT));
-            return builder.build();
+                    .setStudentLimit(rs.getInt(STUDENT_LIMIT))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("Can't map ResultSet to EducationOption", e);
             throw new MapperException(e);

@@ -14,11 +14,11 @@ public class SpecialtyMapper {
     private static final String NAME = "name";
 
     public static Specialty map(ResultSet rs) {
-        Specialty.Builder builder = new Specialty.Builder();
         try {
-            builder.setId(rs.getInt(ID))
-                    .setName(rs.getString(NAME));
-            return builder.build();
+            return new Specialty.Builder()
+                    .setId(rs.getInt(ID))
+                    .setName(rs.getString(NAME))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("Can't map ResultSet to Specialty", e);
             throw new MapperException(e);

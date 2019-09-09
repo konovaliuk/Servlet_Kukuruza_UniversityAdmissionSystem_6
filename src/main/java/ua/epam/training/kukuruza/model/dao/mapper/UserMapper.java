@@ -23,9 +23,9 @@ public class UserMapper {
     private static final String USER_STATUS_ID = "user_status_id";
 
     public static User map(ResultSet rs) {
-        User.Builder builder = new User.Builder();
         try {
-            builder.setId(rs.getLong(ID))
+            return new User.Builder()
+                    .setId(rs.getLong(ID))
                     .setLogin(rs.getString(LOGIN))
                     .setPassword(rs.getString(PASSWORD))
                     .setFirstName(rs.getString(FIRST_NAME))
@@ -35,8 +35,8 @@ public class UserMapper {
                     .setPhone(rs.getString(PHONE))
                     .setPassportCode(rs.getString(PASSPORT_CODE))
                     .setUserTypeId(rs.getInt(USER_TYPE_ID))
-                    .setUserStatusId(rs.getInt(USER_STATUS_ID));
-            return builder.build();
+                    .setUserStatusId(rs.getInt(USER_STATUS_ID))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("Can't map ResultSet to User", e);
             throw new MapperException(e);

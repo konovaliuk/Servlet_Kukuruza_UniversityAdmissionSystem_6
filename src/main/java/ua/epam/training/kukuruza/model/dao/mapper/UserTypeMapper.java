@@ -14,11 +14,11 @@ public class UserTypeMapper {
     private static final String USER_ROLE = "user_role";
 
     public static UserType map(ResultSet rs) {
-        UserType.Builder builder = new UserType.Builder();
         try {
-            builder.setId(rs.getInt(ID))
-                    .setUserRole(rs.getString(USER_ROLE));
-            return builder.build();
+            return new UserType.Builder()
+                    .setId(rs.getInt(ID))
+                    .setUserRole(rs.getString(USER_ROLE))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("Can't map ResultSet to UserType", e);
             throw new MapperException(e);

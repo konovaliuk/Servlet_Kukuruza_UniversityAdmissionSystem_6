@@ -15,12 +15,12 @@ public class UserExamMapper {
     private static final String EXAM_ID = "exam_id";
 
     public static UserExam map(ResultSet rs) {
-        UserExam.Builder builder = new UserExam.Builder();
         try {
-            builder.setId(rs.getLong(ID))
+            return new UserExam.Builder()
+                    .setId(rs.getLong(ID))
                     .setUserId(rs.getLong(USER_ID))
-                    .setExamId(rs.getInt(EXAM_ID));
-            return builder.build();
+                    .setExamId(rs.getInt(EXAM_ID))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("Can't map ResultSet to UserExam", e);
             throw new MapperException(e);

@@ -14,11 +14,11 @@ public class UserStatusMapper {
     private static final String STATUS = "status";
 
     public static UserStatus map(ResultSet rs) {
-        UserStatus.Builder builder = new UserStatus.Builder();
         try {
-            builder.setId(rs.getInt(ID))
-                    .setStatus(rs.getString(STATUS));
-            return builder.build();
+            return new UserStatus.Builder()
+                    .setId(rs.getInt(ID))
+                    .setStatus(rs.getString(STATUS))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("Can't map ResultSet to UserStatus", e);
             throw new MapperException(e);

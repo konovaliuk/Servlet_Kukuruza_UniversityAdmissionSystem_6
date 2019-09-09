@@ -15,12 +15,11 @@ public class SpecialtySubjectMapper {
     private static final String SUBJECT_ID = "subject_id";
 
     public static SpecialtySubject map(ResultSet rs) {
-        SpecialtySubject.Builder builder = new SpecialtySubject.Builder();
         try {
-            builder.setId(rs.getLong(ID))
+            return new SpecialtySubject.Builder().setId(rs.getLong(ID))
                     .setSpecialtyId(rs.getInt(SPECIALTY_ID))
-                    .setSubjectId(rs.getInt(SUBJECT_ID));
-            return builder.build();
+                    .setSubjectId(rs.getInt(SUBJECT_ID))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("Can't map ResultSet to SpecialtySubject", e);
             throw new MapperException(e);

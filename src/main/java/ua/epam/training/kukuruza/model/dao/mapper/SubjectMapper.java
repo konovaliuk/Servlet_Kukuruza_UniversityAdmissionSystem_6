@@ -14,11 +14,11 @@ public class SubjectMapper {
     private static final String NAME = "name";
 
     public static Subject map(ResultSet rs) {
-        Subject.Builder builder = new Subject.Builder();
         try {
-            builder.setId(rs.getInt(ID))
-                    .setName(rs.getString(NAME));
-            return builder.build();
+            return new Subject.Builder()
+                    .setId(rs.getInt(ID))
+                    .setName(rs.getString(NAME))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("Can't map ResultSet to Subject", e);
             throw new MapperException(e);

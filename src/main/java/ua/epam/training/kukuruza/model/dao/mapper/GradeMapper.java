@@ -16,13 +16,13 @@ public class GradeMapper {
     private static final String GRADE = "grade";
 
     public static Grade map(ResultSet rs) {
-        Grade.Builder builder = new Grade.Builder();
         try {
-            builder.setId(rs.getLong(ID))
+            return new Grade.Builder()
+                    .setId(rs.getLong(ID))
                     .setUserId(rs.getLong(USER_ID))
                     .setSubjectId(rs.getInt(SUBJECT_ID))
-                    .setGrade(rs.getInt(GRADE));
-            return builder.build();
+                    .setGrade(rs.getInt(GRADE))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("Can't map ResultSet to Grade", e);
             throw new MapperException(e);

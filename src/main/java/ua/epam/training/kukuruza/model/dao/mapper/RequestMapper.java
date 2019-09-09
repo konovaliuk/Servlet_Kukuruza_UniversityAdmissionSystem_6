@@ -15,12 +15,12 @@ public class RequestMapper {
     private static final String EDUCATION_OPTION_ID = "education_option_id";
 
     public static Request map(ResultSet rs) {
-        Request.Builder builder = new Request.Builder();
         try {
-            builder.setUserId(rs.getLong(USER_ID))
+            return new Request.Builder()
+                    .setUserId(rs.getLong(USER_ID))
                     .setRating(rs.getInt(RATING))
-                    .setEducationOptionId(rs.getLong(EDUCATION_OPTION_ID));
-            return builder.build();
+                    .setEducationOptionId(rs.getLong(EDUCATION_OPTION_ID))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("Can't map ResultSet to Request", e);
             throw new MapperException(e);

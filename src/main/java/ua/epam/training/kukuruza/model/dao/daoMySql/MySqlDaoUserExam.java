@@ -7,9 +7,12 @@ import ua.epam.training.kukuruza.model.entity.UserExam;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MySqlDaoUserExam implements IDaoUserExam {
     private static final String GET_USER_EXAM_BY_ID_SQL = "SELECT * FROM user_exam WHERE id = ?";
+    private static final String GET_USER_EXAM_BY_USER_ID_SQL = "SELECT * FROM user_exam WHERE user_id = ?";
     private static final String GET_ALL_USER_EXAM_SQL = "SELECT * FROM user_exam";
     private static final String INSERT_USER_EXAM_SQL = "INSERT INTO user_exam VALUES (NULL, ?, ?)";
     private static final String UPDATE_USER_EXAM_SQL = "UPDATE user_exam SET " +
@@ -30,6 +33,14 @@ public class MySqlDaoUserExam implements IDaoUserExam {
     @Override
     public List<UserExam> getAll() {
         return helper.executeSelectQuery(GET_ALL_USER_EXAM_SQL, UserExamMapper::map);
+    }
+
+    @Override
+    public Set<Integer> getExamsIdByUserId(Long userId) {
+        List<UserExam> userExams = helper.executeSelectQuery(GET_USER_EXAM_BY_USER_ID_SQL, UserExamMapper::map, userId);
+        return userExams.stream()
+                .map(UserExam::getExamId)
+                .collect(Collectors.toSet());
     }
 
     @Override

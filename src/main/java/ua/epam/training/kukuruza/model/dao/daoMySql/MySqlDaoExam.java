@@ -5,8 +5,10 @@ import ua.epam.training.kukuruza.model.dao.IDaoExam;
 import ua.epam.training.kukuruza.model.dao.mapper.ExamMapper;
 import ua.epam.training.kukuruza.model.entity.Exam;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class MySqlDaoExam implements IDaoExam {
     private static final String GET_EXAM_BY_ID_SQL = "SELECT * FROM exam WHERE id = ?";
@@ -22,7 +24,6 @@ public class MySqlDaoExam implements IDaoExam {
         this.factory = factory;
     }
 
-
     @Override
     public Optional<Exam> get(Integer id) {
         return helper.get(GET_EXAM_BY_ID_SQL, ExamMapper::map, id);
@@ -31,6 +32,22 @@ public class MySqlDaoExam implements IDaoExam {
     @Override
     public List<Exam> getAll() {
         return helper.executeSelectQuery(GET_ALL_EXAMS_SQL, ExamMapper::map);
+    }
+
+    @Override
+    public List<Exam> getByIdSet(Set<Integer> examsId) {
+        if (examsId.isEmpty())
+            return Collections.emptyList();
+        String sql = buildSql(new StringBuilder("SELECT * FROM exam WHERE id IN("), examsId);
+        return helper.executeSelectQuery(sql, ExamMapper::map);
+    }
+
+    @Override
+    public List<Exam> getNotInIdSet(Set<Integer> examsId) {
+        if (examsId.isEmpty())
+            return getAll();
+        String sql = buildSql(new StringBuilder("SELECT * FROM exam WHERE id NOT IN("), examsId);
+        return helper.executeSelectQuery(sql, ExamMapper::map);
     }
 
     @Override
@@ -49,5 +66,12 @@ public class MySqlDaoExam implements IDaoExam {
     @Override
     public boolean delete(Integer id) {
         return helper.delete(DELETE_EXAM_SQL, id);
+    }
+
+    private String buildSql(StringBuilder s, Set<Integer> examsId) {
+        examsId.forEach((id) -> s.append(id).append(","));
+        s.setLength(s.length() - 1);
+        s.append(")");
+        return s.toString();
     }
 }

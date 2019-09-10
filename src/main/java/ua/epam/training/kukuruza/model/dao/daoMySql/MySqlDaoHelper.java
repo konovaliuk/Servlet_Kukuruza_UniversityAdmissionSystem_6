@@ -57,12 +57,23 @@ public class MySqlDaoHelper {
         try (Connection c = factory.getConnection();
              Statement s = c.createStatement()) {
             try (ResultSet rs = s.executeQuery(sql)) {
-                List<T> entities = new ArrayList<>();
-                while (rs.next()) {
-                    T entity = mapper.apply(rs);
-                    entities.add(entity);
-                }
-                return entities;
+                return getEntitiesList(mapper, rs);
+            } catch (SQLException e) {
+                LOGGER.error("Result set error", e);
+                throw new PersistenceException(e);
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Can't start request executing", e);
+            throw new PersistenceException(e);
+        }
+    }
+
+    public <T> List<T> executeSelectQuery(String sql, Function<ResultSet, T> mapper, Object parameter) {
+        try (Connection c = factory.getConnection();
+             PreparedStatement s = c.prepareStatement(sql)) {
+            setPrepareStatementParameters(s, parameter);
+            try (ResultSet rs = s.executeQuery()) {
+                return getEntitiesList(mapper, rs);
             } catch (SQLException e) {
                 LOGGER.error("Result set error", e);
                 throw new PersistenceException(e);
@@ -156,5 +167,14 @@ public class MySqlDaoHelper {
             LOGGER.error("Unsupported key type");
             throw new PersistenceException("Unsupported key type");
         }
+    }
+
+    private  <T> List<T> getEntitiesList(Function<ResultSet, T> mapper, ResultSet rs) throws SQLException {
+        List<T> entities = new ArrayList<>();
+        while (rs.next()) {
+            T entity = mapper.apply(rs);
+            entities.add(entity);
+        }
+        return entities;
     }
 }

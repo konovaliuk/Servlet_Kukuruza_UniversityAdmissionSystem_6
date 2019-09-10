@@ -29,7 +29,7 @@ public class MySqlDaoEducationOption implements IDaoEducationOption {
 
     @Override
     public List<EducationOption> getAll() {
-        return helper.getAll(GET_ALL_EDUCATION_OPTIONS_SQL, EducationOptionMapper::map);
+        return helper.executeSelectQuery(GET_ALL_EDUCATION_OPTIONS_SQL, EducationOptionMapper::map);
     }
 
     @Override

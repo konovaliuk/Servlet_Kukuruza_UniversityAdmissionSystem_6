@@ -28,7 +28,7 @@ public class MySqlDaoSubject implements IDaoSubject {
 
     @Override
     public List<Subject> getAll() {
-        return helper.getAll(GET_ALL_SUBJECTS_SQL, SubjectMapper::map);
+        return helper.executeSelectQuery(GET_ALL_SUBJECTS_SQL, SubjectMapper::map);
     }
 
     @Override

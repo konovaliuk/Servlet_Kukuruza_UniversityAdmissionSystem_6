@@ -28,7 +28,7 @@ public class MySqlDaoSpecialty implements IDaoSpecialty {
 
     @Override
     public List<Specialty> getAll() {
-        return helper.getAll(GET_ALL_SPECIALTIES_SQL, SpecialtyMapper::map);
+        return helper.executeSelectQuery(GET_ALL_SPECIALTIES_SQL, SpecialtyMapper::map);
     }
 
     @Override

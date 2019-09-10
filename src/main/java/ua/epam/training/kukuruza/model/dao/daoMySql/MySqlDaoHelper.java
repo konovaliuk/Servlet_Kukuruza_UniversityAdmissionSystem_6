@@ -53,7 +53,7 @@ public class MySqlDaoHelper {
         }
     }
 
-    public <T> List<T> getAll(String sql, Function<ResultSet, T> mapper) {
+    public <T> List<T> executeSelectQuery(String sql, Function<ResultSet, T> mapper) {
         try (Connection c = factory.getConnection();
              Statement s = c.createStatement()) {
             try (ResultSet rs = s.executeQuery(sql)) {

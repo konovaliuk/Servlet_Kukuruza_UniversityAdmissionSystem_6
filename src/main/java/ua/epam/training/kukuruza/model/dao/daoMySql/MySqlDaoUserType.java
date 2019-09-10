@@ -29,7 +29,7 @@ public class MySqlDaoUserType implements IDaoUserType {
 
     @Override
     public List<UserType> getAll() {
-        return helper.getAll(GET_ALL_USER_TYPES_SQL, UserTypeMapper::map);
+        return helper.executeSelectQuery(GET_ALL_USER_TYPES_SQL, UserTypeMapper::map);
     }
 
     @Override

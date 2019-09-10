@@ -29,7 +29,7 @@ public class MySqlDaoSpecialtySubject implements IDaoSpecialtySubject {
 
     @Override
     public List<SpecialtySubject> getAll() {
-        return helper.getAll(GET_ALL_SPECIALTY_SUBJECT_SQL, SpecialtySubjectMapper::map);
+        return helper.executeSelectQuery(GET_ALL_SPECIALTY_SUBJECT_SQL, SpecialtySubjectMapper::map);
     }
 
     @Override

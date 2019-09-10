@@ -28,7 +28,7 @@ public class MySqlDaoUserStatus implements IDaoUserStatus {
 
     @Override
     public List<UserStatus> getAll() {
-        return helper.getAll(GET_ALL_USER_STATUSES_SQL, UserStatusMapper::map);
+        return helper.executeSelectQuery(GET_ALL_USER_STATUSES_SQL, UserStatusMapper::map);
     }
 
     @Override

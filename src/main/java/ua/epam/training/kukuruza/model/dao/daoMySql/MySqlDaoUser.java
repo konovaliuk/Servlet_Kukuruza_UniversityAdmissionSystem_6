@@ -34,7 +34,7 @@ public class MySqlDaoUser implements IDaoUser {
 
     @Override
     public List<User> getAll() {
-        return helper.getAll(GET_ALL_USERS_SQL, UserMapper::map);
+        return helper.executeSelectQuery(GET_ALL_USERS_SQL, UserMapper::map);
     }
 
     @Override

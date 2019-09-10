@@ -28,7 +28,7 @@ public class MySqlDaoUniversity  implements IDaoUniversity {
 
     @Override
     public List<University> getAll() {
-        return helper.getAll(GET_ALL_UNIVERSITIES_SQL, UniversityMapper::map);
+        return helper.executeSelectQuery(GET_ALL_UNIVERSITIES_SQL, UniversityMapper::map);
     }
 
     @Override

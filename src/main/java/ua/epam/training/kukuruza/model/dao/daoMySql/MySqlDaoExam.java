@@ -30,7 +30,7 @@ public class MySqlDaoExam implements IDaoExam {
 
     @Override
     public List<Exam> getAll() {
-        return helper.getAll(GET_ALL_EXAMS_SQL, ExamMapper::map);
+        return helper.executeSelectQuery(GET_ALL_EXAMS_SQL, ExamMapper::map);
     }
 
     @Override

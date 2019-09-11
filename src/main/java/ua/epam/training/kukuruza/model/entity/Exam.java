@@ -1,18 +1,18 @@
 package ua.epam.training.kukuruza.model.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 public class Exam implements Serializable {
     private Integer id;
-    private Timestamp date;
+    private Date date;
     private String address;
     private Integer subjectId;
 
     public static class Builder {
         private Integer id;
-        private Timestamp date;
+        private Date date;
         private String address;
         private Integer subjectId;
 
@@ -21,7 +21,7 @@ public class Exam implements Serializable {
             return this;
         }
 
-        public Builder setDate(Timestamp date) {
+        public Builder setDate(Date date) {
             this.date = date;
             return this;
         }
@@ -44,7 +44,7 @@ public class Exam implements Serializable {
     public Exam() {
     }
 
-    public Exam(Integer id, Timestamp date, String address, Integer subjectId) {
+    public Exam(Integer id, Date date, String address, Integer subjectId) {
         this.id = id;
         this.date = date;
         this.address = address;
@@ -59,11 +59,11 @@ public class Exam implements Serializable {
         this.id = id;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -102,10 +102,10 @@ public class Exam implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Exam that = (Exam) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(subjectId, that.subjectId);
+        Exam exam = (Exam) o;
+        return Objects.equals(id, exam.id) &&
+                Objects.equals(date, exam.date) &&
+                Objects.equals(address, exam.address) &&
+                Objects.equals(subjectId, exam.subjectId);
     }
 }

@@ -25,6 +25,8 @@ public class MySqlDaoUserExam implements IDaoUserExam {
     private static final String UPDATE_USER_EXAM_SQL = "UPDATE user_exam SET " +
             "user_id = ?, exam_id = ? WHERE id = ?";
     private static final String DELETE_USER_EXAM_SQL = "DELETE FROM user_exam WHERE id = ?";
+    private static final String DELETE_USER_EXAM_BY_USER_ID_AND_EXAM_ID_SQL = "DELETE FROM user_exam " +
+            "WHERE user_id = ? AND exam_id = ?";
     private MySqlDaoHelper helper = MySqlDaoHelper.getInstance();
     private IConnectionFactory factory;
 
@@ -59,20 +61,7 @@ public class MySqlDaoUserExam implements IDaoUserExam {
 
     @Override
     public void save(List<UserExam> userExams) {
-        if (userExams.isEmpty())
-            return;
-        try (Connection c = factory.getConnection();
-             PreparedStatement ps = c.prepareStatement(INSERT_USER_EXAM_SQL)) {
-            for (UserExam userExam : userExams) {
-                ps.setLong(1, userExam.getUserId());
-                ps.setInt(2, userExam.getExamId());
-                ps.addBatch();
-            }
-            ps.executeBatch();
-        } catch (SQLException e) {
-            LOGGER.error("Can't insert entity", e);
-            throw new PersistenceException(e);
-        }
+        executeSql(INSERT_USER_EXAM_SQL, userExams);
     }
 
     @Override
@@ -83,5 +72,27 @@ public class MySqlDaoUserExam implements IDaoUserExam {
     @Override
     public boolean delete(Long id) {
         return helper.delete(DELETE_USER_EXAM_SQL, id);
+    }
+
+    @Override
+    public void delete(List<UserExam> userExams) {
+        executeSql(DELETE_USER_EXAM_BY_USER_ID_AND_EXAM_ID_SQL, userExams);
+    }
+
+    private void executeSql(String sql, List<UserExam> userExams) {
+        if (userExams.isEmpty())
+            return;
+        try (Connection c = factory.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            for (UserExam userExam : userExams) {
+                ps.setLong(1, userExam.getUserId());
+                ps.setInt(2, userExam.getExamId());
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        } catch (SQLException e) {
+            LOGGER.error("Can't execute", e);
+            throw new PersistenceException(e);
+        }
     }
 }

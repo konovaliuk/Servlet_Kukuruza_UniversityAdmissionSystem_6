@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public class MySqlDaoGrade implements IDaoGrade {
     private static final String GET_GRADE_BY_ID_SQL = "SELECT * FROM grade WHERE id = ?";
+    private static final String GET_GRADE_BY_USER_ID_SQL = "SELECT * FROM grade WHERE user_id = ?";
     private static final String GET_ALL_GRADES_SQL = "SELECT * FROM grade";
     private static final String INSERT_GRADE_SQL = "INSERT INTO grade VALUES (NULL, ?, ?, ?)";
     private static final String UPDATE_GRADE_SQL = "UPDATE grade SET " +
@@ -30,6 +31,11 @@ public class MySqlDaoGrade implements IDaoGrade {
     @Override
     public List<Grade> getAll() {
         return helper.executeSelectQuery(GET_ALL_GRADES_SQL, GradeMapper::map);
+    }
+
+    @Override
+    public List<Grade> getUserGrades(Long userId) {
+        return helper.executeSelectQuery(GET_GRADE_BY_USER_ID_SQL, GradeMapper::map, userId);
     }
 
     @Override

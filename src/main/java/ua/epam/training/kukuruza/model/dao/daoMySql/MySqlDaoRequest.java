@@ -33,6 +33,11 @@ public class MySqlDaoRequest implements IDaoRequest {
     }
 
     @Override
+    public Optional<Request> getByUserId(Long userId) {
+        return get(userId);
+    }
+
+    @Override
     public Long save(Request entity) {
         helper.saveWithoutAutoKey(INSERT_REQUEST_SQL,
                 entity.getUserId(), entity.getRating(), entity.getEducationOptionId());
@@ -47,5 +52,10 @@ public class MySqlDaoRequest implements IDaoRequest {
     @Override
     public boolean delete(Long id) {
         return helper.delete(DELETE_REQUEST_SQL, id);
+    }
+
+    @Override
+    public boolean deleteByUserId(Long userId) {
+        return delete(userId);
     }
 }

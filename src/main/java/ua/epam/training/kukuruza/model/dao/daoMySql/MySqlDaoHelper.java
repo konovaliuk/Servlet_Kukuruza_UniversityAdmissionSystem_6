@@ -7,10 +7,7 @@ import ua.epam.training.kukuruza.model.connection.IConnectionFactory;
 import ua.epam.training.kukuruza.model.exception.PersistenceException;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 public class MySqlDaoHelper {
@@ -32,10 +29,10 @@ public class MySqlDaoHelper {
         return instance;
     }
 
-    public <T> Optional<T> get(String sql, Function<ResultSet, T> mapper, Object parameter) {
+    public <T> Optional<T> get(String sql, Function<ResultSet, T> mapper, Object... parameters) {
         try (Connection c = factory.getConnection();
              PreparedStatement s = c.prepareStatement(sql)) {
-            setPrepareStatementParameters(s, parameter);
+            setPrepareStatementParameters(s, parameters);
             try (ResultSet rs = s.executeQuery()) {
                 if (rs.next()) {
                     T entity = mapper.apply(rs);
@@ -68,10 +65,10 @@ public class MySqlDaoHelper {
         }
     }
 
-    public <T> List<T> executeSelectQuery(String sql, Function<ResultSet, T> mapper, Object parameter) {
+    public <T> List<T> executeSelectQuery(String sql, Function<ResultSet, T> mapper, Object... parameters) {
         try (Connection c = factory.getConnection();
              PreparedStatement s = c.prepareStatement(sql)) {
-            setPrepareStatementParameters(s, parameter);
+            setPrepareStatementParameters(s, parameters);
             try (ResultSet rs = s.executeQuery()) {
                 return getEntitiesList(mapper, rs);
             } catch (SQLException e) {
@@ -145,7 +142,13 @@ public class MySqlDaoHelper {
             LOGGER.error("Can't insert entity", e);
             throw new PersistenceException(e);
         }
+    }
 
+    public String buildSql(StringBuilder template, Collection<?> values) {
+        values.forEach((value) -> template.append(value).append(","));
+        template.setLength(template.length() - 1);
+        template.append(")");
+        return template.toString();
     }
 
     private void setPrepareStatementParameters(PreparedStatement ps, Object... values) throws SQLException {

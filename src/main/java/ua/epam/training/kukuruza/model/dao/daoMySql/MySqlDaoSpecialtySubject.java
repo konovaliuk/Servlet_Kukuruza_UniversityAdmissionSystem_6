@@ -7,9 +7,13 @@ import ua.epam.training.kukuruza.model.entity.SpecialtySubject;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MySqlDaoSpecialtySubject implements IDaoSpecialtySubject {
     private static final String GET_SPECIALTY_SUBJECT_BY_ID_SQL = "SELECT * FROM specialty_subject WHERE id = ?";
+    private static final String GET_SPECIALTY_SUBJECT_BY_SPECIALTY_ID_SQL =
+            "SELECT * FROM specialty_subject WHERE specialty_id = ?";
     private static final String GET_ALL_SPECIALTY_SUBJECT_SQL = "SELECT * FROM specialty_subject";
     private static final String INSERT_SPECIALTY_SUBJECT_SQL = "INSERT INTO specialty_subject VALUES (NULL, ?, ?)";
     private static final String UPDATE_SPECIALTY_SUBJECT_SQL = "UPDATE specialty_subject SET " +
@@ -30,6 +34,15 @@ public class MySqlDaoSpecialtySubject implements IDaoSpecialtySubject {
     @Override
     public List<SpecialtySubject> getAll() {
         return helper.executeSelectQuery(GET_ALL_SPECIALTY_SUBJECT_SQL, SpecialtySubjectMapper::map);
+    }
+
+    @Override
+    public Set<Integer> getSubjectsIdBySpecialtyId(Integer specialtyId) {
+        List<SpecialtySubject> specialtySubjects = helper.executeSelectQuery(GET_SPECIALTY_SUBJECT_BY_SPECIALTY_ID_SQL,
+                SpecialtySubjectMapper::map, specialtyId);
+        return specialtySubjects.stream()
+                .map(SpecialtySubject::getSubjectId)
+                .collect(Collectors.toSet());
     }
 
     @Override

@@ -38,7 +38,7 @@ public class MySqlDaoExam implements IDaoExam {
     public List<Exam> getByIdSet(Set<Integer> examsId) {
         if (examsId.isEmpty())
             return Collections.emptyList();
-        String sql = buildSql(new StringBuilder("SELECT * FROM exam WHERE id IN("), examsId);
+        String sql = helper.buildSql(new StringBuilder("SELECT * FROM exam WHERE id IN("), examsId);
         return helper.executeSelectQuery(sql, ExamMapper::map);
     }
 
@@ -46,7 +46,7 @@ public class MySqlDaoExam implements IDaoExam {
     public List<Exam> getNotInIdSet(Set<Integer> examsId) {
         if (examsId.isEmpty())
             return getAll();
-        String sql = buildSql(new StringBuilder("SELECT * FROM exam WHERE id NOT IN("), examsId);
+        String sql = helper.buildSql(new StringBuilder("SELECT * FROM exam WHERE id NOT IN("), examsId);
         return helper.executeSelectQuery(sql, ExamMapper::map);
     }
 
@@ -66,12 +66,5 @@ public class MySqlDaoExam implements IDaoExam {
     @Override
     public boolean delete(Integer id) {
         return helper.delete(DELETE_EXAM_SQL, id);
-    }
-
-    private String buildSql(StringBuilder s, Set<Integer> examsId) {
-        examsId.forEach((id) -> s.append(id).append(","));
-        s.setLength(s.length() - 1);
-        s.append(")");
-        return s.toString();
     }
 }

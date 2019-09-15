@@ -5,8 +5,10 @@ import ua.epam.training.kukuruza.model.dao.IDaoSpecialty;
 import ua.epam.training.kukuruza.model.dao.mapper.SpecialtyMapper;
 import ua.epam.training.kukuruza.model.entity.Specialty;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class MySqlDaoSpecialty implements IDaoSpecialty {
     private static final String GET_SPECIALTY_BY_ID_SQL = "SELECT * FROM specialty WHERE id = ?";
@@ -29,6 +31,14 @@ public class MySqlDaoSpecialty implements IDaoSpecialty {
     @Override
     public List<Specialty> getAll() {
         return helper.executeSelectQuery(GET_ALL_SPECIALTIES_SQL, SpecialtyMapper::map);
+    }
+
+    @Override
+    public List<Specialty> getByIdSet(Set<Integer> specialtiesId) {
+        if (specialtiesId.isEmpty())
+            return Collections.emptyList();
+        String sql = helper.buildSql(new StringBuilder("SELECT * FROM specialty WHERE id IN("), specialtiesId);
+        return helper.executeSelectQuery(sql, SpecialtyMapper::map);
     }
 
     @Override

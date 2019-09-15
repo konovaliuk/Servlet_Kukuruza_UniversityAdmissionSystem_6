@@ -7,9 +7,15 @@ import ua.epam.training.kukuruza.model.entity.EducationOption;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MySqlDaoEducationOption implements IDaoEducationOption {
     private static final String GET_EDUCATION_OPTION_BY_ID_SQL = "SELECT * FROM education_option WHERE id = ?";
+    private static final String GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_SQL =
+            "SELECT * FROM education_option WHERE university_id = ?";
+    private static final String GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_AND_SPECIALTY_ID_SQL =
+            "SELECT * FROM education_option WHERE university_id = ? AND specialty_id = ?";
     private static final String GET_ALL_EDUCATION_OPTIONS_SQL = "SELECT * FROM education_option";
     private static final String INSERT_EDUCATION_OPTION_SQL = "INSERT INTO education_option VALUES (NULL, ?, ?, ?)";
     private static final String UPDATE_EDUCATION_OPTION_SQL = "UPDATE education_option SET " +
@@ -30,6 +36,21 @@ public class MySqlDaoEducationOption implements IDaoEducationOption {
     @Override
     public List<EducationOption> getAll() {
         return helper.executeSelectQuery(GET_ALL_EDUCATION_OPTIONS_SQL, EducationOptionMapper::map);
+    }
+
+    @Override
+    public Optional<EducationOption> getByUniversityIdAndSpecialtyId(Integer universityId, Integer specialtyId) {
+        return helper.get(GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_AND_SPECIALTY_ID_SQL, EducationOptionMapper::map,
+                universityId, specialtyId);
+    }
+
+    @Override
+    public Set<Integer> getSpecialtiesIdByUniversityId(Integer universityId) {
+        List<EducationOption> educationOptions = helper.executeSelectQuery(GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_SQL,
+                EducationOptionMapper::map, universityId);
+        return educationOptions.stream()
+                .map(EducationOption::getSpecialtyId)
+                .collect(Collectors.toSet());
     }
 
     @Override

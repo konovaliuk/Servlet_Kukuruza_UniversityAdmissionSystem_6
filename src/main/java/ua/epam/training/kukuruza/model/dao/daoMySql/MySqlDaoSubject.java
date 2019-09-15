@@ -5,8 +5,10 @@ import ua.epam.training.kukuruza.model.dao.IDaoSubject;
 import ua.epam.training.kukuruza.model.dao.mapper.SubjectMapper;
 import ua.epam.training.kukuruza.model.entity.Subject;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class MySqlDaoSubject implements IDaoSubject {
     private static final String GET_SUBJECT_BY_ID_SQL = "SELECT * FROM subject WHERE id = ?";
@@ -29,6 +31,14 @@ public class MySqlDaoSubject implements IDaoSubject {
     @Override
     public List<Subject> getAll() {
         return helper.executeSelectQuery(GET_ALL_SUBJECTS_SQL, SubjectMapper::map);
+    }
+
+    @Override
+    public List<Subject> getByIdSet(Set<Integer> subjectsId) {
+        if (subjectsId.isEmpty())
+            return Collections.emptyList();
+        String sql = helper.buildSql(new StringBuilder("SELECT * FROM subject WHERE id IN("), subjectsId);
+        return helper.executeSelectQuery(sql, SubjectMapper::map);
     }
 
     @Override

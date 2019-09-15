@@ -5,8 +5,10 @@ import ua.epam.training.kukuruza.model.dao.IDaoUser;
 import ua.epam.training.kukuruza.model.dao.mapper.UserMapper;
 import ua.epam.training.kukuruza.model.entity.User;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class MySqlDaoUser implements IDaoUser {
     private static final String GET_USER_BY_ID_SQL = "SELECT * FROM user WHERE id = ?";
@@ -40,6 +42,14 @@ public class MySqlDaoUser implements IDaoUser {
     @Override
     public Optional<User> getByEmail(String email) {
         return helper.get(GET_USER_BY_EMAIL_SQL, UserMapper::map, email);
+    }
+
+    @Override
+    public List<User> getByIdSet(Set<Long> usersId) {
+        if (usersId.isEmpty())
+            return Collections.emptyList();
+        String sql = helper.buildSql(new StringBuilder("SELECT * FROM user WHERE id IN("), usersId);
+        return helper.getList(sql, UserMapper::map);
     }
 
     @Override

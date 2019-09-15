@@ -10,6 +10,8 @@ import java.util.Optional;
 
 public class MySqlDaoRequest implements IDaoRequest {
     private static final String GET_REQUEST_BY_USER_ID_SQL = "SELECT * FROM request WHERE user_id = ?";
+    private static final String GET_REQUEST_BY_EDUCATION_OPTION_ID_SQL =
+            "SELECT * FROM request WHERE education_option_id = ?";
     private static final String GET_ALL_REQUESTS_SQL = "SELECT * FROM request";
     private static final String INSERT_REQUEST_SQL = "INSERT INTO request VALUES (?, ?, ?)";
     private static final String UPDATE_REQUEST_SQL = "UPDATE request SET " +
@@ -30,6 +32,11 @@ public class MySqlDaoRequest implements IDaoRequest {
     @Override
     public List<Request> getAll() {
         return helper.getList(GET_ALL_REQUESTS_SQL, RequestMapper::map);
+    }
+
+    @Override
+    public List<Request> getByEducationOptionId(Long educationOptionId) {
+        return helper.getList(GET_REQUEST_BY_EDUCATION_OPTION_ID_SQL, RequestMapper::map, educationOptionId);
     }
 
     @Override

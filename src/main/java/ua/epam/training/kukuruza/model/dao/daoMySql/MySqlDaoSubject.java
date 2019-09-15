@@ -30,7 +30,7 @@ public class MySqlDaoSubject implements IDaoSubject {
 
     @Override
     public List<Subject> getAll() {
-        return helper.executeSelectQuery(GET_ALL_SUBJECTS_SQL, SubjectMapper::map);
+        return helper.getList(GET_ALL_SUBJECTS_SQL, SubjectMapper::map);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MySqlDaoSubject implements IDaoSubject {
         if (subjectsId.isEmpty())
             return Collections.emptyList();
         String sql = helper.buildSql(new StringBuilder("SELECT * FROM subject WHERE id IN("), subjectsId);
-        return helper.executeSelectQuery(sql, SubjectMapper::map);
+        return helper.getList(sql, SubjectMapper::map);
     }
 
     @Override

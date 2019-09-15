@@ -30,7 +30,7 @@ public class MySqlDaoSpecialty implements IDaoSpecialty {
 
     @Override
     public List<Specialty> getAll() {
-        return helper.executeSelectQuery(GET_ALL_SPECIALTIES_SQL, SpecialtyMapper::map);
+        return helper.getList(GET_ALL_SPECIALTIES_SQL, SpecialtyMapper::map);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MySqlDaoSpecialty implements IDaoSpecialty {
         if (specialtiesId.isEmpty())
             return Collections.emptyList();
         String sql = helper.buildSql(new StringBuilder("SELECT * FROM specialty WHERE id IN("), specialtiesId);
-        return helper.executeSelectQuery(sql, SpecialtyMapper::map);
+        return helper.getList(sql, SpecialtyMapper::map);
     }
 
     @Override

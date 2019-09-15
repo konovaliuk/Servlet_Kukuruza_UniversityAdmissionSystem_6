@@ -32,7 +32,7 @@ public class MySqlDaoGrade implements IDaoGrade {
 
     @Override
     public List<Grade> getAll() {
-        return helper.executeSelectQuery(GET_ALL_GRADES_SQL, GradeMapper::map);
+        return helper.getList(GET_ALL_GRADES_SQL, GradeMapper::map);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MySqlDaoGrade implements IDaoGrade {
 
     @Override
     public List<Grade> getUserGrades(Long userId) {
-        return helper.executeSelectQuery(GET_GRADE_BY_USER_ID_SQL, GradeMapper::map, userId);
+        return helper.getList(GET_GRADE_BY_USER_ID_SQL, GradeMapper::map, userId);
     }
 
     @Override

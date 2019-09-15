@@ -29,7 +29,7 @@ public class MySqlDaoRequest implements IDaoRequest {
 
     @Override
     public List<Request> getAll() {
-        return helper.executeSelectQuery(GET_ALL_REQUESTS_SQL, RequestMapper::map);
+        return helper.getList(GET_ALL_REQUESTS_SQL, RequestMapper::map);
     }
 
     @Override

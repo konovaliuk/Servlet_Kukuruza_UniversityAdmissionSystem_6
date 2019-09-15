@@ -35,7 +35,7 @@ public class MySqlDaoEducationOption implements IDaoEducationOption {
 
     @Override
     public List<EducationOption> getAll() {
-        return helper.executeSelectQuery(GET_ALL_EDUCATION_OPTIONS_SQL, EducationOptionMapper::map);
+        return helper.getList(GET_ALL_EDUCATION_OPTIONS_SQL, EducationOptionMapper::map);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MySqlDaoEducationOption implements IDaoEducationOption {
 
     @Override
     public Set<Integer> getSpecialtiesIdByUniversityId(Integer universityId) {
-        List<EducationOption> educationOptions = helper.executeSelectQuery(GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_SQL,
+        List<EducationOption> educationOptions = helper.getList(GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_SQL,
                 EducationOptionMapper::map, universityId);
         return educationOptions.stream()
                 .map(EducationOption::getSpecialtyId)

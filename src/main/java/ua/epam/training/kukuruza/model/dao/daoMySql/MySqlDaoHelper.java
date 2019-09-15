@@ -50,7 +50,7 @@ public class MySqlDaoHelper {
         }
     }
 
-    public <T> List<T> executeSelectQuery(String sql, Function<ResultSet, T> mapper) {
+    public <T> List<T> getList(String sql, Function<ResultSet, T> mapper) {
         try (Connection c = factory.getConnection();
              Statement s = c.createStatement()) {
             try (ResultSet rs = s.executeQuery(sql)) {
@@ -65,7 +65,7 @@ public class MySqlDaoHelper {
         }
     }
 
-    public <T> List<T> executeSelectQuery(String sql, Function<ResultSet, T> mapper, Object... parameters) {
+    public <T> List<T> getList(String sql, Function<ResultSet, T> mapper, Object... parameters) {
         try (Connection c = factory.getConnection();
              PreparedStatement s = c.prepareStatement(sql)) {
             setPrepareStatementParameters(s, parameters);

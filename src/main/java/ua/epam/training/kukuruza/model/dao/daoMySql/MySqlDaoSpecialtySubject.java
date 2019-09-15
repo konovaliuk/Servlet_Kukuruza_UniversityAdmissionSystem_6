@@ -33,12 +33,12 @@ public class MySqlDaoSpecialtySubject implements IDaoSpecialtySubject {
 
     @Override
     public List<SpecialtySubject> getAll() {
-        return helper.executeSelectQuery(GET_ALL_SPECIALTY_SUBJECT_SQL, SpecialtySubjectMapper::map);
+        return helper.getList(GET_ALL_SPECIALTY_SUBJECT_SQL, SpecialtySubjectMapper::map);
     }
 
     @Override
     public Set<Integer> getSubjectsIdBySpecialtyId(Integer specialtyId) {
-        List<SpecialtySubject> specialtySubjects = helper.executeSelectQuery(GET_SPECIALTY_SUBJECT_BY_SPECIALTY_ID_SQL,
+        List<SpecialtySubject> specialtySubjects = helper.getList(GET_SPECIALTY_SUBJECT_BY_SPECIALTY_ID_SQL,
                 SpecialtySubjectMapper::map, specialtyId);
         return specialtySubjects.stream()
                 .map(SpecialtySubject::getSubjectId)

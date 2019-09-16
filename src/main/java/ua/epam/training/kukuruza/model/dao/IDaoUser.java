@@ -8,6 +8,7 @@ import java.util.Set;
 
 public interface IDaoUser extends IDaoGeneric<User, Long> {
     Optional<User> getByEmail(String email);
+    List<User> getByFirstNameAndSecondName(String firstName, String secondName);
     List<User> getByIdSet(Set<Long> usersId);
     Optional<User> getByLogin(String login);
     Optional<User> getByPassportCode(String passportCode);

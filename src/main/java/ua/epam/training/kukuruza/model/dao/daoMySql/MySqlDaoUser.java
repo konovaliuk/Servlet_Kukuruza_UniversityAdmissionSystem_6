@@ -13,6 +13,8 @@ import java.util.Set;
 public class MySqlDaoUser implements IDaoUser {
     private static final String GET_USER_BY_ID_SQL = "SELECT * FROM user WHERE id = ?";
     private static final String GET_USER_BY_EMAIL_SQL = "SELECT * FROM user WHERE email = ?";
+    private static final String GET_USER_BY_FIRST_NAME_AND_SECOND_NAME_SQL =
+            "SELECT * FROM user WHERE first_name = ? AND second_name = ?";
     private static final String GET_USER_BY_LOGIN_SQL = "SELECT * FROM user WHERE login = ?";
     private static final String GET_USER_BY_PASSPORT_CODE_SQL = "SELECT * FROM user WHERE passport_code = ?";
     private static final String GET_ALL_USERS_SQL = "SELECT * FROM user";
@@ -42,6 +44,11 @@ public class MySqlDaoUser implements IDaoUser {
     @Override
     public Optional<User> getByEmail(String email) {
         return helper.get(GET_USER_BY_EMAIL_SQL, UserMapper::map, email);
+    }
+
+    @Override
+    public List<User> getByFirstNameAndSecondName(String firstName, String secondName) {
+        return helper.getList(GET_USER_BY_FIRST_NAME_AND_SECOND_NAME_SQL, UserMapper::map, firstName, secondName);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package ua.epam.training.kukuruza.controller.command;
 
-import ua.epam.training.kukuruza.controller.command.impl.Localization;
-import ua.epam.training.kukuruza.controller.command.impl.NoCommand;
-import ua.epam.training.kukuruza.controller.command.impl.SignIn;
-import ua.epam.training.kukuruza.controller.command.impl.SignOut;
+import ua.epam.training.kukuruza.controller.command.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +14,7 @@ public abstract class CommandFactory {
         actions.put("localization", new Localization());
         actions.put("signIn", new SignIn());
         actions.put("signOut", new SignOut());
+        actions.put("registration", new Registration());
     }
 
     public static ICommand getAction(String commandName) {

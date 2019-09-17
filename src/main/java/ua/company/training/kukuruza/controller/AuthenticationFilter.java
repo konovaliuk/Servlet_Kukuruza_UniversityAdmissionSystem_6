@@ -1,5 +1,7 @@
 package ua.company.training.kukuruza.controller;
 
+import ua.company.training.kukuruza.controller.util.Path;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,12 +16,12 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
         String rootURI = req.getContextPath() + "/";
-        String indexURI = req.getContextPath() + "/index.jsp";
-        String registrationURI = req.getContextPath() + "/registration.jsp";
-        String signInURI = req.getContextPath() + "/signIn.jsp";
-        String signInCommand = req.getContextPath() + "/signIn.do";
-        String registrationCommand = req.getContextPath() + "/registration.do";
-        String localizationCommand = req.getContextPath() + "/localization.do";
+        String indexURI = req.getContextPath() + Path.INDEX_PAGE;
+        String registrationURI = req.getContextPath() + Path.REGISTRATION_PAGE;
+        String signInURI = req.getContextPath() + Path.SIGN_IN_PAGE;
+        String signInCommand = req.getContextPath() + Path.SIGN_IN_COMMAND;
+        String registrationCommand = req.getContextPath() + Path.REGISTRATION_COMMAND;
+        String localizationCommand = req.getContextPath() + Path.LOCALIZATION_COMMAND;
 
         boolean isLoggedIn = Objects.nonNull(session) && Objects.nonNull(session.getAttribute("user"));
         boolean isRootRequest = req.getRequestURI().equals(rootURI);

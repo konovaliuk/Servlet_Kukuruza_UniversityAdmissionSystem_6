@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller;
 
+import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.util.UserType;
 
@@ -36,7 +37,7 @@ public class AuthorizationFilter implements Filter {
             if (isUserAdmin(req, resp)) {
                 chain.doFilter(req, resp);
             } else {
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher(Path.INDEX_PAGE);
                 dispatcher.forward(req, response);
             }
         } else {

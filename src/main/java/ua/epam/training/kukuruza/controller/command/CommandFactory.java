@@ -17,7 +17,11 @@ public abstract class CommandFactory {
         actions.put("exam", new ExamHandler());
         actions.put("examCancelRegistration", new ExamCancelRegistration());
         actions.put("examRegistration", new ExamRegistration());
+        actions.put("findUserSendingNotification", new FindUserSendingNotification());
+        actions.put("findUserSettingGrade", new FindUserSettingGrade());
         actions.put("results", new Results());
+        actions.put("setGrade", new SetGrade());
+        actions.put("setUserStatus", new SetUserStatus());
         actions.put("signIn", new SignIn());
         actions.put("signOut", new SignOut());
         actions.put("specialtySelection", new SpecialtySelection());

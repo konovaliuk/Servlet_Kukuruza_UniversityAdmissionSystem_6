@@ -10,6 +10,7 @@ import java.util.Objects;
 public class ServiceFactory {
     private static final Logger LOGGER = LogManager.getLogger(ServiceFactory.class);
     private static ServiceFactory instance;
+    private AdminService adminService;
     private AuthenticationService authenticationService;
     private CheckStatusService checkStatusService;
     private EducationService educationService;
@@ -19,6 +20,7 @@ public class ServiceFactory {
     private SummaryRatingService summaryRatingService;
 
     private ServiceFactory(AbstractDaoFactory factory) {
+        adminService = new AdminService(factory);
         authenticationService = new AuthenticationService(factory);
         checkStatusService = new CheckStatusService(factory);
         educationService = new EducationService(factory);
@@ -43,6 +45,10 @@ public class ServiceFactory {
             return instance;
         }
         return new ServiceFactory(MySqlDaoFactory.getInstance());
+    }
+
+    public AdminService getAdminService() {
+        return adminService;
     }
 
     public AuthenticationService getAuthenticationService() {

@@ -15,6 +15,7 @@ public abstract class CommandFactory {
         actions.put("exam", new ExamHandler());
         actions.put("examCancelRegistration", new ExamCancelRegistration());
         actions.put("examRegistration", new ExamRegistration());
+        actions.put("results", new Results());
         actions.put("signIn", new SignIn());
         actions.put("signOut", new SignOut());
         actions.put("registration", new Registration());

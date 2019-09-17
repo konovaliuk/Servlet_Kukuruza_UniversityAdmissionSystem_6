@@ -12,6 +12,9 @@ public abstract class CommandFactory {
 
     static {
         actions.put("localization", new Localization());
+        actions.put("exam", new ExamHandler());
+        actions.put("examCancelRegistration", new ExamCancelRegistration());
+        actions.put("examRegistration", new ExamRegistration());
         actions.put("signIn", new SignIn());
         actions.put("signOut", new SignOut());
         actions.put("registration", new Registration());

@@ -11,10 +11,12 @@ public class ServiceFactory {
     private static final Logger LOGGER = LogManager.getLogger(ServiceFactory.class);
     private static ServiceFactory instance;
     private AuthenticationService authenticationService;
+    private ExamService examService;
     private RegistrationService registrationService;
 
     private ServiceFactory(AbstractDaoFactory factory) {
         authenticationService = new AuthenticationService(factory);
+        examService = new ExamService(factory);
         registrationService = new RegistrationService(factory);
     }
 
@@ -37,6 +39,10 @@ public class ServiceFactory {
 
     public AuthenticationService getAuthenticationService() {
         return authenticationService;
+    }
+
+    public ExamService getExamService() {
+        return examService;
     }
 
     public RegistrationService getRegistrationService() {

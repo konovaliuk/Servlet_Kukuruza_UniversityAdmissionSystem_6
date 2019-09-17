@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" import="ua.epam.training.kukuruza.controller.util.UserStatus" %>
+<%@ page contentType="text/html;charset=UTF-8" import="ua.company.training.kukuruza.controller.util.UserStatus" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setBundle basename="messages/msg" var="lang"/>

@@ -11,6 +11,7 @@ public class ServiceFactory {
     private static final Logger LOGGER = LogManager.getLogger(ServiceFactory.class);
     private static ServiceFactory instance;
     private AuthenticationService authenticationService;
+    private CheckStatusService checkStatusService;
     private EducationService educationService;
     private ExamService examService;
     private RegistrationService registrationService;
@@ -19,6 +20,7 @@ public class ServiceFactory {
 
     private ServiceFactory(AbstractDaoFactory factory) {
         authenticationService = new AuthenticationService(factory);
+        checkStatusService = new CheckStatusService(factory);
         educationService = new EducationService(factory);
         examService = new ExamService(factory);
         registrationService = new RegistrationService(factory);
@@ -45,6 +47,10 @@ public class ServiceFactory {
 
     public AuthenticationService getAuthenticationService() {
         return authenticationService;
+    }
+
+    public CheckStatusService getCheckStatusService() {
+        return checkStatusService;
     }
 
     public EducationService getEducationService() {

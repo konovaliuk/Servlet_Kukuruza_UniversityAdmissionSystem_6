@@ -21,6 +21,7 @@ public abstract class CommandFactory {
         actions.put("signOut", new SignOut());
         actions.put("specialtySelection", new SpecialtySelection());
         actions.put("submitRequest", new SubmitRequest());
+        actions.put("summaryRating", new SummaryRating());
         actions.put("registration", new Registration());
         actions.put("universitySelection", new UniversitySelection());
     }

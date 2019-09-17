@@ -15,6 +15,7 @@ public class ServiceFactory {
     private ExamService examService;
     private RegistrationService registrationService;
     private ResultService resultService;
+    private SummaryRatingService summaryRatingService;
 
     private ServiceFactory(AbstractDaoFactory factory) {
         authenticationService = new AuthenticationService(factory);
@@ -22,6 +23,7 @@ public class ServiceFactory {
         examService = new ExamService(factory);
         registrationService = new RegistrationService(factory);
         resultService = new ResultService(factory);
+        summaryRatingService = new SummaryRatingService(factory);
     }
 
     public static ServiceFactory getInstance() {
@@ -59,5 +61,9 @@ public class ServiceFactory {
 
     public ResultService getResultService() {
         return resultService;
+    }
+
+    public SummaryRatingService getSummaryRatingService() {
+        return summaryRatingService;
     }
 }

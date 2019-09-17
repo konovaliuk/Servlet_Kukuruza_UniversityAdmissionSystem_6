@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 public class Path {
+    public static final String ACCESS_DENIED_PAGE;
     public static final String ADMIN_PAGE;
     public static final String CHECK_STATUS_PAGE;
     public static final String EXAM_COMMAND;
@@ -27,6 +28,7 @@ public class Path {
         String fileName = "path.properties";
         try {
             properties.load(Objects.requireNonNull(Path.class.getClassLoader().getResourceAsStream(fileName)));
+            ACCESS_DENIED_PAGE = properties.getProperty("accessDeniedPage");
             ADMIN_PAGE = properties.getProperty("adminPage");
             CHECK_STATUS_PAGE = properties.getProperty("checkStatusPage");
             EXAM_COMMAND = properties.getProperty("examCommand");

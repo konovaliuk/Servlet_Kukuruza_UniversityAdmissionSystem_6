@@ -37,7 +37,7 @@ public class AuthorizationFilter implements Filter {
             if (isUserAdmin(req, resp)) {
                 chain.doFilter(req, resp);
             } else {
-                RequestDispatcher dispatcher = req.getRequestDispatcher(Path.INDEX_PAGE);
+                RequestDispatcher dispatcher = req.getRequestDispatcher(Path.ACCESS_DENIED_PAGE);
                 dispatcher.forward(req, response);
             }
         } else {

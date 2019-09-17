@@ -13,14 +13,16 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import static ua.company.training.kukuruza.controller.util.CommandNames.*;
+
 public class AuthorizationFilter implements Filter {
     private static final Set<String> secureCommands = new HashSet<>();
 
     static {
-        secureCommands.add("findUserSendingNotification");
-        secureCommands.add("findUserSettingGrade");
-        secureCommands.add("setGrade");
-        secureCommands.add("setUserStatus");
+        secureCommands.add(FIND_USER_SENDING_NOTIFICATION_COMMAND);
+        secureCommands.add(FIND_USER_SETTING_GRADE_COMMAND);
+        secureCommands.add(SET_GRADE_COMMAND);
+        secureCommands.add(SET_USER_STATUS_COMMAND);
     }
 
     @Override

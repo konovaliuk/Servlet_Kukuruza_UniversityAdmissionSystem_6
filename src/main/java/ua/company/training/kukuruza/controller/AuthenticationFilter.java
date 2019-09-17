@@ -19,29 +19,28 @@ public class AuthenticationFilter implements Filter {
         String indexURI = req.getContextPath() + Path.INDEX_PAGE;
         String registrationURI = req.getContextPath() + Path.REGISTRATION_PAGE;
         String signInURI = req.getContextPath() + Path.SIGN_IN_PAGE;
-        String signInCommand = req.getContextPath() + Path.SIGN_IN_COMMAND;
-        String registrationCommand = req.getContextPath() + Path.REGISTRATION_COMMAND;
-        String localizationCommand = req.getContextPath() + Path.LOCALIZATION_COMMAND;
+        String command = req.getParameter("command");
 
         boolean isLoggedIn = Objects.nonNull(session) && Objects.nonNull(session.getAttribute("user"));
         boolean isRootRequest = req.getRequestURI().equals(rootURI);
         boolean isIndexRequest = req.getRequestURI().equals(indexURI);
         boolean isRegistrationRequest = req.getRequestURI().equals(registrationURI);
         boolean isSignInRequest = req.getRequestURI().equals(signInURI);
-        boolean isSubmitSignInData = req.getRequestURI().equals(signInCommand) && req.getMethod().equals("POST");
-        boolean isSubmitRegistrationData = req.getRequestURI().equals(registrationCommand)
+        boolean isSignInCommand = Objects.nonNull(command) && command.equals("signIn")
                 && req.getMethod().equals("POST");
-        boolean isLocalizationCommand = req.getRequestURI().equals(localizationCommand);
+        boolean isRegistrationCommand = Objects.nonNull(command) && command.equals("registration")
+                && req.getMethod().equals("POST");
+        boolean isLocalizationCommand = Objects.nonNull(command) && command.equals("localization");
 
         if (isLoggedIn) {
-            if (isRegistrationRequest || isSignInRequest || isSubmitRegistrationData || isSubmitSignInData) {
+            if (isRegistrationRequest || isSignInRequest || isRegistrationCommand || isSignInCommand) {
                 resp.sendRedirect(indexURI);
             } else {
                 chain.doFilter(req, resp);
             }
         } else {
             if (isIndexRequest || isLocalizationCommand || isRegistrationRequest || isRootRequest ||
-                    isSignInRequest || isSubmitRegistrationData || isSubmitSignInData) {
+                    isSignInRequest || isRegistrationCommand || isSignInCommand) {
                 chain.doFilter(req, resp);
             } else {
                 resp.sendRedirect(signInURI);

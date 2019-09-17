@@ -22,6 +22,9 @@ public class SignIn implements ICommand {
             if (user.getUserTypeId() == UserType.STUDENT.getId()) {
                 return "/index.jsp";
             }
+            if (user.getUserTypeId() == UserType.ADMIN.getId()) {
+                return "redirect:/admin/adminPage.jsp";
+            }
 
             throw new RuntimeException("Wrong UserTypeId");
         } catch (ServiceException e) {

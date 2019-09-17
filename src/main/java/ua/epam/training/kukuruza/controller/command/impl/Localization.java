@@ -1,6 +1,8 @@
 package ua.epam.training.kukuruza.controller.command.impl;
 
 import ua.epam.training.kukuruza.controller.command.ICommand;
+import ua.epam.training.kukuruza.controller.util.UserType;
+import ua.epam.training.kukuruza.model.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,11 @@ public class Localization implements ICommand {
         String lang = req.getParameter("lang");
         if (Objects.nonNull(lang))
             Config.set(req.getSession(), Config.FMT_LOCALE, Locale.forLanguageTag(lang));
+
+        User user = (User) req.getSession().getAttribute("user");
+        if (Objects.nonNull(user) && user.getUserTypeId() == UserType.ADMIN.getId())
+            return "/admin/adminPage.jsp";
+
         return "/index.jsp";
     }
 }

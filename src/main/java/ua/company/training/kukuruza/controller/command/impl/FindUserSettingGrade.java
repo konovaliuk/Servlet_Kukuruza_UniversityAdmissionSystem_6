@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
+import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.Subject;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.command.ICommand;
@@ -25,6 +26,6 @@ public class FindUserSettingGrade implements ICommand {
             req.setAttribute("users", users);
         }
 
-        return "/admin/setGrade.jsp";
+        return Path.SET_GRADE_PAGE;
     }
 }

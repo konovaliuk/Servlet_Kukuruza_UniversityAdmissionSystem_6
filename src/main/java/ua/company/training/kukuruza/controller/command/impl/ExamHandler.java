@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
+import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.Exam;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.command.ICommand;
@@ -25,6 +26,6 @@ public class ExamHandler implements ICommand {
         req.setAttribute("userExams", userExams);
         req.setAttribute("availableExams", availableExams);
 
-        return "/WEB-INF/jsp/user/exam.jsp";
+        return Path.EXAM_PAGE;
     }
 }

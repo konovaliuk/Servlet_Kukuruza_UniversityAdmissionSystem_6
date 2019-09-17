@@ -1,6 +1,7 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.command.ICommand;
+import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.controller.util.UserType;
 import ua.company.training.kukuruza.model.entity.User;
 
@@ -13,9 +14,9 @@ public class NoCommand implements ICommand {
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = (User) req.getSession().getAttribute("user");
         if (Objects.nonNull(user) && user.getUserTypeId() == UserType.ADMIN.getId()) {
-            return "/admin/adminPage.jsp";
+            return Path.ADMIN_PAGE;
         } else {
-            return "/index.jsp";
+            return Path.INDEX_PAGE;
         }
     }
 }

@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
+import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.Specialty;
 import ua.company.training.kukuruza.controller.command.ICommand;
 import ua.company.training.kukuruza.controller.service.ServiceFactory;
@@ -14,6 +15,6 @@ public class SpecialtySelection implements ICommand {
         Integer universityId = Integer.valueOf(req.getParameter("universityId"));
         List<Specialty> specialties = ServiceFactory.getInstance().getEducationService().getSpecialties(universityId);
         req.setAttribute("specialties", specialties);
-        return "/WEB-INF/jsp/user/specialtySelection.jsp";
+        return Path.SPECIALTY_SELECTION_PAGE;
     }
 }

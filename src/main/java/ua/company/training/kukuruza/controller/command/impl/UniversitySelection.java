@@ -1,6 +1,7 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.service.EducationService;
+import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.Specialty;
 import ua.company.training.kukuruza.model.entity.University;
 import ua.company.training.kukuruza.model.entity.User;
@@ -26,6 +27,6 @@ public class UniversitySelection implements ICommand {
             req.setAttribute("universities", universities);
         }
 
-        return "/WEB-INF/jsp/user/universitySelection.jsp";
+        return Path.UNIVERSITY_SELECTION_PAGE;
     }
 }

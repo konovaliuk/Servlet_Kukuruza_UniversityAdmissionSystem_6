@@ -1,6 +1,7 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.service.EducationService;
+import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.Specialty;
 import ua.company.training.kukuruza.model.entity.Subject;
 import ua.company.training.kukuruza.model.entity.User;
@@ -28,12 +29,11 @@ public class SubmitRequest implements ICommand {
             req.setAttribute("notAvailableSpecialty", notAvailableSpecialty);
             req.setAttribute("requiredSubjects", requiredSubjects);
             req.setAttribute("specialties", specialties);
-            return "/WEB-INF/jsp/user/specialtySelection.jsp";
+            return Path.SPECIALTY_SELECTION_PAGE;
         } else {
             Specialty chosenSpecialty = service.submitRequest(user.getId(), rating, universityId, specialtyId);
             req.setAttribute("chosenSpecialty", chosenSpecialty);
+            return Path.UNIVERSITY_SELECTION_PAGE;
         }
-
-        return "/WEB-INF/jsp/user/universitySelection.jsp";
     }
 }

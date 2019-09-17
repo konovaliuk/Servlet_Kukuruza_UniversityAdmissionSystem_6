@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
+import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.command.ICommand;
 import ua.company.training.kukuruza.controller.service.ServiceFactory;
@@ -13,6 +14,6 @@ public class CheckStatus implements ICommand {
         User user = (User) req.getSession().getAttribute("user");
         User updatedUser = ServiceFactory.getInstance().getCheckStatusService().getUpdatedUser(user);
         req.getSession().setAttribute("user", updatedUser);
-        return "/WEB-INF/jsp/user/checkStatus.jsp";
+        return Path.CHECK_STATUS_PAGE;
     }
 }

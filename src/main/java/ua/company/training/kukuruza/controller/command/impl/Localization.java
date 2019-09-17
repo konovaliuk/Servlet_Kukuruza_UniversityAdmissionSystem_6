@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
+import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.command.ICommand;
 import ua.company.training.kukuruza.controller.util.UserType;
@@ -19,8 +20,8 @@ public class Localization implements ICommand {
 
         User user = (User) req.getSession().getAttribute("user");
         if (Objects.nonNull(user) && user.getUserTypeId() == UserType.ADMIN.getId())
-            return "/admin/adminPage.jsp";
+            return Path.ADMIN_PAGE;
 
-        return "/index.jsp";
+        return Path.INDEX_PAGE;
     }
 }

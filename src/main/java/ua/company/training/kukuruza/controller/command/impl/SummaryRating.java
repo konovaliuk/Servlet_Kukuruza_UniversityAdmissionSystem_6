@@ -1,6 +1,7 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.service.SummaryRatingService;
+import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.Request;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.command.ICommand;
@@ -32,6 +33,6 @@ public class SummaryRating implements ICommand {
             req.setAttribute("studentLimit", studentLimit);
         }
 
-        return "/WEB-INF/jsp/user/summaryRating.jsp";
+        return Path.SUMMARY_RATING_PAGE;
     }
 }

@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
+import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.command.ICommand;
 import ua.company.training.kukuruza.controller.service.ServiceFactory;
@@ -16,6 +17,6 @@ public class ExamCancelRegistration implements ICommand {
             User user = (User) req.getSession().getAttribute("user");
             ServiceFactory.getInstance().getExamService().cancelRegistrationUserToExams(user.getId(), examsId);
         }
-        return "/exam.do?command=exam";
+        return Path.EXAM_COMMAND;
     }
 }

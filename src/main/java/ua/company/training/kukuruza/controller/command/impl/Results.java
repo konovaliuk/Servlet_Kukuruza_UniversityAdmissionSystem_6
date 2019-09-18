@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.command.ICommand;
@@ -12,9 +13,9 @@ import java.util.Map;
 public class Results implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        User user = (User) req.getSession().getAttribute("user");
+        User user = (User) req.getSession().getAttribute(AttributeNames.USER);
         Map<String, Integer> userGrades = ServiceFactory.getInstance().getResultService().getUserGrades(user.getId());
-        req.setAttribute("userGrades", userGrades);
+        req.setAttribute(AttributeNames.USER_GRADES, userGrades);
         return Path.RESULTS_PAGE;
     }
 }

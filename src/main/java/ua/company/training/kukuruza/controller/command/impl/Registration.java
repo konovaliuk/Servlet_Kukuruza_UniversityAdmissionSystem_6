@@ -1,6 +1,7 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.service.ServiceFactory;
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.command.ICommand;
@@ -27,10 +28,10 @@ public class Registration implements ICommand {
 
         try {
             ServiceFactory.getInstance().getRegistrationService().register(newUser);
-            req.getSession().setAttribute("user", newUser);
+            req.getSession().setAttribute(AttributeNames.USER, newUser);
             return Path.INDEX_PAGE;
         } catch (ServiceException e) {
-            req.setAttribute("registrationError", e.getMessage());
+            req.setAttribute(AttributeNames.REGISTRATION_ERROR, e.getMessage());
             return Path.REGISTRATION_PAGE;
         }
     }

@@ -2,6 +2,7 @@ package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.command.ICommand;
 import ua.company.training.kukuruza.controller.service.ServiceFactory;
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.controller.util.RequestParameters;
 
@@ -16,7 +17,7 @@ public class SetGrade implements ICommand {
         Integer grade = Integer.valueOf(req.getParameter(RequestParameters.GRADE));
 
         ServiceFactory.getInstance().getAdminService().setGrade(userId, subjectId, grade);
-        req.setAttribute("success", "success");
+        req.setAttribute(AttributeNames.SUCCESS, "success");
 
         return Path.SET_GRADE_PAGE;
     }

@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller;
 
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.controller.util.RequestParameters;
 import ua.company.training.kukuruza.model.entity.User;
@@ -56,9 +57,9 @@ public class AuthorizationFilter implements Filter {
 
     private boolean isUserAdmin(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession(false);
-        boolean isLoggedIn = Objects.nonNull(session) && Objects.nonNull(session.getAttribute("user"));
+        boolean isLoggedIn = Objects.nonNull(session) && Objects.nonNull(session.getAttribute(AttributeNames.USER));
         if (isLoggedIn) {
-            User user = (User) session.getAttribute("user");
+            User user = (User) session.getAttribute(AttributeNames.USER);
             Integer userTypeId = user.getUserTypeId();
             if (Objects.isNull(userTypeId)) {
                 return false;

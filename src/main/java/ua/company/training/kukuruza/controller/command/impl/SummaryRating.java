@@ -1,6 +1,7 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.service.SummaryRatingService;
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.Request;
 import ua.company.training.kukuruza.model.entity.User;
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class SummaryRating implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        User user = (User) req.getSession().getAttribute("user");
+        User user = (User) req.getSession().getAttribute(AttributeNames.USER);
 
         SummaryRatingService service = ServiceFactory.getInstance().getSummaryRatingService();
         Optional<Request> userRequest = service.getUserRequest(user);
@@ -26,11 +27,11 @@ public class SummaryRating implements ICommand {
             String specialtyName = service.getSpecialtyName(userRequest.get());
             Integer studentLimit = service.getStudentLimit(userRequest.get());
 
-            req.setAttribute("userIdToRating", userIdToRating);
-            req.setAttribute("userIdToUser", userIdToUser);
-            req.setAttribute("universityName", universityName);
-            req.setAttribute("specialtyName", specialtyName);
-            req.setAttribute("studentLimit", studentLimit);
+            req.setAttribute(AttributeNames.USER_ID_TO_RATING, userIdToRating);
+            req.setAttribute(AttributeNames.USER_ID_TO_USER, userIdToUser);
+            req.setAttribute(AttributeNames.UNIVERSITY_NAME, universityName);
+            req.setAttribute(AttributeNames.SPECIALTY_NAME, specialtyName);
+            req.setAttribute(AttributeNames.STUDENT_LIMIT, studentLimit);
         }
 
         return Path.SUMMARY_RATING_PAGE;

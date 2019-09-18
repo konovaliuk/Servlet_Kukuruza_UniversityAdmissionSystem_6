@@ -1,6 +1,7 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.service.EducationService;
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.controller.util.RequestParameters;
 import ua.company.training.kukuruza.model.entity.Specialty;
@@ -19,7 +20,7 @@ public class SubmitRequest implements ICommand {
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         Integer universityId = Integer.valueOf(req.getParameter(RequestParameters.UNIVERSITY_ID));
         Integer specialtyId = Integer.valueOf(req.getParameter(RequestParameters.SPECIALTY_ID));
-        User user = (User) req.getSession().getAttribute("user");
+        User user = (User) req.getSession().getAttribute(AttributeNames.USER);
 
         EducationService service = ServiceFactory.getInstance().getEducationService();
         Integer rating = service.getRatingByRequiredSubjects(user.getId(), specialtyId);
@@ -27,13 +28,13 @@ public class SubmitRequest implements ICommand {
             Specialty notAvailableSpecialty = service.getSpecialty(specialtyId);
             List<Subject> requiredSubjects = service.getRequiredSubjects(specialtyId);
             List<Specialty> specialties = service.getSpecialties(universityId);
-            req.setAttribute("notAvailableSpecialty", notAvailableSpecialty);
-            req.setAttribute("requiredSubjects", requiredSubjects);
-            req.setAttribute("specialties", specialties);
+            req.setAttribute(AttributeNames.NOT_AVAILABLE_SPECIALTY, notAvailableSpecialty);
+            req.setAttribute(AttributeNames.REQUIRED_SUBJECTS, requiredSubjects);
+            req.setAttribute(AttributeNames.SPECIALTIES, specialties);
             return Path.SPECIALTY_SELECTION_PAGE;
         } else {
             Specialty chosenSpecialty = service.submitRequest(user.getId(), rating, universityId, specialtyId);
-            req.setAttribute("chosenSpecialty", chosenSpecialty);
+            req.setAttribute(AttributeNames.CHOSEN_SPECIALTY, chosenSpecialty);
             return Path.UNIVERSITY_SELECTION_PAGE;
         }
     }

@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.controller.util.RequestParameters;
 import ua.company.training.kukuruza.model.entity.Subject;
@@ -19,12 +20,12 @@ public class FindUserSettingGrade implements ICommand {
 
         List<User> users = ServiceFactory.getInstance().getAdminService().findUsers(firstName, secondName);
         if (users.isEmpty()) {
-            req.setAttribute("firstName", firstName);
-            req.setAttribute("secondName", secondName);
+            req.setAttribute(AttributeNames.FIRST_NAME, firstName);
+            req.setAttribute(AttributeNames.SECOND_NAME, secondName);
         } else {
             List<Subject> subjects = ServiceFactory.getInstance().getAdminService().getSubjects();
-            req.setAttribute("subjects", subjects);
-            req.setAttribute("users", users);
+            req.setAttribute(AttributeNames.SUBJECTS, subjects);
+            req.setAttribute(AttributeNames.USERS, users);
         }
 
         return Path.SET_GRADE_PAGE;

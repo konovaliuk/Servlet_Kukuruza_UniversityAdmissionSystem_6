@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.command.ICommand;
@@ -11,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 public class CheckStatus implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        User user = (User) req.getSession().getAttribute("user");
+        User user = (User) req.getSession().getAttribute(AttributeNames.USER);
         User updatedUser = ServiceFactory.getInstance().getCheckStatusService().getUpdatedUser(user);
-        req.getSession().setAttribute("user", updatedUser);
+        req.getSession().setAttribute(AttributeNames.USER, updatedUser);
         return Path.CHECK_STATUS_PAGE;
     }
 }

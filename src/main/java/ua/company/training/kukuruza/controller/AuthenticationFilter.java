@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller;
 
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.RequestParameters;
 
 import javax.servlet.*;
@@ -14,7 +15,8 @@ import static ua.company.training.kukuruza.controller.util.Path.*;
 
 public class AuthenticationFilter implements Filter {
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
@@ -24,7 +26,7 @@ public class AuthenticationFilter implements Filter {
         String signInURI = req.getContextPath() + SIGN_IN_PAGE;
         String command = req.getParameter(RequestParameters.COMMAND);
 
-        boolean isLoggedIn = Objects.nonNull(session) && Objects.nonNull(session.getAttribute("user"));
+        boolean isLoggedIn = Objects.nonNull(session) && Objects.nonNull(session.getAttribute(AttributeNames.USER));
         boolean isRootRequest = req.getRequestURI().equals(rootURI);
         boolean isIndexRequest = req.getRequestURI().equals(indexURI);
         boolean isRegistrationRequest = req.getRequestURI().equals(registrationURI);

@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.controller.util.RequestParameters;
 import ua.company.training.kukuruza.model.entity.User;
@@ -15,7 +16,7 @@ public class ExamCancelRegistration implements ICommand {
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         String[] examsId = req.getParameterValues(RequestParameters.EXAMS_ID);
         if (Objects.nonNull(examsId)) {
-            User user = (User) req.getSession().getAttribute("user");
+            User user = (User) req.getSession().getAttribute(AttributeNames.USER);
             ServiceFactory.getInstance().getExamService().cancelRegistrationUserToExams(user.getId(), examsId);
         }
         return Path.EXAM_COMMAND;

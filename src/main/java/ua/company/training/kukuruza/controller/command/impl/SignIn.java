@@ -1,6 +1,7 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.service.ServiceFactory;
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.controller.util.RequestParameters;
 import ua.company.training.kukuruza.model.entity.User;
@@ -19,7 +20,7 @@ public class SignIn implements ICommand {
 
         try {
             User user = ServiceFactory.getInstance().getAuthenticationService().signIn(login, password);
-            req.getSession().setAttribute("user", user);
+            req.getSession().setAttribute(AttributeNames.USER, user);
 
             if (user.getUserTypeId() == UserType.STUDENT.getId()) {
                 return Path.INDEX_PAGE;
@@ -30,7 +31,7 @@ public class SignIn implements ICommand {
 
             throw new RuntimeException("Wrong UserTypeId");
         } catch (ServiceException e) {
-            req.setAttribute("signInError", e.getMessage());
+            req.setAttribute(AttributeNames.SIGN_IN_ERROR, e.getMessage());
             return Path.SIGN_IN_PAGE;
         }
     }

@@ -2,6 +2,7 @@ package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.command.ICommand;
 import ua.company.training.kukuruza.controller.service.ServiceFactory;
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.controller.util.RequestParameters;
 
@@ -15,7 +16,7 @@ public class SetUserStatus implements ICommand {
         Integer userStatus = Integer.valueOf(req.getParameter(RequestParameters.USER_STATUS));
 
         ServiceFactory.getInstance().getAdminService().setUserStatus(userId, userStatus);
-        req.setAttribute("success", "success");
+        req.setAttribute(AttributeNames.SUCCESS, "success");
 
         return Path.SEND_NOTIFICATION_PAGE;
     }

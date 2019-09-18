@@ -1,5 +1,6 @@
 package ua.company.training.kukuruza.controller.command.impl;
 
+import ua.company.training.kukuruza.controller.util.AttributeNames;
 import ua.company.training.kukuruza.controller.util.Path;
 import ua.company.training.kukuruza.model.entity.University;
 import ua.company.training.kukuruza.model.entity.User;
@@ -13,10 +14,10 @@ import java.util.List;
 public class ChangeSpecialty implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        User user = (User) req.getSession().getAttribute("user");
+        User user = (User) req.getSession().getAttribute(AttributeNames.USER);
         ServiceFactory.getInstance().getEducationService().dropRequest(user.getId());
         List<University> universities = ServiceFactory.getInstance().getEducationService().getUniversities();
-        req.setAttribute("universities", universities);
+        req.setAttribute(AttributeNames.UNIVERSITIES, universities);
         return Path.UNIVERSITY_SELECTION_PAGE;
     }
 }

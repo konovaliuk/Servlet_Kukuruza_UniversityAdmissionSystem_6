@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.company.training.kukuruza.controller.command.ICommand;
 import ua.company.training.kukuruza.controller.command.CommandFactory;
+import ua.company.training.kukuruza.controller.util.RequestParameters;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +30,7 @@ public class FrontController extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.debug("URI is: " + req.getRequestURI());
-        ICommand command = CommandFactory.getAction(req.getParameter("command"));
+        ICommand command = CommandFactory.getAction(req.getParameter(RequestParameters.COMMAND));
         LOGGER.debug("Command is: " + command.getClass());
         String view = command.execute(req, resp);
         LOGGER.debug("View is: " + view);

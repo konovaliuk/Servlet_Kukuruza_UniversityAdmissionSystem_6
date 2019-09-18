@@ -1,6 +1,7 @@
 package ua.company.training.kukuruza.controller;
 
 import ua.company.training.kukuruza.controller.util.Path;
+import ua.company.training.kukuruza.controller.util.RequestParameters;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.util.UserType;
 
@@ -31,7 +32,7 @@ public class AuthorizationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String securePath = req.getContextPath() + "/admin";
-        String command = req.getParameter("command");
+        String command = req.getParameter(RequestParameters.COMMAND);
         boolean isSecurePageRequest = req.getRequestURI().startsWith(securePath);
         boolean isSecureCommandRequest = isSecureCommand(command);
 

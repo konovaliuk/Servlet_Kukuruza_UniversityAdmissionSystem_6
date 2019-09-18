@@ -2,6 +2,7 @@ package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.service.EducationService;
 import ua.company.training.kukuruza.controller.util.Path;
+import ua.company.training.kukuruza.controller.util.RequestParameters;
 import ua.company.training.kukuruza.model.entity.Specialty;
 import ua.company.training.kukuruza.model.entity.Subject;
 import ua.company.training.kukuruza.model.entity.User;
@@ -16,8 +17,8 @@ import java.util.Objects;
 public class SubmitRequest implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        Integer universityId = Integer.valueOf(req.getParameter("universityId"));
-        Integer specialtyId = Integer.valueOf(req.getParameter("specialtyId"));
+        Integer universityId = Integer.valueOf(req.getParameter(RequestParameters.UNIVERSITY_ID));
+        Integer specialtyId = Integer.valueOf(req.getParameter(RequestParameters.SPECIALTY_ID));
         User user = (User) req.getSession().getAttribute("user");
 
         EducationService service = ServiceFactory.getInstance().getEducationService();

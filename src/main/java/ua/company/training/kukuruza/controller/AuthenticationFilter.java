@@ -1,5 +1,7 @@
 package ua.company.training.kukuruza.controller;
 
+import ua.company.training.kukuruza.controller.util.RequestParameters;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +22,7 @@ public class AuthenticationFilter implements Filter {
         String indexURI = req.getContextPath() + INDEX_PAGE;
         String registrationURI = req.getContextPath() + REGISTRATION_PAGE;
         String signInURI = req.getContextPath() + SIGN_IN_PAGE;
-        String command = req.getParameter("command");
+        String command = req.getParameter(RequestParameters.COMMAND);
 
         boolean isLoggedIn = Objects.nonNull(session) && Objects.nonNull(session.getAttribute("user"));
         boolean isRootRequest = req.getRequestURI().equals(rootURI);

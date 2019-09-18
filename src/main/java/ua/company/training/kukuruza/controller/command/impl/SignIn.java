@@ -2,6 +2,7 @@ package ua.company.training.kukuruza.controller.command.impl;
 
 import ua.company.training.kukuruza.controller.service.ServiceFactory;
 import ua.company.training.kukuruza.controller.util.Path;
+import ua.company.training.kukuruza.controller.util.RequestParameters;
 import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.controller.command.ICommand;
 import ua.company.training.kukuruza.controller.service.ServiceException;
@@ -13,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class SignIn implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+        String login = req.getParameter(RequestParameters.LOGIN);
+        String password = req.getParameter(RequestParameters.PASSWORD);
 
         try {
             User user = ServiceFactory.getInstance().getAuthenticationService().signIn(login, password);

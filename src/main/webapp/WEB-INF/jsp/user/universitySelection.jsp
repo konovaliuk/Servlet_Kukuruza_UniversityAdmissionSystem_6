@@ -13,17 +13,18 @@
     <div class="container">
         <div class="jumbotron bg-success mt-4 pb-4 text-center">
             <h3 class="display-4 text-white">
-                <p><fmt:message key="universitySelection.successChosenSpecialty" bundle="${lang}"/>!</p>
-                <p><fmt:message key="universitySelection.yourChoice" bundle="${lang}"/>
-                    <em>${requestScope.chosenSpecialty.name}</em>
+                <fmt:message key="universitySelection.successChosenSpecialty" bundle="${lang}"/>!
+                <p>
+                    <fmt:message key="universitySelection.yourChoice" bundle="${lang}"/>
+                    <em>${requestScope.chosenSpecialty.name}</em>!
                 </p>
             </h3>
             <p class="lead text-white-50">
                 <fmt:message key="universitySelection.changeChoice" bundle="${lang}"/>
             </p>
             <hr class="my-4">
-
-            <a class="btn btn-light font-weight-bold" href="changeSpecialty.do?command=changeSpecialty" role="button">
+            <a class="btn btn-light font-weight-bold"
+               href="<c:url value="/changeSpecialty.do?command=changeSpecialty"/>" role="button">
                 <fmt:message key="universitySelection.changeChoiceButton" bundle="${lang}"/>
             </a>
         </div>
@@ -39,7 +40,7 @@
             <c:forEach items="${requestScope.universities}" var="university">
                 <div class="col-sm-4 mb-4">
                     <div class="card">
-                        <form action="selectUniversity.do" method="post">
+                        <form action="<c:url value="/selectUniversity.do"/>" method="post">
                             <div class="card-body">
                                 <h5 class="card-title">${university.name}</h5>
 

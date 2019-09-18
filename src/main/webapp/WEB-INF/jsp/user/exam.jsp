@@ -11,10 +11,10 @@
 <%@ include file="/WEB-INF/jsp/user/navbar.jsp" %>
 <div class="container">
     <c:if test="${not empty requestScope.userExams}">
-
-        <h2 class="mt-2"><fmt:message key="exam.myExams" bundle="${lang}"/></h2>
-
-        <form action="examCancelRegistration.do" method="post">
+        <h2 class="mt-2">
+            <fmt:message key="exam.myExams" bundle="${lang}"/>
+        </h2>
+        <form action="<c:url value="/examCancelRegistration.do"/>" method="post">
             <table class="table">
                 <thead>
                 <tr>
@@ -25,7 +25,6 @@
                 </tr>
                 </thead>
                 <tbody>
-
                 <c:forEach var="exam" items="${requestScope.userExams}">
                     <tr>
                         <th scope="row"><input type="checkbox" value="${exam.id}" name="exam_id"></th>
@@ -53,9 +52,10 @@
         </form>
     </c:if>
     <c:if test="${not empty requestScope.availableExams}">
-        <h2 class="mt-2"><fmt:message key="exam.availableExams" bundle="${lang}"/></h2>
-
-        <form class="mb-4" action="examRegistration.do" method="post">
+        <h2 class="mt-2">
+            <fmt:message key="exam.availableExams" bundle="${lang}"/>
+        </h2>
+        <form class="mb-4" action="<c:url value="/examRegistration.do"/>" method="post">
             <table class="table">
                 <thead>
                 <tr>

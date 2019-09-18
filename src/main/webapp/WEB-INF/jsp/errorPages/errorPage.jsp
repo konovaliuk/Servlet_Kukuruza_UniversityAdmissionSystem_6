@@ -14,21 +14,17 @@
         <h3 class="display-4 text-white">
             <fmt:message key="errorPage.message" bundle="${lang}"/>
         </h3>
-
         <p class="lead text-white-50">
             <fmt:message key="errorPage.advice" bundle="${lang}"/>
         </p>
-
         <hr class="my-4">
-
         <c:if test="${(sessionScope.user eq null) or (sessionScope.user.userTypeId eq UserType.STUDENT.id)}">
-            <a class="btn btn-light font-weight-bold" href="${pageContext.request.contextPath}/index.jsp" role="button">
+            <a class="btn btn-light font-weight-bold" href="<c:url value="/index.jsp"/>" role="button">
                 <fmt:message key="errorPage.button" bundle="${lang}"/>
             </a>
         </c:if>
-
         <c:if test="${sessionScope.user.userTypeId eq UserType.ADMIN.id}">
-            <a class="btn btn-light font-weight-bold" href="${pageContext.request.contextPath}/admin/adminPage.jsp"
+            <a class="btn btn-light font-weight-bold" href="<c:url value="/admin/adminPage.jsp"/>"
                role="button">
                 <fmt:message key="errorPage.button" bundle="${lang}"/>
             </a>

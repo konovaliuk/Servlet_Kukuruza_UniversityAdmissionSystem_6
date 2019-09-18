@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="index.jsp">
+            <a class="nav-link" href="<c:url value="/index.jsp"/>">
                 <i class="fa fa-home" aria-hidden="true"></i>
                 <fmt:message key="navbar.home" bundle="${lang}"/>
             </a>
@@ -12,10 +12,10 @@
                 <fmt:message key="navbar.language" bundle="${lang}"/>
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="localization.do?command=localization&lang=en-US">
+                <a class="dropdown-item" href="<c:url value="/localization.do?command=localization&lang=en-US"/>">
                     <fmt:message key="navbar.en_US" bundle="${lang}"/>
                 </a>
-                <a class="dropdown-item" href="localization.do?command=localization&lang=uk-UA">
+                <a class="dropdown-item" href="<c:url value="/localization.do?command=localization&lang=uk-UA"/>">
                     <fmt:message key="navbar.uk_UA" bundle="${lang}"/>
                 </a>
             </div>
@@ -24,13 +24,15 @@
     <c:if test="${sessionScope.user eq null}">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a href="registration.jsp" class="nav-link my-2 btn btn-sm btn-success font-weight-bold">
+                <a href="<c:url value="/registration.jsp"/>"
+                   class="nav-link my-2 btn btn-sm btn-success font-weight-bold">
                     <fmt:message key="navbar.registration" bundle="${lang}"/>
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="signIn.jsp" class="nav-link my-2 btn btn-sm btn-success ml-3 font-weight-bold">
+                <a href="<c:url value="/signIn.jsp"/>"
+                   class="nav-link my-2 btn btn-sm btn-success ml-3 font-weight-bold">
                     <fmt:message key="navbar.signIn" bundle="${lang}"/>
                     <i class="fa fa-sign-in" aria-hidden="true"></i>
                 </a>
@@ -46,26 +48,27 @@
                         ${sessionScope.user.firstName}
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="exam.do?command=exam">
+                    <a class="dropdown-item" href="<c:url value="/exam.do?command=exam"/>">
                         <fmt:message key="navbar.exams" bundle="${lang}"/>
                     </a>
-                    <a class="dropdown-item" href="results.do?command=results">
+                    <a class="dropdown-item" href="<c:url value="/results.do?command=results"/>">
                         <fmt:message key="navbar.results" bundle="${lang}"/>
                     </a>
-                    <a class="dropdown-item" href="universitySelection.do?command=universitySelection">
+                    <a class="dropdown-item"
+                       href="<c:url value="/universitySelection.do?command=universitySelection"/>">
                         <fmt:message key="navbar.universities" bundle="${lang}"/>
                     </a>
-                    <a class="dropdown-item" href="rating.do?command=summaryRating">
+                    <a class="dropdown-item" href="<c:url value="/rating.do?command=summaryRating"/>">
                         <fmt:message key="navbar.summaryRating" bundle="${lang}"/>
                     </a>
-                    <a class="dropdown-item" href="checkStatus.do?command=checkStatus">
+                    <a class="dropdown-item" href="<c:url value="/checkStatus.do?command=checkStatus"/>">
                         <fmt:message key="navbar.checkStatus" bundle="${lang}"/>
                     </a>
                 </div>
             </li>
-
             <li class="nav-item">
-                <a href="signOut.do?command=signOut" class="nav-link my-2 btn btn-sm btn-success ml-3 font-weight-bold">
+                <a href="<c:url value="/signOut.do?command=signOut"/>"
+                   class="nav-link my-2 btn btn-sm btn-success ml-3 font-weight-bold">
                     <fmt:message key="navbar.signOut" bundle="${lang}"/>
                     <i class="fa fa-sign-out" aria-hidden="true"></i>
                 </a>

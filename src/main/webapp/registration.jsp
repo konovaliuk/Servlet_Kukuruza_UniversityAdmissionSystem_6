@@ -13,19 +13,17 @@
     <div class="row">
         <div class="col"></div>
         <div class="col">
-            <form class="form-signin mt-4" action="registration.do" method="post">
+            <form class="form-signin mt-4" action="<c:url value="/registration.do"/>" method="post">
                 <c:if test="${requestScope.registrationError ne null}">
                     <div class="alert alert-danger" role="alert">
                             ${requestScope.registrationError}
                     </div>
                 </c:if>
-
                 <div class="text-center">
                     <h1 class="h3 mb-3 font-weight-normal">
                         <fmt:message key="registration.formTitle" bundle="${lang}"/>
                     </h1>
                 </div>
-
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -35,7 +33,6 @@
                     <input name="login" class="form-control"
                            placeholder="<fmt:message key="registration.login" bundle="${lang}"/>" required autofocus>
                 </div>
-
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -45,7 +42,6 @@
                     <input name="first_name" class="form-control"
                            placeholder="<fmt:message key="registration.firstName" bundle="${lang}"/>" required>
                 </div>
-
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -55,7 +51,6 @@
                     <input name="second_name" class="form-control"
                            placeholder="<fmt:message key="registration.secondName" bundle="${lang}"/>" required>
                 </div>
-
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -65,7 +60,6 @@
                     <input name="passport_code" class="form-control"
                            placeholder="<fmt:message key="registration.passportCode" bundle="${lang}"/>" required>
                 </div>
-
                 <div class="btn-group btn-group-toggle mb-3 btn-group-sm" data-toggle="buttons">
                     <label class="btn btn-secondary active">
                         <input type="radio" name="gender" value="M" autocomplete="off" required>
@@ -76,7 +70,6 @@
                         <fmt:message key="registration.female" bundle="${lang}"/>
                     </label>
                 </div>
-
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -86,7 +79,6 @@
                     <input name="email" type="email" class="form-control"
                            placeholder="<fmt:message key="registration.email" bundle="${lang}"/>">
                 </div>
-
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -96,7 +88,6 @@
                     <input name="phone" type="tel" class="form-control"
                            placeholder="<fmt:message key="registration.phoneNumber" bundle="${lang}"/>" required>
                 </div>
-
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">

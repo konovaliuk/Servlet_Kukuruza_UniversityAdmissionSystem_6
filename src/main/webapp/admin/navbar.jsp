@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="adminPage.jsp">
+            <a class="nav-link" href="<c:url value="/admin/adminPage.jsp"/>">
                 <i class="fa fa-home" aria-hidden="true"></i>
                 <fmt:message key="navbar.home" bundle="${lang}"/>
             </a>
@@ -12,21 +12,21 @@
                 <fmt:message key="navbar.language" bundle="${lang}"/>
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="localization.do?command=localization&lang=en-US">
+                <a class="dropdown-item" href="<c:url value="/localization.do?command=localization&lang=en-US"/>">
                     <fmt:message key="navbar.en_US" bundle="${lang}"/>
                 </a>
-                <a class="dropdown-item" href="localization.do?command=localization&lang=uk-UA">
+                <a class="dropdown-item" href="<c:url value="/localization.do?command=localization&lang=uk-UA"/>">
                     <fmt:message key="navbar.uk_UA" bundle="${lang}"/>
                 </a>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="setGrade.jsp">
+            <a class="nav-link" href="<c:url value="/admin/setGrade.jsp"/>">
                 <fmt:message key="adminNavbar.setGrades" bundle="${lang}"/>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="sendNotification.jsp">
+            <a class="nav-link" href="<c:url value="/admin/sendNotification.jsp"/>">
                 <fmt:message key="adminNavbar.sendNotifications" bundle="${lang}"/>
             </a>
         </li>
@@ -40,7 +40,8 @@
         </li>
 
         <li class="nav-item">
-            <a href="signOut.do?command=signOut" class="nav-link my-2 btn btn-sm btn-success ml-3 font-weight-bold">
+            <a href="<c:url value="/signOut.do?command=signOut"/>"
+               class="nav-link my-2 btn btn-sm btn-success ml-3 font-weight-bold">
                 <fmt:message key="navbar.signOut" bundle="${lang}"/>
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
             </a>

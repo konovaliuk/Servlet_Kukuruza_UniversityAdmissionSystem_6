@@ -13,19 +13,17 @@
     <div class="row">
         <div class="col"></div>
         <div class="col">
-            <form class="form-signin mt-4" method="post" action="signIn.do">
+            <form class="form-signin mt-4" method="post" action="<c:url value="/signIn.do"/>">
                 <c:if test="${requestScope.signInError ne null}">
                     <div class="alert alert-danger" role="alert">
                             ${requestScope.signInError}
                     </div>
                 </c:if>
-
                 <div class="text-center">
                     <h1 class="h3 mb-3 font-weight-normal">
                         <fmt:message key="signIn.signIn" bundle="${lang}"/>
                     </h1>
                 </div>
-
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-address-card fa-fw"
@@ -41,9 +39,7 @@
                     <input name="password" type="password" class="form-control"
                            placeholder="<fmt:message key="signIn.password" bundle="${lang}"/>" required>
                 </div>
-
                 <input type="hidden" name="command" value="signIn">
-
                 <button class="btn btn btn-primary btn-block" type="submit">
                     <fmt:message key="signIn.button" bundle="${lang}"/><i class="fa fa-sign-in" aria-hidden="true"></i>
                 </button>

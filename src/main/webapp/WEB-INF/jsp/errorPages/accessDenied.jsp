@@ -13,12 +13,11 @@
         <h3 class="display-4 text-white">
             <fmt:message key="accessDenied.message" bundle="${lang}"/>
         </h3>
-
         <p class="lead text-white-50">
             <fmt:message key="accessDenied.advice" bundle="${lang}"/>
         </p>
         <hr class="my-4">
-        <a class="btn btn-light font-weight-bold" href="${pageContext.request.contextPath}/index.jsp" role="button">
+        <a class="btn btn-light font-weight-bold" href="<c:url value="/index.jsp"/>" role="button">
             <fmt:message key="accessDenied.button" bundle="${lang}"/>
         </a>
     </div>

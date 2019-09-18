@@ -15,7 +15,6 @@
             <i class="fa fa-university" aria-hidden="true"></i>
             <fmt:message key="specialtySelection.specialties" bundle="${lang}"/>
         </h2>
-
         <c:if test="${requestScope.notAvailableSpecialty ne null}">
             <div class="alert alert-danger" role="alert">
                 <fmt:message key="specialtySelection.choiceError" bundle="${lang}"/>
@@ -31,19 +30,16 @@
                 </c:if>
             </div>
         </c:if>
-
         <div class="row">
             <c:forEach items="${requestScope.specialties}" var="specialty">
                 <div class="col-sm-4 mb-4">
                     <div class="card">
-                        <form action="selectSpecialty.do" method="post">
+                        <form action="<c:url value="/selectSpecialty.do"/>" method="post">
                             <div class="card-body">
                                 <h5 class="card-title">${specialty.name}</h5>
-
                                 <input type="hidden" name="universityId" value="${param.universityId}">
                                 <input type="hidden" name="specialtyId" value="${specialty.id}">
                                 <input type="hidden" name="command" value="submitRequest">
-
                                 <button class="btn btn-sm btn-block btn-primary">
                                     <fmt:message key="specialtySelection.chooseSpecialtyButton" bundle="${lang}"/>
                                 </button>

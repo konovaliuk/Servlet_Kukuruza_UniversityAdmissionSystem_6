@@ -83,7 +83,7 @@
                     </div>
                     <div class="col-sm text-break">
                         <div class="input-group input-group-sm">
-                            <input class="form-control" name="grade"
+                            <input class="form-control" name="result"
                                    placeholder="<fmt:message key="setGrade.grade" bundle="${lang}"/>" required>
                             <input type="hidden" name="user_id" value="${user.id}">
                             <div class="input-group-append">

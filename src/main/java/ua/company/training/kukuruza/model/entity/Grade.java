@@ -7,13 +7,13 @@ public class Grade implements Serializable {
     private Long id;
     private Long userId;
     private Integer subjectId;
-    private Integer grade;
+    private Integer result;
 
     public static class Builder {
         private Long id;
         private Long userId;
         private Integer subjectId;
-        private Integer grade;
+        private Integer result;
 
         public Builder setId(Long id) {
             this.id = id;
@@ -30,24 +30,24 @@ public class Grade implements Serializable {
             return this;
         }
 
-        public Builder setGrade(Integer grade) {
-            this.grade = grade;
+        public Builder setResult(Integer result) {
+            this.result = result;
             return this;
         }
 
         public Grade build() {
-            return new Grade(id, userId, subjectId, grade);
+            return new Grade(id, userId, subjectId, result);
         }
     }
 
     public Grade() {
     }
 
-    public Grade(Long id, Long userId, Integer subjectId, Integer grade) {
+    public Grade(Long id, Long userId, Integer subjectId, Integer result) {
         this.id = id;
         this.userId = userId;
         this.subjectId = subjectId;
-        this.grade = grade;
+        this.result = result;
     }
 
     public Long getId() {
@@ -74,12 +74,12 @@ public class Grade implements Serializable {
         this.subjectId = subjectId;
     }
 
-    public Integer getGrade() {
-        return grade;
+    public Integer getResult() {
+        return result;
     }
 
-    public void setGrade(Integer grade) {
-        this.grade = grade;
+    public void setResult(Integer result) {
+        this.result = result;
     }
 
     @Override
@@ -88,23 +88,23 @@ public class Grade implements Serializable {
                 "id=" + id +
                 ", userId=" + userId +
                 ", subjectId=" + subjectId +
-                ", grade=" + grade +
+                ", result=" + result +
                 '}';
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, subjectId, grade);
+        return Objects.hash(id, userId, subjectId, result);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Grade that = (Grade) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(userId, that.userId) &&
-                Objects.equals(subjectId, that.subjectId) &&
-                Objects.equals(grade, that.grade);
+        Grade grade = (Grade) o;
+        return Objects.equals(id, grade.id) &&
+                Objects.equals(userId, grade.userId) &&
+                Objects.equals(subjectId, grade.subjectId) &&
+                Objects.equals(result, grade.result);
     }
 }

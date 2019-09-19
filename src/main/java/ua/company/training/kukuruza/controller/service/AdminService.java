@@ -27,17 +27,17 @@ public class AdminService {
         return factory.getDaoSubject().getAll();
     }
 
-    public void setGrade(Long userId, Integer subjectId, Integer grade) {
+    public void setGrade(Long userId, Integer subjectId, Integer result) {
         Optional<Grade> userGrade = factory.getDaoGrade().getByUserIdAndSubjectId(userId, subjectId);
         if (userGrade.isPresent()) {
             Grade gradeUpdate = userGrade.get();
-            gradeUpdate.setGrade(grade);
+            gradeUpdate.setResult(result);
             factory.getDaoGrade().update(gradeUpdate);
         } else {
             Grade newGrade = new Grade.Builder()
                     .setUserId(userId)
                     .setSubjectId(subjectId)
-                    .setGrade(grade)
+                    .setResult(result)
                     .build();
             factory.getDaoGrade().save(newGrade);
         }

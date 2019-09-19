@@ -40,7 +40,7 @@ public class EducationService {
         for (Integer subjectId : subjectsId) {
             Optional<Grade> grade = factory.getDaoGrade().getByUserIdAndSubjectId(userId, subjectId);
             if (grade.isPresent()) {
-                rating += grade.get().getGrade();
+                rating += grade.get().getResult();
             } else {
                 return null;
             }

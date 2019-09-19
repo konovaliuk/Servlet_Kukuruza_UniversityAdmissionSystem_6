@@ -17,20 +17,20 @@ public class ResultService {
     }
 
     public Map<String, Integer> getUserGrades(Long userId) {
-        Map<String, Integer> subjectNameToGrade = new HashMap<>();
+        Map<String, Integer> subjectNameToResult = new HashMap<>();
 
         List<Grade> userGrades = factory.getDaoGrade().getUserGrades(userId);
         if (userGrades.isEmpty()) {
-            return subjectNameToGrade;
+            return subjectNameToResult;
         }
 
         Map<Integer, String> subjectIdToSubjectName = factory.getDaoSubject().getAll()
                 .stream()
                 .collect(Collectors.toMap(Subject::getId, Subject::getName));
         for (Grade grade : userGrades) {
-            subjectNameToGrade.put(subjectIdToSubjectName.get(grade.getSubjectId()), grade.getGrade());
+            subjectNameToResult.put(subjectIdToSubjectName.get(grade.getSubjectId()), grade.getResult());
         }
 
-        return subjectNameToGrade;
+        return subjectNameToResult;
     }
 }

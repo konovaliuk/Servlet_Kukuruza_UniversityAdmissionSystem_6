@@ -10,7 +10,7 @@ public class CheckStatusService {
         this.factory = factory;
     }
 
-    public User getUpdatedUser(User user) {
-        return factory.getDaoUser().get(user.getId()).orElseThrow(RuntimeException::new);
+    public User getUpdatedUser(Long userId) {
+        return factory.getDaoUser().get(userId).orElseThrow(RuntimeException::new);
     }
 }

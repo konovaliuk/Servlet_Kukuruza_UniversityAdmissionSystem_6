@@ -8,7 +8,7 @@ import java.util.Objects;
 
 import static ua.company.training.kukuruza.controller.util.CommandNames.*;
 
-public abstract class CommandFactory {
+public class CommandFactory {
     private static final Map<String, ICommand> actions = new HashMap<>();
     private static final ICommand noCommand = new NoCommand();
 

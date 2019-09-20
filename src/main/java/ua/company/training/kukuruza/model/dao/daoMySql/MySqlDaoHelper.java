@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 public class MySqlDaoHelper {
     private static final Logger LOGGER = LogManager.getLogger(MySqlDaoHelper.class);
-    private static MySqlDaoHelper instance;
+    private static final MySqlDaoHelper INSTANCE = new MySqlDaoHelper(ConnectionFactoryImpl.getInstance());
     private IConnectionFactory factory;
 
     private MySqlDaoHelper(IConnectionFactory factory) {
@@ -20,13 +20,7 @@ public class MySqlDaoHelper {
     }
 
     public static MySqlDaoHelper getInstance() {
-        if (Objects.isNull(instance)) {
-            synchronized (MySqlDaoHelper.class) {
-                if (Objects.isNull(instance))
-                    instance = new MySqlDaoHelper(ConnectionFactoryImpl.getInstance());
-            }
-        }
-        return instance;
+        return INSTANCE;
     }
 
     public <T> Optional<T> get(String sql, Function<ResultSet, T> mapper, Object... parameters) {

@@ -42,7 +42,7 @@ public class EducationService {
             if (grade.isPresent()) {
                 rating += grade.get().getResult();
             } else {
-                return null;
+                throw new ServiceException("No grade");
             }
         }
         return rating;

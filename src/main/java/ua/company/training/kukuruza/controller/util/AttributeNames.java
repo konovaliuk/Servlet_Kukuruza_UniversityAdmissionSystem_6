@@ -32,7 +32,7 @@ public class AttributeNames {
         Properties properties = new Properties();
         String fileName = "attributeName.properties";
         try {
-            properties.load(Objects.requireNonNull(Path.class.getClassLoader().getResourceAsStream(fileName)));
+            properties.load(Objects.requireNonNull(AttributeNames.class.getClassLoader().getResourceAsStream(fileName)));
             AVAILABLE_EXAMS = properties.getProperty("availableExams");
             CHOSEN_SPECIALTY = properties.getProperty("chosenSpecialty");
             FIRST_NAME = properties.getProperty("firstName");

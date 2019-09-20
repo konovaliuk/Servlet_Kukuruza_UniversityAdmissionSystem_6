@@ -27,7 +27,8 @@ public class RequestParameters {
         Properties properties = new Properties();
         String fileName = "requestParameter.properties";
         try {
-            properties.load(Objects.requireNonNull(Path.class.getClassLoader().getResourceAsStream(fileName)));
+            properties.load(Objects.requireNonNull(RequestParameters.class.getClassLoader()
+                    .getResourceAsStream(fileName)));
             COMMAND = properties.getProperty("command");
             EMAIL = properties.getProperty("email");
             EXAMS_ID = properties.getProperty("examsId");

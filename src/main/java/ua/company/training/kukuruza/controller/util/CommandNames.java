@@ -28,7 +28,7 @@ public class CommandNames {
         Properties properties = new Properties();
         String fileName = "command.properties";
         try {
-            properties.load(Objects.requireNonNull(Path.class.getClassLoader().getResourceAsStream(fileName)));
+            properties.load(Objects.requireNonNull(CommandNames.class.getClassLoader().getResourceAsStream(fileName)));
             CHANGE_SPECIALTY_COMMAND = properties.getProperty("changeSpecialty");
             CHECK_STATUS_COMMAND = properties.getProperty("checkStatus");
             EXAM_CANCEL_REGISTRATION_COMMAND = properties.getProperty("examCancelRegistration");

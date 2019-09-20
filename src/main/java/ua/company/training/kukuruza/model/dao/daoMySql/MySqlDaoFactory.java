@@ -1,16 +1,11 @@
 package ua.company.training.kukuruza.model.dao.daoMySql;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ua.company.training.kukuruza.model.connection.ConnectionFactoryImpl;
 import ua.company.training.kukuruza.model.connection.IConnectionFactory;
 import ua.company.training.kukuruza.model.dao.*;
 
-import java.util.Objects;
-
 public class MySqlDaoFactory extends AbstractDaoFactory {
-    private static final Logger LOGGER = LogManager.getLogger(MySqlDaoFactory.class);
-    private static MySqlDaoFactory instance;
+    private static final MySqlDaoFactory INSTANCE = new MySqlDaoFactory(ConnectionFactoryImpl.getInstance());
     private IDaoEducationOption daoEducationOption;
     private IDaoExam daoExam;
     private IDaoGrade daoGrade;
@@ -40,20 +35,7 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
     }
 
     public static MySqlDaoFactory getInstance() {
-        if (Objects.isNull(instance)) {
-            LOGGER.debug("Begin of creating instance");
-            instance = createInstance();
-            LOGGER.debug("Successful creating instance");
-        }
-        return instance;
-    }
-
-    private static synchronized MySqlDaoFactory createInstance() {
-        if (Objects.nonNull(instance)) {
-            LOGGER.debug("Another thread created instance");
-            return instance;
-        }
-        return new MySqlDaoFactory(ConnectionFactoryImpl.getInstance());
+        return INSTANCE;
     }
 
     @Override

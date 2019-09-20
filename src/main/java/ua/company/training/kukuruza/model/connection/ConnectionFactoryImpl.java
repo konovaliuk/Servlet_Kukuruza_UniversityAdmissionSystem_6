@@ -10,42 +10,31 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class ConnectionFactoryImpl implements IConnectionFactory {
     private final static Logger LOGGER = LogManager.getLogger(ConnectionFactoryImpl.class);
-    private static ConnectionFactoryImpl instance;
+    private static final ConnectionFactoryImpl INSTANCE;
     private DataSource dataSource;
 
-    private ConnectionFactoryImpl(DataSource dataSource) {
-        LOGGER.debug("Constructing instance");
-        this.dataSource = dataSource;
-    }
-
-    public static ConnectionFactoryImpl getInstance() {
-        if (Objects.isNull(instance)) {
-            LOGGER.debug("Begin of creating instance");
-            instance = createInstance();
-            LOGGER.debug("Successful creating instance");
-        }
-        return instance;
-    }
-
-    private static synchronized ConnectionFactoryImpl createInstance() {
-        if (Objects.nonNull(instance)) {
-            LOGGER.debug("Another thread already created instance");
-            return instance;
-        }
+    static {
         try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
             DataSource ds = (DataSource) envContext.lookup("jdbc/uas_db");
             DataSourceProxy dsProxy = new DataSourceProxy(ds);
-            return new ConnectionFactoryImpl(dsProxy);
+            INSTANCE = new ConnectionFactoryImpl(dsProxy);
         } catch (NamingException e) {
-            LOGGER.debug("Fail creating instance", e);
+            LOGGER.error("Fail creating instance", e);
             throw new ConnectionException(e);
         }
+    }
+
+    private ConnectionFactoryImpl(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    public static ConnectionFactoryImpl getInstance() {
+        return INSTANCE;
     }
 
     @Override

@@ -1,15 +1,10 @@
 package ua.company.training.kukuruza.controller.service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ua.company.training.kukuruza.model.dao.AbstractDaoFactory;
 import ua.company.training.kukuruza.model.dao.daoMySql.MySqlDaoFactory;
 
-import java.util.Objects;
-
 public class ServiceFactory {
-    private static final Logger LOGGER = LogManager.getLogger(ServiceFactory.class);
-    private static ServiceFactory instance;
+    private static final ServiceFactory INSTANCE = new ServiceFactory(MySqlDaoFactory.getInstance());
     private AdminService adminService;
     private AuthenticationService authenticationService;
     private CheckStatusService checkStatusService;
@@ -31,20 +26,7 @@ public class ServiceFactory {
     }
 
     public static ServiceFactory getInstance() {
-        if (Objects.isNull(instance)) {
-            LOGGER.debug("Begin of creating instance");
-            instance = createInstance();
-            LOGGER.debug("Successful creating instance");
-        }
-        return instance;
-    }
-
-    private static synchronized ServiceFactory createInstance() {
-        if (Objects.nonNull(instance)) {
-            LOGGER.debug("Another thread created instance");
-            return instance;
-        }
-        return new ServiceFactory(MySqlDaoFactory.getInstance());
+        return INSTANCE;
     }
 
     public AdminService getAdminService() {

@@ -22,12 +22,12 @@ public class MySqlDaoUserType implements IDaoUserType {
     }
 
     @Override
-    public Optional<UserType> get(Integer id) {
+    public Optional<UserType> find(Integer id) {
         return helper.get(GET_USER_TYPE_BY_ID_SQL, UserTypeMapper::map, id);
     }
 
     @Override
-    public List<UserType> getAll() {
+    public List<UserType> findAll() {
         return helper.getList(GET_ALL_USER_TYPES_SQL, UserTypeMapper::map);
     }
 

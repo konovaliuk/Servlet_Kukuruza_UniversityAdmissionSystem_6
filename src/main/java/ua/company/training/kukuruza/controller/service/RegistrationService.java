@@ -24,15 +24,15 @@ public class RegistrationService {
 
         IDaoUser daoUser = factory.getDaoUser();
 
-        Optional<User> userWithSameLogin = daoUser.getByLogin(user.getLogin());
+        Optional<User> userWithSameLogin = daoUser.findByLogin(user.getLogin());
         if (userWithSameLogin.isPresent())
             throw new ServiceException("User with the same login is already exist. Please choose another one.");
 
-        Optional<User> userWithSameEmail = daoUser.getByEmail(user.getEmail());
+        Optional<User> userWithSameEmail = daoUser.findByEmail(user.getEmail());
         if (userWithSameEmail.isPresent())
             throw new ServiceException("User with the same email is already exist. Please choose another one.");
 
-        Optional<User> userWithSamePassportCode = daoUser.getByPassportCode(user.getPassportCode());
+        Optional<User> userWithSamePassportCode = daoUser.findByPassportCode(user.getPassportCode());
         if (userWithSamePassportCode.isPresent())
             throw new ServiceException("User with the same passport code is already exist.");
 

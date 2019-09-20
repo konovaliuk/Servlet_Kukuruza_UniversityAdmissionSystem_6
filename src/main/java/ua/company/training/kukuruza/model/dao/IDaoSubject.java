@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Set;
 
 public interface IDaoSubject extends IDaoGeneric<Subject, Integer> {
-    List<Subject> getByIdSet(Set<Integer> subjectsId);
+    List<Subject> findByIdSet(Set<Integer> subjectsId);
 }

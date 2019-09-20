@@ -27,17 +27,17 @@ public class MySqlDaoSpecialtySubject implements IDaoSpecialtySubject {
     }
 
     @Override
-    public Optional<SpecialtySubject> get(Long id) {
+    public Optional<SpecialtySubject> find(Long id) {
         return helper.get(GET_SPECIALTY_SUBJECT_BY_ID_SQL, SpecialtySubjectMapper::map, id);
     }
 
     @Override
-    public List<SpecialtySubject> getAll() {
+    public List<SpecialtySubject> findAll() {
         return helper.getList(GET_ALL_SPECIALTY_SUBJECT_SQL, SpecialtySubjectMapper::map);
     }
 
     @Override
-    public Set<Integer> getSubjectsIdBySpecialtyId(Integer specialtyId) {
+    public Set<Integer> findSubjectsIdBySpecialtyId(Integer specialtyId) {
         List<SpecialtySubject> specialtySubjects = helper.getList(GET_SPECIALTY_SUBJECT_BY_SPECIALTY_ID_SQL,
                 SpecialtySubjectMapper::map, specialtyId);
         return specialtySubjects.stream()

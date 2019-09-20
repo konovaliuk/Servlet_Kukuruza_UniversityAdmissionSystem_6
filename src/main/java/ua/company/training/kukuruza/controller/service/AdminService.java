@@ -20,15 +20,15 @@ public class AdminService {
     public List<User> findUsers(String firstName, String secondName) {
         if (Objects.isNull(firstName) || Objects.isNull(secondName))
             return Collections.emptyList();
-        return factory.getDaoUser().getByFirstNameAndSecondName(firstName, secondName);
+        return factory.getDaoUser().findByFirstNameAndSecondName(firstName, secondName);
     }
 
     public List<Subject> getSubjects() {
-        return factory.getDaoSubject().getAll();
+        return factory.getDaoSubject().findAll();
     }
 
     public void setGrade(Long userId, Integer subjectId, Integer result) {
-        Optional<Grade> userGrade = factory.getDaoGrade().getByUserIdAndSubjectId(userId, subjectId);
+        Optional<Grade> userGrade = factory.getDaoGrade().findByUserIdAndSubjectId(userId, subjectId);
         if (userGrade.isPresent()) {
             Grade gradeUpdate = userGrade.get();
             gradeUpdate.setResult(result);
@@ -44,7 +44,7 @@ public class AdminService {
     }
 
     public void setUserStatus(Long userId, Integer userStatus) {
-        Optional<User> user = factory.getDaoUser().get(userId);
+        Optional<User> user = factory.getDaoUser().find(userId);
         User u = user.orElseThrow(RuntimeException::new);
         u.setUserStatusId(userStatus);
         factory.getDaoUser().update(u);

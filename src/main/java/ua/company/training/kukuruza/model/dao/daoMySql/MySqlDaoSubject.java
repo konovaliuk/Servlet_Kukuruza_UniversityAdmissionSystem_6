@@ -24,17 +24,17 @@ public class MySqlDaoSubject implements IDaoSubject {
     }
 
     @Override
-    public Optional<Subject> get(Integer id) {
+    public Optional<Subject> find(Integer id) {
         return helper.get(GET_SUBJECT_BY_ID_SQL, SubjectMapper::map, id);
     }
 
     @Override
-    public List<Subject> getAll() {
+    public List<Subject> findAll() {
         return helper.getList(GET_ALL_SUBJECTS_SQL, SubjectMapper::map);
     }
 
     @Override
-    public List<Subject> getByIdSet(Set<Integer> subjectsId) {
+    public List<Subject> findByIdSet(Set<Integer> subjectsId) {
         if (subjectsId.isEmpty())
             return Collections.emptyList();
         String sql = helper.buildSql(new StringBuilder("SELECT * FROM subject WHERE id IN("), subjectsId);

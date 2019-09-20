@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IDaoGeneric<T, PK extends Serializable> {
-    Optional<T> get(PK id);
+    Optional<T> find(PK id);
 
-    List<T> getAll();
+    List<T> findAll();
 
     PK save(T entity);
 

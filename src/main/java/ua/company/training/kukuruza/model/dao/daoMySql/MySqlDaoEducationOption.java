@@ -29,23 +29,23 @@ public class MySqlDaoEducationOption implements IDaoEducationOption {
     }
 
     @Override
-    public Optional<EducationOption> get(Long id) {
+    public Optional<EducationOption> find(Long id) {
         return helper.get(GET_EDUCATION_OPTION_BY_ID_SQL, EducationOptionMapper::map, id);
     }
 
     @Override
-    public List<EducationOption> getAll() {
+    public List<EducationOption> findAll() {
         return helper.getList(GET_ALL_EDUCATION_OPTIONS_SQL, EducationOptionMapper::map);
     }
 
     @Override
-    public Optional<EducationOption> getByUniversityIdAndSpecialtyId(Integer universityId, Integer specialtyId) {
+    public Optional<EducationOption> findByUniversityIdAndSpecialtyId(Integer universityId, Integer specialtyId) {
         return helper.get(GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_AND_SPECIALTY_ID_SQL, EducationOptionMapper::map,
                 universityId, specialtyId);
     }
 
     @Override
-    public Set<Integer> getSpecialtiesIdByUniversityId(Integer universityId) {
+    public Set<Integer> findSpecialtiesIdByUniversityId(Integer universityId) {
         List<EducationOption> educationOptions = helper.getList(GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_SQL,
                 EducationOptionMapper::map, universityId);
         return educationOptions.stream()

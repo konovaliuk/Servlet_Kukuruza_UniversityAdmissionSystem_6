@@ -20,19 +20,19 @@ public class ExamService {
     }
 
     public List<Exam> getUserExams(User user) {
-        Set<Integer> userExamsId = factory.getDaoUserExam().getExamsIdByUserId(user.getId());
-        return factory.getDaoExam().getByIdSet(userExamsId);
+        Set<Integer> userExamsId = factory.getDaoUserExam().findExamsIdByUserId(user.getId());
+        return factory.getDaoExam().findByIdSet(userExamsId);
     }
 
     public List<Exam> getAvailableExams(List<Exam> userExams) {
         Set<Integer> examsId = userExams.stream()
                 .map(Exam::getId)
                 .collect(Collectors.toSet());
-        return factory.getDaoExam().getNotInIdSet(examsId);
+        return factory.getDaoExam().findNotInIdSet(examsId);
     }
 
     public Map<Integer, String> getSubjectIdToSubjectName() {
-        List<Subject> subjects = factory.getDaoSubject().getAll();
+        List<Subject> subjects = factory.getDaoSubject().findAll();
         return subjects.stream().collect(Collectors.toMap(Subject::getId, Subject::getName));
     }
 

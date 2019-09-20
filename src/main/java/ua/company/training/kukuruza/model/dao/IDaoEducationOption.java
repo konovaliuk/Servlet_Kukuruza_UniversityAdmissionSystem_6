@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface IDaoEducationOption extends IDaoGeneric<EducationOption, Long> {
-    Set<Integer> getSpecialtiesIdByUniversityId(Integer universityId);
+    Set<Integer> findSpecialtiesIdByUniversityId(Integer universityId);
 
-    Optional<EducationOption> getByUniversityIdAndSpecialtyId(Integer universityId, Integer specialtyId);
+    Optional<EducationOption> findByUniversityIdAndSpecialtyId(Integer universityId, Integer specialtyId);
 }

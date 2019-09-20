@@ -35,17 +35,17 @@ public class MySqlDaoUserExam implements IDaoUserExam {
     }
 
     @Override
-    public Optional<UserExam> get(Long id) {
+    public Optional<UserExam> find(Long id) {
         return helper.get(GET_USER_EXAM_BY_ID_SQL, UserExamMapper::map, id);
     }
 
     @Override
-    public List<UserExam> getAll() {
+    public List<UserExam> findAll() {
         return helper.getList(GET_ALL_USER_EXAM_SQL, UserExamMapper::map);
     }
 
     @Override
-    public Set<Integer> getExamsIdByUserId(Long userId) {
+    public Set<Integer> findExamsIdByUserId(Long userId) {
         List<UserExam> userExams = helper.getList(GET_USER_EXAM_BY_USER_ID_SQL, UserExamMapper::map, userId);
         return userExams.stream()
                 .map(UserExam::getExamId)

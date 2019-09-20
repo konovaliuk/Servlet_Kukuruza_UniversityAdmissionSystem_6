@@ -24,17 +24,17 @@ public class MySqlDaoSpecialty implements IDaoSpecialty {
     }
 
     @Override
-    public Optional<Specialty> get(Integer id) {
+    public Optional<Specialty> find(Integer id) {
         return helper.get(GET_SPECIALTY_BY_ID_SQL, SpecialtyMapper::map, id);
     }
 
     @Override
-    public List<Specialty> getAll() {
+    public List<Specialty> findAll() {
         return helper.getList(GET_ALL_SPECIALTIES_SQL, SpecialtyMapper::map);
     }
 
     @Override
-    public List<Specialty> getByIdSet(Set<Integer> specialtiesId) {
+    public List<Specialty> findByIdSet(Set<Integer> specialtiesId) {
         if (specialtiesId.isEmpty())
             return Collections.emptyList();
         String sql = helper.buildSql(new StringBuilder("SELECT * FROM specialty WHERE id IN("), specialtiesId);

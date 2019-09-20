@@ -26,22 +26,22 @@ public class MySqlDaoGrade implements IDaoGrade {
     }
 
     @Override
-    public Optional<Grade> get(Long id) {
+    public Optional<Grade> find(Long id) {
         return helper.get(GET_GRADE_BY_ID_SQL, GradeMapper::map, id);
     }
 
     @Override
-    public List<Grade> getAll() {
+    public List<Grade> findAll() {
         return helper.getList(GET_ALL_GRADES_SQL, GradeMapper::map);
     }
 
     @Override
-    public Optional<Grade> getByUserIdAndSubjectId(Long userId, Integer subjectId) {
+    public Optional<Grade> findByUserIdAndSubjectId(Long userId, Integer subjectId) {
         return helper.get(GET_GRADE_BY_USER_ID_AND_SUBJECT_ID_SQL, GradeMapper::map, userId, subjectId);
     }
 
     @Override
-    public List<Grade> getUserGrades(Long userId) {
+    public List<Grade> findByUserId(Long userId) {
         return helper.getList(GET_GRADE_BY_USER_ID_SQL, GradeMapper::map, userId);
     }
 

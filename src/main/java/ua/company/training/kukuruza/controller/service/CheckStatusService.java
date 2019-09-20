@@ -11,6 +11,6 @@ public class CheckStatusService {
     }
 
     public User getUpdatedUser(Long userId) {
-        return factory.getDaoUser().get(userId).orElseThrow(RuntimeException::new);
+        return factory.getDaoUser().find(userId).orElseThrow(RuntimeException::new);
     }
 }

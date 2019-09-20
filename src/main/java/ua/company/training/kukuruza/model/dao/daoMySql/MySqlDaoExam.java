@@ -25,17 +25,17 @@ public class MySqlDaoExam implements IDaoExam {
     }
 
     @Override
-    public Optional<Exam> get(Integer id) {
+    public Optional<Exam> find(Integer id) {
         return helper.get(GET_EXAM_BY_ID_SQL, ExamMapper::map, id);
     }
 
     @Override
-    public List<Exam> getAll() {
+    public List<Exam> findAll() {
         return helper.getList(GET_ALL_EXAMS_SQL, ExamMapper::map);
     }
 
     @Override
-    public List<Exam> getByIdSet(Set<Integer> examsId) {
+    public List<Exam> findByIdSet(Set<Integer> examsId) {
         if (examsId.isEmpty())
             return Collections.emptyList();
         String sql = helper.buildSql(new StringBuilder("SELECT * FROM exam WHERE id IN("), examsId);
@@ -43,9 +43,9 @@ public class MySqlDaoExam implements IDaoExam {
     }
 
     @Override
-    public List<Exam> getNotInIdSet(Set<Integer> examsId) {
+    public List<Exam> findNotInIdSet(Set<Integer> examsId) {
         if (examsId.isEmpty())
-            return getAll();
+            return findAll();
         String sql = helper.buildSql(new StringBuilder("SELECT * FROM exam WHERE id NOT IN("), examsId);
         return helper.getList(sql, ExamMapper::map);
     }

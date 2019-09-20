@@ -32,27 +32,27 @@ public class MySqlDaoUser implements IDaoUser {
     }
 
     @Override
-    public Optional<User> get(Long id) {
+    public Optional<User> find(Long id) {
         return helper.get(GET_USER_BY_ID_SQL, UserMapper::map, id);
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> findAll() {
         return helper.getList(GET_ALL_USERS_SQL, UserMapper::map);
     }
 
     @Override
-    public Optional<User> getByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return helper.get(GET_USER_BY_EMAIL_SQL, UserMapper::map, email);
     }
 
     @Override
-    public List<User> getByFirstNameAndSecondName(String firstName, String secondName) {
+    public List<User> findByFirstNameAndSecondName(String firstName, String secondName) {
         return helper.getList(GET_USER_BY_FIRST_NAME_AND_SECOND_NAME_SQL, UserMapper::map, firstName, secondName);
     }
 
     @Override
-    public List<User> getByIdSet(Set<Long> usersId) {
+    public List<User> findByIdSet(Set<Long> usersId) {
         if (usersId.isEmpty())
             return Collections.emptyList();
         String sql = helper.buildSql(new StringBuilder("SELECT * FROM user WHERE id IN("), usersId);
@@ -60,12 +60,12 @@ public class MySqlDaoUser implements IDaoUser {
     }
 
     @Override
-    public Optional<User> getByLogin(String login) {
+    public Optional<User> findByLogin(String login) {
         return helper.get(GET_USER_BY_LOGIN_SQL, UserMapper::map, login);
     }
 
     @Override
-    public Optional<User> getByPassportCode(String passportCode) {
+    public Optional<User> findByPassportCode(String passportCode) {
         return helper.get(GET_USER_BY_PASSPORT_CODE_SQL, UserMapper::map, passportCode);
     }
 

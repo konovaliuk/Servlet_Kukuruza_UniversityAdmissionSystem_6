@@ -22,12 +22,12 @@ public class MySqlDaoUniversity implements IDaoUniversity {
     }
 
     @Override
-    public Optional<University> get(Integer id) {
+    public Optional<University> find(Integer id) {
         return helper.get(GET_UNIVERSITY_BY_ID_SQL, UniversityMapper::map, id);
     }
 
     @Override
-    public List<University> getAll() {
+    public List<University> findAll() {
         return helper.getList(GET_ALL_UNIVERSITIES_SQL, UniversityMapper::map);
     }
 

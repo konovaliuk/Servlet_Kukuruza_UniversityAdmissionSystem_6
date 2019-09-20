@@ -25,23 +25,23 @@ public class MySqlDaoRequest implements IDaoRequest {
     }
 
     @Override
-    public Optional<Request> get(Long id) {
+    public Optional<Request> find(Long id) {
         return helper.get(GET_REQUEST_BY_USER_ID_SQL, RequestMapper::map, id);
     }
 
     @Override
-    public List<Request> getAll() {
+    public List<Request> findAll() {
         return helper.getList(GET_ALL_REQUESTS_SQL, RequestMapper::map);
     }
 
     @Override
-    public List<Request> getByEducationOptionId(Long educationOptionId) {
+    public List<Request> findByEducationOptionId(Long educationOptionId) {
         return helper.getList(GET_REQUEST_BY_EDUCATION_OPTION_ID_SQL, RequestMapper::map, educationOptionId);
     }
 
     @Override
-    public Optional<Request> getByUserId(Long userId) {
-        return get(userId);
+    public Optional<Request> findByUserId(Long userId) {
+        return find(userId);
     }
 
     @Override

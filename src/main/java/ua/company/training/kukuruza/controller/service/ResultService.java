@@ -19,12 +19,12 @@ public class ResultService {
     public Map<String, Integer> getUserGrades(Long userId) {
         Map<String, Integer> subjectNameToResult = new HashMap<>();
 
-        List<Grade> userGrades = factory.getDaoGrade().getUserGrades(userId);
+        List<Grade> userGrades = factory.getDaoGrade().findByUserId(userId);
         if (userGrades.isEmpty()) {
             return subjectNameToResult;
         }
 
-        Map<Integer, String> subjectIdToSubjectName = factory.getDaoSubject().getAll()
+        Map<Integer, String> subjectIdToSubjectName = factory.getDaoSubject().findAll()
                 .stream()
                 .collect(Collectors.toMap(Subject::getId, Subject::getName));
         for (Grade grade : userGrades) {

@@ -7,13 +7,13 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface IDaoUser extends IDaoGeneric<User, Long> {
-    Optional<User> getByEmail(String email);
+    Optional<User> findByEmail(String email);
 
-    List<User> getByFirstNameAndSecondName(String firstName, String secondName);
+    List<User> findByFirstNameAndSecondName(String firstName, String secondName);
 
-    List<User> getByIdSet(Set<Long> usersId);
+    List<User> findByIdSet(Set<Long> usersId);
 
-    Optional<User> getByLogin(String login);
+    Optional<User> findByLogin(String login);
 
-    Optional<User> getByPassportCode(String passportCode);
+    Optional<User> findByPassportCode(String passportCode);
 }

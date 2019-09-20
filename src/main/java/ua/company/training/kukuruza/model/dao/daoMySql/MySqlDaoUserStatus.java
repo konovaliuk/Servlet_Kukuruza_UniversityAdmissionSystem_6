@@ -22,12 +22,12 @@ public class MySqlDaoUserStatus implements IDaoUserStatus {
     }
 
     @Override
-    public Optional<UserStatus> get(Integer id) {
+    public Optional<UserStatus> find(Integer id) {
         return helper.get(GET_USER_STATUS_BY_ID_SQL, UserStatusMapper::map, id);
     }
 
     @Override
-    public List<UserStatus> getAll() {
+    public List<UserStatus> findAll() {
         return helper.getList(GET_ALL_USER_STATUSES_SQL, UserStatusMapper::map);
     }
 

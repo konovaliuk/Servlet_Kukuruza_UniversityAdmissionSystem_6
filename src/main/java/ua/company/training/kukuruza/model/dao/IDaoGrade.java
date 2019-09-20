@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IDaoGrade extends IDaoGeneric<Grade, Long> {
-    List<Grade> getUserGrades(Long userId);
+    List<Grade> findByUserId(Long userId);
 
-    Optional<Grade> getByUserIdAndSubjectId(Long userId, Integer subjectId);
+    Optional<Grade> findByUserIdAndSubjectId(Long userId, Integer subjectId);
 }

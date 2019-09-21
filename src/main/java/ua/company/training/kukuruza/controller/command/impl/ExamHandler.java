@@ -20,7 +20,7 @@ public class ExamHandler implements ICommand {
         ExamService service = ServiceFactory.getInstance().getExamService();
 
         Map<Integer, String> subjectIdToSubjectName = service.getSubjectIdToSubjectName();
-        List<Exam> userExams = service.getUserExams(user);
+        List<Exam> userExams = service.getUserExams(user.getId());
         List<Exam> availableExams = service.getAvailableExams(userExams);
 
         req.setAttribute(AttributeNames.SUBJECT_ID_TO_SUBJECT_NAME, subjectIdToSubjectName);

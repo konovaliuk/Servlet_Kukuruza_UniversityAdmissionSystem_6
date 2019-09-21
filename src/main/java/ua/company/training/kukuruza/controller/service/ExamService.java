@@ -19,8 +19,8 @@ public class ExamService {
         this.factory = factory;
     }
 
-    public List<Exam> getUserExams(User user) {
-        Set<Integer> userExamsId = factory.getDaoUserExam().findExamsIdByUserId(user.getId());
+    public List<Exam> getUserExams(Long userId) {
+        Set<Integer> userExamsId = factory.getDaoUserExam().findExamsIdByUserId(userId);
         return factory.getDaoExam().findByIdSet(userExamsId);
     }
 

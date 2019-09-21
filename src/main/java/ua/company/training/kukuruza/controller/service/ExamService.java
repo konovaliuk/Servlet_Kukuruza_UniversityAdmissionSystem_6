@@ -3,7 +3,6 @@ package ua.company.training.kukuruza.controller.service;
 import ua.company.training.kukuruza.model.dao.AbstractDaoFactory;
 import ua.company.training.kukuruza.model.entity.Exam;
 import ua.company.training.kukuruza.model.entity.Subject;
-import ua.company.training.kukuruza.model.entity.User;
 import ua.company.training.kukuruza.model.entity.UserExam;
 
 import java.util.ArrayList;
@@ -38,13 +37,17 @@ public class ExamService {
 
 
     public void registerUserToExams(Long userId, String[] examsId) {
-        List<UserExam> userExams = getUserExams(userId, examsId);
-        factory.getDaoUserExam().save(userExams);
+        if (examsId.length > 0) {
+            List<UserExam> userExams = getUserExams(userId, examsId);
+            factory.getDaoUserExam().save(userExams);
+        }
     }
 
     public void cancelRegistrationUserToExams(Long userId, String[] examsId) {
-        List<UserExam> userExams = getUserExams(userId, examsId);
-        factory.getDaoUserExam().delete(userExams);
+        if (examsId.length > 0) {
+            List<UserExam> userExams = getUserExams(userId, examsId);
+            factory.getDaoUserExam().delete(userExams);
+        }
     }
 
     private List<UserExam> getUserExams(Long userId, String[] examsId) {

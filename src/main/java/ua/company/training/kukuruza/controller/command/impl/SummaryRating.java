@@ -19,13 +19,13 @@ public class SummaryRating implements ICommand {
         User user = (User) req.getSession().getAttribute(AttributeNames.USER);
 
         SummaryRatingService service = ServiceFactory.getInstance().getSummaryRatingService();
-        Optional<Request> userRequest = service.getUserRequest(user);
+        Optional<Request> userRequest = service.getUserRequest(user.getId());
         if (userRequest.isPresent()) {
-            Map<Long, Integer> userIdToRating = service.getUserIdToRating(userRequest.get());
+            Map<Long, Integer> userIdToRating = service.getUserIdToRating(userRequest.get().getEducationOptionId());
             Map<Long, User> userIdToUser = service.getUserIdToUserByIdSet(userIdToRating.keySet());
-            String universityName = service.getUniversityName(userRequest.get());
-            String specialtyName = service.getSpecialtyName(userRequest.get());
-            Integer studentLimit = service.getStudentLimit(userRequest.get());
+            String universityName = service.getUniversityName(userRequest.get().getEducationOptionId());
+            String specialtyName = service.getSpecialtyName(userRequest.get().getEducationOptionId());
+            Integer studentLimit = service.getStudentLimit(userRequest.get().getEducationOptionId());
 
             req.setAttribute(AttributeNames.USER_ID_TO_RATING, userIdToRating);
             req.setAttribute(AttributeNames.USER_ID_TO_USER, userIdToUser);

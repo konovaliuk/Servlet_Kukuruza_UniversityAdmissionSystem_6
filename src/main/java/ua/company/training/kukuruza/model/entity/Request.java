@@ -4,17 +4,19 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Request implements Serializable {
-    private Long userId;
+    private Long id;
     private Integer rating;
+    private Long userId;
     private Long educationOptionId;
 
     public static class Builder {
-        private Long userId;
+        private Long id;
         private Integer rating;
+        private Long userId;
         private Long educationOptionId;
 
-        public Builder setUserId(Long userId) {
-            this.userId = userId;
+        public Builder setId(Long id) {
+            this.id = id;
             return this;
         }
 
@@ -23,31 +25,37 @@ public class Request implements Serializable {
             return this;
         }
 
+        public Builder setUserId(Long userId) {
+            this.userId = userId;
+            return this;
+        }
+
         public Builder setEducationOptionId(Long educationOptionId) {
             this.educationOptionId = educationOptionId;
             return this;
         }
 
-        public Request build() {
-            return new Request(userId, rating, educationOptionId);
+        public Request build(){
+            return new Request(id, rating, userId, educationOptionId);
         }
     }
 
     public Request() {
     }
 
-    public Request(Long userId, Integer rating, Long educationOptionId) {
-        this.userId = userId;
+    public Request(Long id, Integer rating, Long userId, Long educationOptionId) {
+        this.id = id;
         this.rating = rating;
+        this.userId = userId;
         this.educationOptionId = educationOptionId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getRating() {
@@ -56,6 +64,14 @@ public class Request implements Serializable {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getEducationOptionId() {
@@ -69,24 +85,26 @@ public class Request implements Serializable {
     @Override
     public String toString() {
         return "Request{" +
-                "userId=" + userId +
+                "id=" + id +
                 ", rating=" + rating +
+                ", userId=" + userId +
                 ", educationOptionId=" + educationOptionId +
                 '}';
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, rating, educationOptionId);
+        return Objects.hash(id, rating, userId, educationOptionId);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Request that = (Request) o;
-        return Objects.equals(userId, that.userId) &&
-                Objects.equals(rating, that.rating) &&
-                Objects.equals(educationOptionId, that.educationOptionId);
+        Request request = (Request) o;
+        return Objects.equals(id, request.id) &&
+                Objects.equals(rating, request.rating) &&
+                Objects.equals(userId, request.userId) &&
+                Objects.equals(educationOptionId, request.educationOptionId);
     }
 }

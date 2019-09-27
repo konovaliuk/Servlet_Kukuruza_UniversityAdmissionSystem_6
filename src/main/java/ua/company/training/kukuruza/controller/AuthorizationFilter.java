@@ -38,7 +38,7 @@ public class AuthorizationFilter implements Filter {
         boolean isSecureCommandRequest = isSecureCommand(command);
 
         if (isSecurePageRequest || isSecureCommandRequest) {
-            if (isUserAdmin(req, resp)) {
+            if (isUserAdmin(req)) {
                 chain.doFilter(req, resp);
             } else {
                 RequestDispatcher dispatcher = req.getRequestDispatcher(Path.ACCESS_DENIED_PAGE);
@@ -55,7 +55,7 @@ public class AuthorizationFilter implements Filter {
         return secureCommands.contains(command);
     }
 
-    private boolean isUserAdmin(HttpServletRequest req, HttpServletResponse resp) {
+    private boolean isUserAdmin(HttpServletRequest req) {
         HttpSession session = req.getSession(false);
         boolean isLoggedIn = Objects.nonNull(session) && Objects.nonNull(session.getAttribute(AttributeNames.USER));
         if (isLoggedIn) {

@@ -28,42 +28,37 @@ public interface ITransaction {
                 boolean isTransactionDoneWithoutRollback = true;
                 boolean autoCommitState;
                 int oldTransactionIsolation;
-
                 try {
                     autoCommitState = connection.getAutoCommit();
                     connection.setAutoCommit(false);
                     oldTransactionIsolation = connection.getTransactionIsolation();
                     if (oldTransactionIsolation != transactionIsolationLevel)
-                        connection.setTransactionIsolation(oldTransactionIsolation);
+                        connection.setTransactionIsolation(transactionIsolationLevel);
                 } catch (SQLException prepareException) {
                     LOGGER.error("Transaction preparing error", prepareException);
                     throw new TransactionException(prepareException);
                 }
-
                 try {
-                    LOGGER.debug("Before executing transaction body");
                     t.transactionBody();
-                    LOGGER.debug("Transaction body successfully done");
                 } catch (PersistenceException persistenceException) {
-                    LOGGER.warn("Transaction body fail. Trying rollback", persistenceException);
+                    LOGGER.info("Transaction body fail. Trying rollback", persistenceException);
                     try {
                         connection.rollback();
                         isTransactionDoneWithoutRollback = false;
-                        LOGGER.debug("Rollback successfully done");
                     } catch (SQLException rollbackException) {
                         rollbackException.addSuppressed(persistenceException);
                         LOGGER.error("Rollback fail", rollbackException);
                         throw new TransactionException(rollbackException);
                     }
                 }
-                try {
-                    connection.commit();
-                    LOGGER.debug("Commit successfully done");
-                } catch (SQLException commitException) {
-                    LOGGER.error("Commit error", commitException);
-                    throw new TransactionException(commitException);
+                if (isTransactionDoneWithoutRollback) {
+                    try {
+                        connection.commit();
+                    } catch (SQLException commitException) {
+                        LOGGER.error("Commit error", commitException);
+                        throw new TransactionException(commitException);
+                    }
                 }
-
                 try {
                     connection.setAutoCommit(autoCommitState);
                     if (connection.getTransactionIsolation() != oldTransactionIsolation)
@@ -72,7 +67,6 @@ public interface ITransaction {
                     LOGGER.error("Can't change connection state", afterCommitException);
                     throw new TransactionException(afterCommitException);
                 }
-
                 return isTransactionDoneWithoutRollback;
             } finally {
                 try {

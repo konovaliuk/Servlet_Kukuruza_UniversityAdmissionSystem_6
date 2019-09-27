@@ -9,7 +9,7 @@
 </head>
 <body class="d-flex flex-column h-100">
 <%@ include file="/WEB-INF/jsp/user/navbar.jsp" %>
-<c:if test="${requestScope.userIdToRating ne null}">
+<c:if test="${not empty requestScope.userIdToRating}">
     <div class="container">
         <h2 class="my-4">
             <fmt:message key="summaryRating.summaryRating" bundle="${lang}"/>:
@@ -74,7 +74,7 @@
         </table>
     </div>
 </c:if>
-<c:if test="${requestScope.userIdToRating eq null}">
+<c:if test="${empty requestScope.userIdToRating}">
     <div class="container h-100">
         <div class="row align-items-center h-100">
             <div class="col-6 mx-auto">

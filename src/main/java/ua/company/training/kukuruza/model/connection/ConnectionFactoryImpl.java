@@ -13,24 +13,23 @@ import java.sql.SQLException;
 
 public class ConnectionFactoryImpl implements IConnectionFactory {
     private final static Logger LOGGER = LogManager.getLogger(ConnectionFactoryImpl.class);
-    private static final ConnectionFactoryImpl INSTANCE;
-    private DataSource dataSource;
+    private static final ConnectionFactoryImpl INSTANCE = new ConnectionFactoryImpl();
+    private static final DataSource DATA_SOURCE;
 
     static {
         try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
             DataSource ds = (DataSource) envContext.lookup("jdbc/uas_db");
-            DataSourceProxy dsProxy = new DataSourceProxy(ds);
-            INSTANCE = new ConnectionFactoryImpl(dsProxy);
+            DATA_SOURCE = new DataSourceProxy(ds);
         } catch (NamingException e) {
             LOGGER.error("Fail creating instance", e);
             throw new ConnectionException(e);
         }
     }
 
-    private ConnectionFactoryImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
+    private ConnectionFactoryImpl() {
+
     }
 
     public static ConnectionFactoryImpl getInstance() {
@@ -40,7 +39,7 @@ public class ConnectionFactoryImpl implements IConnectionFactory {
     @Override
     public Connection getConnection() {
         try {
-            return dataSource.getConnection();
+            return DATA_SOURCE.getConnection();
         } catch (SQLException e) {
             LOGGER.error("Can't get connection", e);
             throw new ConnectionException(e);

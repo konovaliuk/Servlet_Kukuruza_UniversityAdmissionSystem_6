@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" isErrorPage="true"
-         import="ua.company.training.kukuruza.controller.util.UserType" %>
+         import="ua.company.training.kukuruza.util.UserType" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setBundle basename="messages/msg" var="lang"/>

@@ -35,7 +35,8 @@
         <li class="nav-item">
                 <span class="nav-link my-2 font-weight-bold" data-toggle="dropdown">
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                    ${sessionScope.user.firstName}
+                    <jsp:useBean id="admin" class="ua.company.training.kukuruza.entity.User" scope="session"/>
+                    <jsp:getProperty name="admin" property="firstName"/>
                 </span>
         </li>
 

@@ -39,6 +39,7 @@
                                 <h5 class="card-title">${specialty.name}</h5>
                                 <input type="hidden" name="universityId" value="${param.universityId}">
                                 <input type="hidden" name="specialtyId" value="${specialty.id}">
+                                <input type="hidden" name="page" value="${requestScope.page}">
                                 <input type="hidden" name="command" value="submitRequest">
                                 <button class="btn btn-sm btn-block btn-primary">
                                     <fmt:message key="specialtySelection.chooseSpecialtyButton" bundle="${lang}"/>
@@ -49,6 +50,26 @@
                 </div>
             </c:forEach>
         </div>
+        <c:if test="${requestScope.numberOfPages gt 1}">
+            <nav>
+                <ul class="pagination pagination-lg justify-content-center">
+                    <c:forEach begin="1" end="${requestScope.numberOfPages}" varStatus="counter">
+                        <c:if test="${requestScope.page eq counter.count}">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">${requestScope.page}</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${requestScope.page ne counter.count}">
+                            <li class="page-item">
+                                <a class="page-link" href="<c:url value="/selectUniversity.do?universityId=${param.universityId}&page=${counter.count}&command=specialtySelection"/>">
+                                        ${counter.count}
+                                </a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </nav>
+        </c:if>
     </div>
 </c:if>
 <%@ include file="/WEB-INF/jsp/components/footer.jsp" %>

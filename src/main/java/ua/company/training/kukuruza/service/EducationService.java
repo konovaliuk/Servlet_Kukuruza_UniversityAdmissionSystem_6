@@ -25,13 +25,8 @@ public class EducationService {
         }
     }
 
-    public List<University> getUniversities() {
-        return factory.getDaoUniversity().findAll();
-    }
-
-    public List<Specialty> getSpecialties(Integer universityId) {
-        Set<Integer> specialtiesId = factory.getDaoEducationOption().findSpecialtiesIdByUniversityId(universityId);
-        return factory.getDaoSpecialty().findByIdSet(specialtiesId);
+    public List<University> getUniversities(Integer skip, Integer limit) {
+        return factory.getDaoUniversity().findAll(skip, limit);
     }
 
     public Integer getRatingByRequiredSubjects(Long userId, Integer specialtyId) {
@@ -50,6 +45,12 @@ public class EducationService {
 
     public Specialty getSpecialty(Integer specialtyId) {
         return factory.getDaoSpecialty().find(specialtyId).orElseThrow(RuntimeException::new);
+    }
+
+    public List<Specialty> getSpecialties(Integer universityId, Integer skip, Integer limit) {
+        Set<Integer> specialtiesId =
+                factory.getDaoEducationOption().findSpecialtiesIdByUniversityId(universityId, skip, limit);
+        return factory.getDaoSpecialty().findByIdSet(specialtiesId);
     }
 
     public List<Subject> getRequiredSubjects(Integer specialtyId) {
@@ -71,5 +72,13 @@ public class EducationService {
 
     public void dropRequest(Long userId) {
         factory.getDaoRequest().deleteByUserId(userId);
+    }
+
+    public Long getSpecialtiesRowsCount(Integer universityId) {
+        return factory.getDaoEducationOption().getSpecialtiesRowsCount(universityId);
+    }
+
+    public Long getUniversitiesRowsCount() {
+        return factory.getDaoUniversity().getRowsCount();
     }
 }

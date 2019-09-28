@@ -11,9 +11,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MySqlDaoEducationOption implements IDaoEducationOption {
+    private static final String GET_COUNT_BY_UNIVERSITY_ID_SQL =
+            "SELECT COUNT(id) FROM education_option WHERE university_id = %d";
     private static final String GET_EDUCATION_OPTION_BY_ID_SQL = "SELECT * FROM education_option WHERE id = ?";
-    private static final String GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_SQL =
-            "SELECT * FROM education_option WHERE university_id = ?";
+    private static final String GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_WITH_LIMIT_SQL =
+            "SELECT * FROM education_option WHERE university_id = ? LIMIT ?, ?";
     private static final String GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_AND_SPECIALTY_ID_SQL =
             "SELECT * FROM education_option WHERE university_id = ? AND specialty_id = ?";
     private static final String GET_ALL_EDUCATION_OPTIONS_SQL = "SELECT * FROM education_option";
@@ -45,12 +47,17 @@ public class MySqlDaoEducationOption implements IDaoEducationOption {
     }
 
     @Override
-    public Set<Integer> findSpecialtiesIdByUniversityId(Integer universityId) {
-        List<EducationOption> educationOptions = helper.getList(GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_SQL,
-                EducationOptionMapper::map, universityId);
+    public Set<Integer> findSpecialtiesIdByUniversityId(Integer universityId, Integer skip, Integer limit) {
+        List<EducationOption> educationOptions = helper.getList(GET_EDUCATION_OPTION_BY_UNIVERSITY_ID_WITH_LIMIT_SQL,
+                EducationOptionMapper::map, universityId, skip, limit);
         return educationOptions.stream()
                 .map(EducationOption::getSpecialtyId)
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Long getSpecialtiesRowsCount(Integer universityId) {
+        return helper.getRowsCount(String.format(GET_COUNT_BY_UNIVERSITY_ID_SQL, universityId));
     }
 
     @Override

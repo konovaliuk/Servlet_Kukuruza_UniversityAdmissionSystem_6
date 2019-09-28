@@ -57,6 +57,26 @@
             </c:forEach>
         </div>
     </div>
+    <c:if test="${requestScope.numberOfPages gt 1}">
+        <nav>
+            <ul class="pagination pagination-lg justify-content-center">
+                <c:forEach begin="1" end="${requestScope.numberOfPages}" varStatus="counter">
+                    <c:if test="${requestScope.page eq counter.count}">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">${requestScope.page}</a>
+                        </li>
+                    </c:if>
+                    <c:if test="${requestScope.page ne counter.count}">
+                        <li class="page-item">
+                            <a class="page-link" href="<c:url value="/selectUniversity.do?page=${counter.count}&command=universitySelection"/>">
+                                    ${counter.count}
+                            </a>
+                        </li>
+                    </c:if>
+                </c:forEach>
+            </ul>
+        </nav>
+    </c:if>
 </c:if>
 <%@ include file="/WEB-INF/jsp/components/footer.jsp" %>
 </body>

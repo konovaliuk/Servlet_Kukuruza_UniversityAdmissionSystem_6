@@ -127,6 +127,26 @@ public class MySqlDaoHelper {
         }
     }
 
+    public Long getRowsCount(String sql) {
+        try (Connection c = factory.getConnection();
+             Statement s = c.createStatement()) {
+            try (ResultSet rs = s.executeQuery(sql)) {
+                if (rs.next()) {
+                    return rs.getLong(1);
+                } else {
+                    LOGGER.error("No result set");
+                    throw new PersistenceException();
+                }
+            } catch (SQLException ex) {
+                LOGGER.error(ex);
+                throw new PersistenceException(ex);
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new PersistenceException(e);
+        }
+    }
+
     public void saveWithoutAutoKey(String sql, Object... values) {
         try (Connection c = factory.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {

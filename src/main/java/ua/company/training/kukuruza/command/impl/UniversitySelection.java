@@ -2,6 +2,7 @@ package ua.company.training.kukuruza.command.impl;
 
 import ua.company.training.kukuruza.service.EducationService;
 import ua.company.training.kukuruza.util.AttributeNames;
+import ua.company.training.kukuruza.util.PaginationManager;
 import ua.company.training.kukuruza.util.Path;
 import ua.company.training.kukuruza.entity.Specialty;
 import ua.company.training.kukuruza.entity.University;
@@ -24,7 +25,9 @@ public class UniversitySelection implements ICommand {
         if (chosenSpecialty.isPresent()) {
             req.setAttribute(AttributeNames.CHOSEN_SPECIALTY, chosenSpecialty.get());
         } else {
-            List<University> universities = service.getUniversities();
+            Long rowsCount = service.getUniversitiesRowsCount();
+            Integer skip = PaginationManager.manage(req, rowsCount);
+            List<University> universities = service.getUniversities(skip, PaginationManager.RECORDS_PER_PAGE);
             req.setAttribute(AttributeNames.UNIVERSITIES, universities);
         }
 

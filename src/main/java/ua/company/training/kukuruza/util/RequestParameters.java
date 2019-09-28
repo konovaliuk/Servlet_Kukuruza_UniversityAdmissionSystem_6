@@ -12,6 +12,7 @@ public class RequestParameters {
     public static final String GENDER;
     public static final String LANG;
     public static final String LOGIN;
+    public static final String PAGE;
     public static final String PASSPORT_CODE;
     public static final String PASSWORD;
     public static final String PHONE;
@@ -36,6 +37,7 @@ public class RequestParameters {
             GENDER = properties.getProperty("gender");
             LANG = properties.getProperty("lang");
             LOGIN = properties.getProperty("login");
+            PAGE = properties.getProperty("page");
             PASSPORT_CODE = properties.getProperty("passportCode");
             PASSWORD = properties.getProperty("password");
             PHONE = properties.getProperty("phone");

@@ -67,16 +67,20 @@ class EducationServiceTest {
 
     @Test
     void getUniversitiesTest() {
+        Integer skip = 10;
+        Integer limit = 5;
         IDaoUniversity daoUniversity = mock(IDaoUniversity.class);
         when(factory.getDaoUniversity()).thenReturn(daoUniversity);
 
-        service.getUniversities();
+        service.getUniversities(skip, limit);
 
-        verify(daoUniversity, times(1)).findAll();
+        verify(daoUniversity, times(1)).findAll(skip, limit);
     }
 
     @Test
     void getSpecialtiesWithCorrectUniversityIdTest() {
+        Integer skip = 10;
+        Integer limit = 5;
         Integer universityId = 42;
         Integer specialtyId = 7;
         Set<Integer> specialtiesId = new HashSet<>();
@@ -90,10 +94,10 @@ class EducationServiceTest {
         IDaoSpecialty daoSpecialty = mock(IDaoSpecialty.class);
         when(factory.getDaoEducationOption()).thenReturn(daoEducationOption);
         when(factory.getDaoSpecialty()).thenReturn(daoSpecialty);
-        when(daoEducationOption.findSpecialtiesIdByUniversityId(universityId)).thenReturn(specialtiesId);
+        when(daoEducationOption.findSpecialtiesIdByUniversityId(universityId, skip, limit)).thenReturn(specialtiesId);
         when(daoSpecialty.findByIdSet(specialtiesId)).thenReturn(specialties);
 
-        List<Specialty> actual = service.getSpecialties(universityId);
+        List<Specialty> actual = service.getSpecialties(universityId, skip, limit);
 
         assertEquals(1, actual.size());
         assertEquals(specialtyId, actual.get(0).getId());
@@ -101,16 +105,18 @@ class EducationServiceTest {
 
     @Test
     void getSpecialtiesWithWrongUniversityIdTest() {
+        Integer skip = 10;
+        Integer limit = 5;
         Integer universityId = 42;
         Set<Integer> specialtiesId = Collections.emptySet();
         IDaoEducationOption daoEducationOption = mock(IDaoEducationOption.class);
         IDaoSpecialty daoSpecialty = mock(IDaoSpecialty.class);
         when(factory.getDaoEducationOption()).thenReturn(daoEducationOption);
         when(factory.getDaoSpecialty()).thenReturn(daoSpecialty);
-        when(daoEducationOption.findSpecialtiesIdByUniversityId(universityId)).thenReturn(specialtiesId);
+        when(daoEducationOption.findSpecialtiesIdByUniversityId(universityId, skip, limit)).thenReturn(specialtiesId);
         when(daoSpecialty.findByIdSet(specialtiesId)).thenReturn(Collections.emptyList());
 
-        List<Specialty> specialties = service.getSpecialties(universityId);
+        List<Specialty> specialties = service.getSpecialties(universityId, skip, limit);
 
         assertTrue(specialties.isEmpty());
     }

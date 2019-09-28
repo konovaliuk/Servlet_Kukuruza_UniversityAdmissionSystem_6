@@ -1,5 +1,7 @@
 package ua.company.training.kukuruza.command.impl;
 
+import ua.company.training.kukuruza.util.PaginationManager;
+import ua.company.training.kukuruza.service.EducationService;
 import ua.company.training.kukuruza.util.AttributeNames;
 import ua.company.training.kukuruza.util.Path;
 import ua.company.training.kukuruza.util.RequestParameters;
@@ -15,7 +17,10 @@ public class SpecialtySelection implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         Integer universityId = Integer.valueOf(req.getParameter(RequestParameters.UNIVERSITY_ID));
-        List<Specialty> specialties = ServiceFactory.getInstance().getEducationService().getSpecialties(universityId);
+        EducationService service = ServiceFactory.getInstance().getEducationService();
+        Long rowsCount = service.getSpecialtiesRowsCount(universityId);
+        Integer skip = PaginationManager.manage(req, rowsCount);
+        List<Specialty> specialties = service.getSpecialties(universityId, skip, PaginationManager.RECORDS_PER_PAGE);
         req.setAttribute(AttributeNames.SPECIALTIES, specialties);
         return Path.SPECIALTY_SELECTION_PAGE;
     }

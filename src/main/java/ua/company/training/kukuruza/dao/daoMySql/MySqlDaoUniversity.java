@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class MySqlDaoUniversity implements IDaoUniversity {
+    private static final String GET_ROWS_COUNT_SQL = "SELECT COUNT(id) FROM university";
     private static final String GET_UNIVERSITY_BY_ID_SQL = "SELECT * FROM university WHERE id = ?";
     private static final String GET_ALL_UNIVERSITIES_SQL = "SELECT * FROM university";
+    private static final String GET_UNIVERSITIES_WITH_LIMIT_SQL = "SELECT * FROM university LIMIT ?, ?";
     private static final String INSERT_UNIVERSITY_SQL = "INSERT INTO university VALUES (NULL, ?)";
     private static final String UPDATE_UNIVERSITY_SQL = "UPDATE university SET name = ? WHERE id = ?";
     private static final String DELETE_UNIVERSITY_SQL = "DELETE FROM university WHERE id = ?";
@@ -29,6 +31,16 @@ public class MySqlDaoUniversity implements IDaoUniversity {
     @Override
     public List<University> findAll() {
         return helper.getList(GET_ALL_UNIVERSITIES_SQL, UniversityMapper::map);
+    }
+
+    @Override
+    public List<University> findAll(Integer skip, Integer limit) {
+        return helper.getList(GET_UNIVERSITIES_WITH_LIMIT_SQL, UniversityMapper::map, skip, limit);
+    }
+
+    @Override
+    public Long getRowsCount() {
+        return helper.getRowsCount(GET_ROWS_COUNT_SQL);
     }
 
     @Override

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="myTag" uri="training.company.ua" %>
 <fmt:setBundle basename="messages/msg" var="lang"/>
 <html>
 <head>
@@ -10,6 +11,10 @@
 <body class="d-flex flex-column h-100">
 <%@ include file="/WEB-INF/jsp/user/navbar.jsp" %>
 <div class="container">
+    <h2 class="mt-2 text-center">
+        <fmt:message key="exam.currentDate" bundle="${lang}"/>:
+        <myTag:currentDate/>
+    </h2>
     <c:if test="${not empty requestScope.userExams}">
         <h2 class="mt-2">
             <fmt:message key="exam.myExams" bundle="${lang}"/>

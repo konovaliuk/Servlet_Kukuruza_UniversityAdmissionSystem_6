@@ -31,11 +31,9 @@ public class SubmitRequest implements ICommand {
         } catch (ServiceException e) {
             Specialty notAvailableSpecialty = service.getSpecialty(specialtyId);
             List<Subject> requiredSubjects = service.getRequiredSubjects(specialtyId);
-            List<Specialty> specialties = service.getSpecialties(universityId);
             req.setAttribute(AttributeNames.NOT_AVAILABLE_SPECIALTY, notAvailableSpecialty);
             req.setAttribute(AttributeNames.REQUIRED_SUBJECTS, requiredSubjects);
-            req.setAttribute(AttributeNames.SPECIALTIES, specialties);
-            return Path.SPECIALTY_SELECTION_PAGE;
+            return Path.SPECIALTY_SELECTION_COMMAND;
         }
     }
 }

@@ -16,8 +16,10 @@ public class Path {
     public static final String SEND_NOTIFICATION_PAGE;
     public static final String SET_GRADE_PAGE;
     public static final String SIGN_IN_PAGE;
+    public static final String SPECIALTY_SELECTION_COMMAND;
     public static final String SPECIALTY_SELECTION_PAGE;
     public static final String SUMMARY_RATING_PAGE;
+    public static final String UNIVERSITY_SELECTION_COMMAND;
     public static final String UNIVERSITY_SELECTION_PAGE;
 
     static {
@@ -36,8 +38,10 @@ public class Path {
             SEND_NOTIFICATION_PAGE = properties.getProperty("sendNotificationPage");
             SET_GRADE_PAGE = properties.getProperty("setGradePage");
             SIGN_IN_PAGE = properties.getProperty("signInPage");
+            SPECIALTY_SELECTION_COMMAND = properties.getProperty("specialtySelectionCommand");
             SPECIALTY_SELECTION_PAGE = properties.getProperty("specialtySelectionPage");
             SUMMARY_RATING_PAGE = properties.getProperty("summaryRatingPage");
+            UNIVERSITY_SELECTION_COMMAND = properties.getProperty("universitySelectionCommand");
             UNIVERSITY_SELECTION_PAGE = properties.getProperty("universitySelectionPage");
         } catch (IOException e) {
             throw new RuntimeException("Can't load " + fileName, e);

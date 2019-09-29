@@ -10,6 +10,11 @@ import java.sql.*;
 import java.util.*;
 import java.util.function.Function;
 
+/**
+ * This helper class was created to avoid a lot of JDBC boilerplate code.
+ *
+ * @author Andrii Kukuruza
+ */
 public class MySqlDaoHelper {
     private static final Logger LOGGER = LogManager.getLogger(MySqlDaoHelper.class);
     private static final MySqlDaoHelper INSTANCE = new MySqlDaoHelper(ConnectionFactoryImpl.getInstance());

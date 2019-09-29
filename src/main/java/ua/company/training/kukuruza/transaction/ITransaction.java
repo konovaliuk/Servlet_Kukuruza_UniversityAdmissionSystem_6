@@ -10,6 +10,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ * The interface was created for transaction support.
+ * It's important to understand that it works in conjunction
+ * with a datasource proxy and a connection proxy
+ * which are inside dbConnection package.
+ *
+ * @author Andrii Kukuruza
+ */
 @FunctionalInterface
 public interface ITransaction {
     Logger LOGGER = LogManager.getLogger(ITransaction.class);

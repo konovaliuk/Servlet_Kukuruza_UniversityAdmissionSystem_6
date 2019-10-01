@@ -21,6 +21,7 @@ public class ConnectionProxy implements Connection {
 
     void incrementCloseCounter() {
         closeCounter++;
+        LOGGER.debug("ConnectionProxy counter was incremented. Current value: " + closeCounter);
     }
 
     @Override
@@ -43,6 +44,8 @@ public class ConnectionProxy implements Connection {
             } finally {
                 dataSourceProxy.removeConnection();
             }
+        } else {
+            LOGGER.debug("ConnectionProxy counter was decremented. Current value: " + closeCounter);
         }
     }
 

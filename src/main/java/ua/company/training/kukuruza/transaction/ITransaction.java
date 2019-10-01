@@ -29,9 +29,11 @@ public interface ITransaction {
     }
 
     static boolean doTransaction(ITransaction t, int transactionIsolationLevel) {
+        LOGGER.info("Transaction begin");
         ConnectionFactoryImpl factory = ConnectionFactoryImpl.getInstance();
         Connection connection = factory.getConnection();
         if (Objects.nonNull(connection)) {
+            LOGGER.info("Got connection");
             try {
                 boolean isTransactionDoneWithoutRollback = true;
                 boolean autoCommitState;
@@ -43,27 +45,28 @@ public interface ITransaction {
                     if (oldTransactionIsolation != transactionIsolationLevel)
                         connection.setTransactionIsolation(transactionIsolationLevel);
                 } catch (SQLException prepareException) {
-                    LOGGER.error("Transaction preparing error", prepareException);
                     throw new TransactionException(prepareException);
                 }
+                LOGGER.info("Changed connection autoCommit state to false");
                 try {
                     t.transactionBody();
+                    LOGGER.info("Transaction body was successfully done");
                 } catch (PersistenceException persistenceException) {
                     LOGGER.info("Transaction body fail. Trying rollback", persistenceException);
                     try {
                         connection.rollback();
                         isTransactionDoneWithoutRollback = false;
+                        LOGGER.info("Rollback successfully done");
                     } catch (SQLException rollbackException) {
                         rollbackException.addSuppressed(persistenceException);
-                        LOGGER.error("Rollback fail", rollbackException);
                         throw new TransactionException(rollbackException);
                     }
                 }
                 if (isTransactionDoneWithoutRollback) {
                     try {
                         connection.commit();
+                        LOGGER.info("Commit successfully done");
                     } catch (SQLException commitException) {
-                        LOGGER.error("Commit error", commitException);
                         throw new TransactionException(commitException);
                     }
                 }
@@ -71,20 +74,20 @@ public interface ITransaction {
                     connection.setAutoCommit(autoCommitState);
                     if (connection.getTransactionIsolation() != oldTransactionIsolation)
                         connection.setTransactionIsolation(oldTransactionIsolation);
+                    LOGGER.info("Changed connection state to default");
                 } catch (SQLException afterCommitException) {
-                    LOGGER.error("Can't change connection state", afterCommitException);
                     throw new TransactionException(afterCommitException);
                 }
                 return isTransactionDoneWithoutRollback;
             } finally {
                 try {
                     connection.close();
+                    LOGGER.info("Transaction end");
                 } catch (SQLException e) {
                     LOGGER.error("Can't close connection", e);
                 }
             }
         } else {
-            LOGGER.error("No connection");
             throw new TransactionException("Connection equals null");
         }
     }

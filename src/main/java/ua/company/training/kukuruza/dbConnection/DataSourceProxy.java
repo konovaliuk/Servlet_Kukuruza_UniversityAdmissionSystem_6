@@ -23,7 +23,9 @@ public class DataSourceProxy implements DataSource {
         ConnectionProxy connectionProxy = connectionProxyThreadLocal.get();
         if (Objects.nonNull(connectionProxy)) {
             connectionProxyThreadLocal.remove();
-            LOGGER.debug("Removed ConnectionProxy");
+            LOGGER.debug("ConnectionProxy was successfully removed");
+        } else {
+            LOGGER.warn("ConnectionProxyThreadLocal is empty, can't remove ConnectionProxy");
         }
     }
 
@@ -31,10 +33,13 @@ public class DataSourceProxy implements DataSource {
     public Connection getConnection() throws SQLException {
         ConnectionProxy connectionProxy = connectionProxyThreadLocal.get();
         if (Objects.isNull(connectionProxy)) {
+            LOGGER.debug("ConnectionProxy is null");
             Connection connection = dataSource.getConnection();
             connectionProxy = new ConnectionProxy(connection, this);
             connectionProxyThreadLocal.set(connectionProxy);
-            LOGGER.debug("Created new ConnectionProxy");
+            LOGGER.debug("ConnectionProxy was successfully created");
+        } else {
+            LOGGER.debug("ConnectionProxy was gotten from connectionProxyThreadLocal");
         }
         connectionProxy.incrementCloseCounter();
         return connectionProxy;

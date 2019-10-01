@@ -18,22 +18,22 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LOGGER.debug("doGet");
+        LOGGER.info("doGet");
         processRequest(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LOGGER.debug("doPost");
+        LOGGER.info("doPost");
         processRequest(req, resp);
     }
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LOGGER.debug("URI is: " + req.getRequestURI());
-        ICommand command = CommandFactory.getAction(req.getParameter(RequestParameters.COMMAND));
-        LOGGER.debug("Command is: " + command.getClass());
+        LOGGER.info("URI is: " + req.getRequestURI());
+        ICommand command = CommandFactory.getCommand(req.getParameter(RequestParameters.COMMAND));
+        LOGGER.info("Command is: " + command.getClass().getSimpleName());
         String view = command.execute(req, resp);
-        LOGGER.debug("View is: " + view);
+        LOGGER.info("View is: " + view);
         if (view.startsWith("redirect:")) {
             resp.sendRedirect(req.getContextPath() + view.substring(9));
         } else {

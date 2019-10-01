@@ -74,7 +74,7 @@ class SummaryRatingServiceTest {
         when(factory.getDaoRequest()).thenReturn(daoRequest);
         when(daoRequest.findByEducationOptionId(educationOptionId)).thenReturn(requests);
 
-        Map<Long, Integer> actual = service.getUserIdToRating(educationOptionId);
+        Map<Long, Integer> actual = service.getUserIdToRatingOrderByRating(educationOptionId);
 
         assertEquals(expected, actual);
     }
@@ -86,7 +86,7 @@ class SummaryRatingServiceTest {
         when(factory.getDaoRequest()).thenReturn(daoRequest);
         when(daoRequest.findByEducationOptionId(wrongEducationOptionId)).thenReturn(Collections.emptyList());
 
-        Map<Long, Integer> actual = service.getUserIdToRating(wrongEducationOptionId);
+        Map<Long, Integer> actual = service.getUserIdToRatingOrderByRating(wrongEducationOptionId);
 
         assertTrue(actual.isEmpty());
     }

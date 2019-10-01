@@ -33,7 +33,7 @@ public class CommandFactory {
         actions.put(UNIVERSITY_SELECTION_COMMAND, new UniversitySelection());
     }
 
-    public static ICommand getAction(String commandName) {
+    public static ICommand getCommand(String commandName) {
         ICommand command = actions.get(commandName);
         return Objects.nonNull(command) ? command : noCommand;
     }

@@ -1,5 +1,7 @@
 package ua.company.training.kukuruza.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.company.training.kukuruza.dao.AbstractDaoFactory;
 import ua.company.training.kukuruza.entity.User;
 import ua.company.training.kukuruza.util.UserStatus;
@@ -9,6 +11,7 @@ import ua.company.training.kukuruza.dao.IDaoUser;
 import java.util.Optional;
 
 public class RegistrationService {
+    private static final Logger LOGGER = LogManager.getLogger(RegistrationService.class);
     private AbstractDaoFactory factory;
 
     public RegistrationService(AbstractDaoFactory factory) {
@@ -16,6 +19,7 @@ public class RegistrationService {
     }
 
     public void register(User user) {
+        LOGGER.info("Try to register new user");
         user.setLogin(user.getLogin().toLowerCase());
         user.setEmail(user.getEmail().toLowerCase());
         user.setPassportCode(user.getPassportCode().toLowerCase());
@@ -36,6 +40,7 @@ public class RegistrationService {
         if (userWithSamePassportCode.isPresent())
             throw new ServiceException("User with the same passport code is already exist.");
 
+        LOGGER.info("User validation successfully done. Try to save new user");
         daoUser.save(user);
     }
 }

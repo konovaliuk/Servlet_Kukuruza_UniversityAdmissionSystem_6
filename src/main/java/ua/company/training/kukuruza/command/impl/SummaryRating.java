@@ -21,7 +21,8 @@ public class SummaryRating implements ICommand {
         SummaryRatingService service = ServiceFactory.getInstance().getSummaryRatingService();
         Optional<Request> userRequest = service.getUserRequest(user.getId());
         if (userRequest.isPresent()) {
-            Map<Long, Integer> userIdToRating = service.getUserIdToRating(userRequest.get().getEducationOptionId());
+            Map<Long, Integer> userIdToRating = service.
+                    getUserIdToRatingOrderByRating(userRequest.get().getEducationOptionId());
             Map<Long, User> userIdToUser = service.getUserIdToUserByIdSet(userIdToRating.keySet());
             String universityName = service.getUniversityName(userRequest.get().getEducationOptionId());
             String specialtyName = service.getSpecialtyName(userRequest.get().getEducationOptionId());

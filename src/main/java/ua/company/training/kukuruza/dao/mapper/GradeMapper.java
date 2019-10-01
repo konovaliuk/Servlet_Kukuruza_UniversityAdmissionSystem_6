@@ -1,7 +1,5 @@
 package ua.company.training.kukuruza.dao.mapper;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ua.company.training.kukuruza.entity.Grade;
 import ua.company.training.kukuruza.persistenceException.MapperException;
 
@@ -9,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GradeMapper {
-    private static final Logger LOGGER = LogManager.getLogger(GradeMapper.class);
     private static final String ID = "id";
     private static final String USER_ID = "user_id";
     private static final String SUBJECT_ID = "subject_id";
@@ -24,7 +21,6 @@ public class GradeMapper {
                     .setResult(rs.getInt(RESULT))
                     .build();
         } catch (SQLException e) {
-            LOGGER.error("Can't map ResultSet to Grade", e);
             throw new MapperException(e);
         }
     }

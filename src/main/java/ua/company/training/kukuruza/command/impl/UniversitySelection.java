@@ -1,5 +1,7 @@
 package ua.company.training.kukuruza.command.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.company.training.kukuruza.service.EducationService;
 import ua.company.training.kukuruza.util.AttributeNames;
 import ua.company.training.kukuruza.util.PaginationManager;
@@ -16,13 +18,17 @@ import java.util.List;
 import java.util.Optional;
 
 public class UniversitySelection implements ICommand {
+    private static final Logger LOGGER = LogManager.getLogger(UniversitySelection.class);
+
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        LOGGER.info("Start of university selection process");
         User user = (User) req.getSession().getAttribute(AttributeNames.USER);
 
         EducationService service = ServiceFactory.getInstance().getEducationService();
         Optional<Specialty> chosenSpecialty = service.getChosenSpecialty(user.getId());
         if (chosenSpecialty.isPresent()) {
+            LOGGER.info("User already chose a specialty");
             req.setAttribute(AttributeNames.CHOSEN_SPECIALTY, chosenSpecialty.get());
         } else {
             Long rowsCount = service.getUniversitiesRowsCount();

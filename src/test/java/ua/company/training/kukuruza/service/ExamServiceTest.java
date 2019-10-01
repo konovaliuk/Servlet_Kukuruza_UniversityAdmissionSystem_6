@@ -165,7 +165,7 @@ class ExamServiceTest {
         IDaoUserExam daoUserExam = mock(IDaoUserExam.class);
         when(factory.getDaoUserExam()).thenReturn(daoUserExam);
 
-        service.cancelRegistrationUserToExams(userId, examsId);
+        service.cancelUserRegistrationToExams(userId, examsId);
 
         verify(daoUserExam, times(1)).delete(userExams);
     }
@@ -175,7 +175,7 @@ class ExamServiceTest {
         Long userId = 42L;
         String[] examsId = new String[0];
 
-        service.cancelRegistrationUserToExams(userId, examsId);
+        service.cancelUserRegistrationToExams(userId, examsId);
 
         verify(factory, never()).getDaoUserExam();
     }

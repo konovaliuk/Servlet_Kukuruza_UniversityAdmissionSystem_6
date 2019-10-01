@@ -1,7 +1,5 @@
 package ua.company.training.kukuruza.dao.mapper;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ua.company.training.kukuruza.entity.SpecialtySubject;
 import ua.company.training.kukuruza.persistenceException.MapperException;
 
@@ -9,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SpecialtySubjectMapper {
-    private static final Logger LOGGER = LogManager.getLogger(SpecialtySubjectMapper.class);
     private static final String ID = "id";
     private static final String SPECIALTY_ID = "specialty_id";
     private static final String SUBJECT_ID = "subject_id";
@@ -21,7 +18,6 @@ public class SpecialtySubjectMapper {
                     .setSubjectId(rs.getInt(SUBJECT_ID))
                     .build();
         } catch (SQLException e) {
-            LOGGER.error("Can't map ResultSet to SpecialtySubject", e);
             throw new MapperException(e);
         }
     }

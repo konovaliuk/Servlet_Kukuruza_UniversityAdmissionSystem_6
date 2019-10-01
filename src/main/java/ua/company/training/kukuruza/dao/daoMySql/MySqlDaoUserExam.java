@@ -17,7 +17,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MySqlDaoUserExam implements IDaoUserExam {
-    private static final Logger LOGGER = LogManager.getLogger(MySqlDaoUserExam.class);
     private static final String GET_USER_EXAM_BY_ID_SQL = "SELECT * FROM user_exam WHERE id = ?";
     private static final String GET_USER_EXAM_BY_USER_ID_SQL = "SELECT * FROM user_exam WHERE user_id = ?";
     private static final String GET_ALL_USER_EXAM_SQL = "SELECT * FROM user_exam";
@@ -91,7 +90,6 @@ public class MySqlDaoUserExam implements IDaoUserExam {
             }
             ps.executeBatch();
         } catch (SQLException e) {
-            LOGGER.error("Can't execute", e);
             throw new PersistenceException(e);
         }
     }

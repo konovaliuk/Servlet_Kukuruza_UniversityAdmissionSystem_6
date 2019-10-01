@@ -1,7 +1,5 @@
 package ua.company.training.kukuruza.dao.daoMySql;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ua.company.training.kukuruza.dbConnection.ConnectionFactoryImpl;
 import ua.company.training.kukuruza.dbConnection.IConnectionFactory;
 import ua.company.training.kukuruza.persistenceException.PersistenceException;
@@ -16,7 +14,6 @@ import java.util.function.Function;
  * @author Andrii Kukuruza
  */
 public class MySqlDaoHelper {
-    private static final Logger LOGGER = LogManager.getLogger(MySqlDaoHelper.class);
     private static final MySqlDaoHelper INSTANCE = new MySqlDaoHelper(ConnectionFactoryImpl.getInstance());
     private IConnectionFactory factory;
 
@@ -40,11 +37,9 @@ public class MySqlDaoHelper {
                     return Optional.empty();
                 }
             } catch (SQLException e) {
-                LOGGER.error("Result set error", e);
                 throw new PersistenceException(e);
             }
         } catch (SQLException e) {
-            LOGGER.error("Can't start request executing", e);
             throw new PersistenceException(e);
         }
     }
@@ -55,11 +50,9 @@ public class MySqlDaoHelper {
             try (ResultSet rs = s.executeQuery(sql)) {
                 return getEntitiesList(mapper, rs);
             } catch (SQLException e) {
-                LOGGER.error("Result set error", e);
                 throw new PersistenceException(e);
             }
         } catch (SQLException e) {
-            LOGGER.error("Can't start request executing", e);
             throw new PersistenceException(e);
         }
     }
@@ -71,11 +64,9 @@ public class MySqlDaoHelper {
             try (ResultSet rs = s.executeQuery()) {
                 return getEntitiesList(mapper, rs);
             } catch (SQLException e) {
-                LOGGER.error("Result set error", e);
                 throw new PersistenceException(e);
             }
         } catch (SQLException e) {
-            LOGGER.error("Can't start request executing", e);
             throw new PersistenceException(e);
         }
     }
@@ -86,7 +77,6 @@ public class MySqlDaoHelper {
             setPrepareStatementParameters(ps, id);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            LOGGER.error("Can't delete entity", e);
             throw new PersistenceException(e);
         }
     }
@@ -97,7 +87,6 @@ public class MySqlDaoHelper {
             setPrepareStatementParameters(ps, values);
             ps.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Can't update entity", e);
             throw new PersistenceException(e);
         }
     }
@@ -119,15 +108,12 @@ public class MySqlDaoHelper {
                 if (rs.next()) {
                     return getGeneratedKey(rs, pkType, pkColumnIndex);
                 } else {
-                    LOGGER.error("There is no generated key");
                     throw new PersistenceException("There is no generated key");
                 }
             } catch (SQLException e) {
-                LOGGER.error("Can't get generated key", e);
                 throw new PersistenceException(e);
             }
         } catch (SQLException e) {
-            LOGGER.error("Can't insert entity", e);
             throw new PersistenceException(e);
         }
     }
@@ -139,26 +125,12 @@ public class MySqlDaoHelper {
                 if (rs.next()) {
                     return rs.getLong(1);
                 } else {
-                    LOGGER.error("No result set");
                     throw new PersistenceException();
                 }
             } catch (SQLException ex) {
-                LOGGER.error(ex);
                 throw new PersistenceException(ex);
             }
         } catch (SQLException e) {
-            LOGGER.error(e);
-            throw new PersistenceException(e);
-        }
-    }
-
-    public void saveWithoutAutoKey(String sql, Object... values) {
-        try (Connection c = factory.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
-            setPrepareStatementParameters(ps, values);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            LOGGER.error("Can't insert entity", e);
             throw new PersistenceException(e);
         }
     }
@@ -186,7 +158,6 @@ public class MySqlDaoHelper {
             Long key = rs.getLong(pkColumnIndex);
             return pkType.cast(key);
         } else {
-            LOGGER.error("Unsupported key type");
             throw new PersistenceException("Unsupported key type");
         }
     }

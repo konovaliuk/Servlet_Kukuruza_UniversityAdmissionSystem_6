@@ -1,7 +1,5 @@
 package ua.company.training.kukuruza.dbConnection;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ua.company.training.kukuruza.persistenceException.ConnectionException;
 
 import javax.naming.Context;
@@ -12,7 +10,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ConnectionFactoryImpl implements IConnectionFactory {
-    private final static Logger LOGGER = LogManager.getLogger(ConnectionFactoryImpl.class);
     private static final ConnectionFactoryImpl INSTANCE = new ConnectionFactoryImpl();
     private static final DataSource DATA_SOURCE;
 
@@ -23,7 +20,6 @@ public class ConnectionFactoryImpl implements IConnectionFactory {
             DataSource ds = (DataSource) envContext.lookup("jdbc/uas_db");
             DATA_SOURCE = new DataSourceProxy(ds);
         } catch (NamingException e) {
-            LOGGER.error("Fail creating instance", e);
             throw new ConnectionException(e);
         }
     }
@@ -41,7 +37,6 @@ public class ConnectionFactoryImpl implements IConnectionFactory {
         try {
             return DATA_SOURCE.getConnection();
         } catch (SQLException e) {
-            LOGGER.error("Can't get connection", e);
             throw new ConnectionException(e);
         }
     }

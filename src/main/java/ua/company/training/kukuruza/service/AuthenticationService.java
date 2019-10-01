@@ -1,5 +1,7 @@
 package ua.company.training.kukuruza.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.company.training.kukuruza.dao.AbstractDaoFactory;
 import ua.company.training.kukuruza.entity.User;
 
@@ -7,6 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class AuthenticationService {
+    private static final Logger LOGGER = LogManager.getLogger(AuthenticationService.class);
     private AbstractDaoFactory factory;
 
     public AuthenticationService(AbstractDaoFactory factory) {
@@ -14,6 +17,7 @@ public class AuthenticationService {
     }
 
     public User signIn(String login, String password) {
+        LOGGER.info("Try to sign in");
         if (Objects.isNull(login) || Objects.isNull(password))
             throw new ServiceException("Please fill all of the fields of the form!");
 

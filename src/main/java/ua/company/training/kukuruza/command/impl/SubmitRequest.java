@@ -29,8 +29,7 @@ public class SubmitRequest implements ICommand {
 
         EducationService service = ServiceFactory.getInstance().getEducationService();
         try {
-            Integer rating = service.getRatingByRequiredSubjects(user.getId(), specialtyId);
-            Specialty chosenSpecialty = service.submitRequest(user.getId(), rating, universityId, specialtyId);
+            Specialty chosenSpecialty = service.submitRequest(user.getId(), universityId, specialtyId);
             req.setAttribute(AttributeNames.CHOSEN_SPECIALTY, chosenSpecialty);
             LOGGER.info("User successfully chose a specialty");
             return Path.UNIVERSITY_SELECTION_PAGE;

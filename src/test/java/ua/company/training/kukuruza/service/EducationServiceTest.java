@@ -122,78 +122,6 @@ class EducationServiceTest {
     }
 
     @Test
-    void getRatingByRequiredSubjectsTest() {
-        Long userId = 42L;
-        Integer specialtyId = 7;
-        Integer subjectId1 = 1;
-        Integer subjectId2 = 2;
-        Integer result1 = 150;
-        Integer result2 = 175;
-        Set<Integer> subjectsId = new HashSet<>();
-        subjectsId.add(subjectId1);
-        subjectsId.add(subjectId2);
-        Grade grade1 = new Grade.Builder()
-                .setSubjectId(subjectId1)
-                .setResult(result1)
-                .build();
-        Grade grade2 = new Grade.Builder()
-                .setSubjectId(subjectId2)
-                .setResult(result2)
-                .build();
-        IDaoSpecialtySubject daoSpecialtySubject = mock(IDaoSpecialtySubject.class);
-        IDaoGrade daoGrade = mock(IDaoGrade.class);
-        when(factory.getDaoSpecialtySubject()).thenReturn(daoSpecialtySubject);
-        when(factory.getDaoGrade()).thenReturn(daoGrade);
-        when(daoSpecialtySubject.findSubjectsIdBySpecialtyId(specialtyId)).thenReturn(subjectsId);
-        when(daoGrade.findByUserIdAndSubjectId(userId, subjectId1)).thenReturn(Optional.of(grade1));
-        when(daoGrade.findByUserIdAndSubjectId(userId, subjectId2)).thenReturn(Optional.of(grade2));
-
-        Integer actual = service.getRatingByRequiredSubjects(userId, specialtyId);
-
-        assertEquals(result1 + result2, actual);
-    }
-
-    @Test
-    void getRatingByRequiredSubjectsWithNotAllRequiredGradesTest() {
-        Long userId = 42L;
-        Integer specialtyId = 7;
-        Integer subjectId1 = 1;
-        Integer subjectId2 = 2;
-        Integer result1 = 150;
-        Set<Integer> subjectsId = new HashSet<>();
-        subjectsId.add(subjectId1);
-        subjectsId.add(subjectId2);
-        Grade grade1 = new Grade.Builder()
-                .setSubjectId(subjectId1)
-                .setResult(result1)
-                .build();
-        IDaoSpecialtySubject daoSpecialtySubject = mock(IDaoSpecialtySubject.class);
-        IDaoGrade daoGrade = mock(IDaoGrade.class);
-        when(factory.getDaoSpecialtySubject()).thenReturn(daoSpecialtySubject);
-        when(factory.getDaoGrade()).thenReturn(daoGrade);
-        when(daoSpecialtySubject.findSubjectsIdBySpecialtyId(specialtyId)).thenReturn(subjectsId);
-        when(daoGrade.findByUserIdAndSubjectId(userId, subjectId1)).thenReturn(Optional.of(grade1));
-        when(daoGrade.findByUserIdAndSubjectId(userId, subjectId2)).thenReturn(Optional.empty());
-
-        ServiceException e = assertThrows(ServiceException.class,
-                () -> service.getRatingByRequiredSubjects(userId, specialtyId));
-        assertEquals("No grade", e.getMessage());
-    }
-
-    @Test
-    void getRatingByRequiredSubjectsWithWrongSpecialtyIdTest() {
-        Long userId = 42L;
-        Integer wrongSpecialtyId = 7;
-        IDaoSpecialtySubject daoSpecialtySubject = mock(IDaoSpecialtySubject.class);
-        when(factory.getDaoSpecialtySubject()).thenReturn(daoSpecialtySubject);
-        when(daoSpecialtySubject.findSubjectsIdBySpecialtyId(wrongSpecialtyId)).thenReturn(Collections.emptySet());
-
-        Integer actual = service.getRatingByRequiredSubjects(userId, wrongSpecialtyId);
-
-        assertEquals(0, actual);
-    }
-
-    @Test
     void getSpecialtyWithCorrectSpecialtyIdTest() {
         Integer specialtyId = 42;
         Specialty expected = new Specialty.Builder()
@@ -261,10 +189,25 @@ class EducationServiceTest {
     @Test
     void submitRequestTest() {
         Long userId = 42L;
-        Integer rating = 420;
         Integer universityId = 7;
         Integer specialtyId = 13;
+        Integer subjectId1 = 1;
+        Integer subjectId2 = 2;
         Long educationOptionId = 4200L;
+        Integer result1 = 150;
+        Integer result2 = 175;
+        Integer rating = result1 + result2;
+        Set<Integer> subjectsId = new HashSet<>();
+        subjectsId.add(subjectId1);
+        subjectsId.add(subjectId2);
+        Grade grade1 = new Grade.Builder()
+                .setSubjectId(subjectId1)
+                .setResult(result1)
+                .build();
+        Grade grade2 = new Grade.Builder()
+                .setSubjectId(subjectId2)
+                .setResult(result2)
+                .build();
         EducationOption educationOption = new EducationOption.Builder()
                 .setId(educationOptionId)
                 .setSpecialtyId(specialtyId)
@@ -275,38 +218,56 @@ class EducationServiceTest {
                 .setRating(rating)
                 .setEducationOptionId(educationOptionId)
                 .build();
-        Specialty specialty = new Specialty.Builder()
+        Specialty expected = new Specialty.Builder()
                 .setId(specialtyId)
                 .build();
+        IDaoSpecialtySubject daoSpecialtySubject = mock(IDaoSpecialtySubject.class);
+        IDaoGrade daoGrade = mock(IDaoGrade.class);
         IDaoEducationOption daoEducationOption = mock(IDaoEducationOption.class);
         IDaoRequest daoRequest = mock(IDaoRequest.class);
         IDaoSpecialty daoSpecialty = mock(IDaoSpecialty.class);
+        when(factory.getDaoSpecialtySubject()).thenReturn(daoSpecialtySubject);
+        when(factory.getDaoGrade()).thenReturn(daoGrade);
         when(factory.getDaoEducationOption()).thenReturn(daoEducationOption);
         when(factory.getDaoRequest()).thenReturn(daoRequest);
         when(factory.getDaoSpecialty()).thenReturn(daoSpecialty);
+        when(daoSpecialtySubject.findSubjectsIdBySpecialtyId(specialtyId)).thenReturn(subjectsId);
+        when(daoGrade.findByUserIdAndSubjectId(userId, subjectId1)).thenReturn(Optional.of(grade1));
+        when(daoGrade.findByUserIdAndSubjectId(userId, subjectId2)).thenReturn(Optional.of(grade2));
         when(daoEducationOption.findByUniversityIdAndSpecialtyId(universityId, specialtyId))
                 .thenReturn(Optional.of(educationOption));
-        when(daoSpecialty.find(specialtyId)).thenReturn(Optional.of(specialty));
+        when(daoSpecialty.find(specialtyId)).thenReturn(Optional.of(expected));
 
-        Specialty actual = service.submitRequest(userId, rating, universityId, specialtyId);
+        Specialty actual = service.submitRequest(userId, universityId, specialtyId);
 
+        assertEquals(expected, actual);
         verify(daoRequest, times(1)).save(request);
-        assertEquals(specialtyId, actual.getId());
     }
 
     @Test
-    void submitRequestWithWrongUniversityIdTest() {
+    void submitRequestWithNoGradeTest() {
         Long userId = 42L;
-        Integer rating = 420;
-        Integer wrongUniversityId = 7;
+        Integer universityId = 7;
         Integer specialtyId = 13;
-        IDaoEducationOption daoEducationOption = mock(IDaoEducationOption.class);
-        when(factory.getDaoEducationOption()).thenReturn(daoEducationOption);
-        when(daoEducationOption.findByUniversityIdAndSpecialtyId(wrongUniversityId, specialtyId))
-                .thenReturn(Optional.empty());
+        Integer subjectId1 = 1;
+        Integer subjectId2 = 2;
+        Integer result1 = 150;
+        Set<Integer> subjectsId = new HashSet<>();
+        subjectsId.add(subjectId1);
+        subjectsId.add(subjectId2);
+        Grade grade1 = new Grade.Builder()
+                .setSubjectId(subjectId1)
+                .setResult(result1)
+                .build();
+        IDaoSpecialtySubject daoSpecialtySubject = mock(IDaoSpecialtySubject.class);
+        IDaoGrade daoGrade = mock(IDaoGrade.class);
+        when(factory.getDaoSpecialtySubject()).thenReturn(daoSpecialtySubject);
+        when(factory.getDaoGrade()).thenReturn(daoGrade);
+        when(daoSpecialtySubject.findSubjectsIdBySpecialtyId(specialtyId)).thenReturn(subjectsId);
+        when(daoGrade.findByUserIdAndSubjectId(userId, subjectId1)).thenReturn(Optional.of(grade1));
+        when(daoGrade.findByUserIdAndSubjectId(userId, subjectId2)).thenReturn(Optional.empty());
 
-        assertThrows(RuntimeException.class,
-                () -> service.submitRequest(userId, rating, wrongUniversityId, specialtyId));
+        assertThrows(ServiceException.class, () -> service.submitRequest(userId, universityId, specialtyId));
     }
 
     @Test

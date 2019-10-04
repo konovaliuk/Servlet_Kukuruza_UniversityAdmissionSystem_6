@@ -18,7 +18,7 @@ public class FindUserSendingNotification implements ICommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        LOGGER.info("Try to find users and for sending a notification");
+        LOGGER.info("Try to find users for sending a notification");
         String firstName = req.getParameter(RequestParameters.FIRST_NAME);
         String secondName = req.getParameter(RequestParameters.SECOND_NAME);
 

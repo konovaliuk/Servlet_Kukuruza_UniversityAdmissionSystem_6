@@ -7,6 +7,7 @@ import java.util.Properties;
 public class Path {
     public static final String ACCESS_DENIED_PAGE;
     public static final String ADMIN_PAGE;
+    public static final String ASSETS;
     public static final String CHECK_STATUS_PAGE;
     public static final String EXAM_COMMAND;
     public static final String EXAM_PAGE;
@@ -29,6 +30,7 @@ public class Path {
             properties.load(Objects.requireNonNull(Path.class.getClassLoader().getResourceAsStream(fileName)));
             ACCESS_DENIED_PAGE = properties.getProperty("accessDeniedPage");
             ADMIN_PAGE = properties.getProperty("adminPage");
+            ASSETS = properties.getProperty("assets");
             CHECK_STATUS_PAGE = properties.getProperty("checkStatusPage");
             EXAM_COMMAND = properties.getProperty("examCommand");
             EXAM_PAGE = properties.getProperty("examPage");

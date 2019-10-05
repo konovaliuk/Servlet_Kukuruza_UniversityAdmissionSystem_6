@@ -32,7 +32,7 @@ public class Registration implements ICommand {
                 .build();
 
         try {
-            ServiceFactory.getInstance().getRegistrationService().register(newUser);
+            ServiceFactory.getRegistrationService().register(newUser);
             req.getSession().setAttribute(AttributeNames.USER, newUser);
             LOGGER.info("User was successfully register");
             return Path.INDEX_PAGE;

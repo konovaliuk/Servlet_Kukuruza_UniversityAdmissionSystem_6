@@ -27,7 +27,7 @@ public class SubmitRequest implements ICommand {
         Integer specialtyId = Integer.valueOf(req.getParameter(RequestParameters.SPECIALTY_ID));
         User user = (User) req.getSession().getAttribute(AttributeNames.USER);
 
-        EducationService service = ServiceFactory.getInstance().getEducationService();
+        EducationService service = ServiceFactory.getEducationService();
         try {
             Specialty chosenSpecialty = service.submitRequest(user.getId(), universityId, specialtyId);
             req.setAttribute(AttributeNames.CHOSEN_SPECIALTY, chosenSpecialty);

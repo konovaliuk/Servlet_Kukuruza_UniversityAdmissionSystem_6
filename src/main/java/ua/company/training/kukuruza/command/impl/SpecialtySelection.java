@@ -17,7 +17,7 @@ public class SpecialtySelection implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         Integer universityId = Integer.valueOf(req.getParameter(RequestParameters.UNIVERSITY_ID));
-        EducationService service = ServiceFactory.getInstance().getEducationService();
+        EducationService service = ServiceFactory.getEducationService();
         Long rowsCount = service.getSpecialtiesRowsCount(universityId);
         Integer skip = PaginationManager.manage(req, rowsCount);
         List<Specialty> specialties = service.getSpecialties(universityId, skip, PaginationManager.RECORDS_PER_PAGE);

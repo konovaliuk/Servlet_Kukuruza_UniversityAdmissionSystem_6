@@ -15,7 +15,7 @@ public class SetUserStatus implements ICommand {
         Long userId = Long.valueOf(req.getParameter(RequestParameters.USER_ID));
         Integer userStatus = Integer.valueOf(req.getParameter(RequestParameters.USER_STATUS));
 
-        ServiceFactory.getInstance().getAdminService().setUserStatus(userId, userStatus);
+        ServiceFactory.getAdminService().setUserStatus(userId, userStatus);
         req.setAttribute(AttributeNames.SUCCESS, "success");
 
         return Path.SEND_NOTIFICATION_PAGE;

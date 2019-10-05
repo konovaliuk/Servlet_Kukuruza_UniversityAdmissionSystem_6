@@ -17,7 +17,7 @@ public class ExamRegistration implements ICommand {
         String[] examsId = req.getParameterValues(RequestParameters.EXAMS_ID);
         if (Objects.nonNull(examsId)) {
             User user = (User) req.getSession().getAttribute(AttributeNames.USER);
-            ServiceFactory.getInstance().getExamService().registerUserToExams(user.getId(), examsId);
+            ServiceFactory.getExamService().registerUserToExams(user.getId(), examsId);
         }
         return Path.EXAM_COMMAND;
     }

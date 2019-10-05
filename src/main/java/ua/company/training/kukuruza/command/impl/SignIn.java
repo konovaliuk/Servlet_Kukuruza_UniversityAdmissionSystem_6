@@ -24,7 +24,7 @@ public class SignIn implements ICommand {
         String password = req.getParameter(RequestParameters.PASSWORD);
 
         try {
-            User user = ServiceFactory.getInstance().getAuthenticationService().signIn(login, password);
+            User user = ServiceFactory.getAuthenticationService().signIn(login, password);
             req.getSession().setAttribute(AttributeNames.USER, user);
             LOGGER.info("User successfully signed in");
             if (user.getUserTypeId() == UserType.STUDENT.getId())

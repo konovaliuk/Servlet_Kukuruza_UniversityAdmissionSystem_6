@@ -4,60 +4,48 @@ import ua.company.training.kukuruza.dao.AbstractDaoFactory;
 import ua.company.training.kukuruza.dao.daoMySql.MySqlDaoFactory;
 
 public class ServiceFactory {
-    private static final ServiceFactory INSTANCE = new ServiceFactory(MySqlDaoFactory.getInstance());
-    private AdminService adminService;
-    private AuthenticationService authenticationService;
-    private CheckStatusService checkStatusService;
-    private EducationService educationService;
-    private ExamService examService;
-    private RegistrationService registrationService;
-    private ResultService resultService;
-    private SummaryRatingService summaryRatingService;
+    private static final AbstractDaoFactory FACTORY = MySqlDaoFactory.getInstance();
+    private static final AdminService ADMIN_SERVICE = new AdminService(FACTORY);
+    private static final AuthenticationService AUTHENTICATION_SERVICE = new AuthenticationService(FACTORY);
+    private static final CheckStatusService CHECK_STATUS_SERVICE = new CheckStatusService(FACTORY);
+    private static final EducationService EDUCATION_SERVICE = new EducationService(FACTORY);
+    private static final ExamService EXAM_SERVICE = new ExamService(FACTORY);
+    private static final RegistrationService REGISTRATION_SERVICE = new RegistrationService(FACTORY);
+    private static final ResultService RESULT_SERVICE = new ResultService(FACTORY);
+    private static final SummaryRatingService SUMMARY_RATING_SERVICE = new SummaryRatingService(FACTORY);
 
-    private ServiceFactory(AbstractDaoFactory factory) {
-        adminService = new AdminService(factory);
-        authenticationService = new AuthenticationService(factory);
-        checkStatusService = new CheckStatusService(factory);
-        educationService = new EducationService(factory);
-        examService = new ExamService(factory);
-        registrationService = new RegistrationService(factory);
-        resultService = new ResultService(factory);
-        summaryRatingService = new SummaryRatingService(factory);
+    private ServiceFactory() {
     }
 
-    public static ServiceFactory getInstance() {
-        return INSTANCE;
+    public static AdminService getAdminService() {
+        return ADMIN_SERVICE;
     }
 
-    public AdminService getAdminService() {
-        return adminService;
+    public static AuthenticationService getAuthenticationService() {
+        return AUTHENTICATION_SERVICE;
     }
 
-    public AuthenticationService getAuthenticationService() {
-        return authenticationService;
+    public static CheckStatusService getCheckStatusService() {
+        return CHECK_STATUS_SERVICE;
     }
 
-    public CheckStatusService getCheckStatusService() {
-        return checkStatusService;
+    public static EducationService getEducationService() {
+        return EDUCATION_SERVICE;
     }
 
-    public EducationService getEducationService() {
-        return educationService;
+    public static ExamService getExamService() {
+        return EXAM_SERVICE;
     }
 
-    public ExamService getExamService() {
-        return examService;
+    public static RegistrationService getRegistrationService() {
+        return REGISTRATION_SERVICE;
     }
 
-    public RegistrationService getRegistrationService() {
-        return registrationService;
+    public static ResultService getResultService() {
+        return RESULT_SERVICE;
     }
 
-    public ResultService getResultService() {
-        return resultService;
-    }
-
-    public SummaryRatingService getSummaryRatingService() {
-        return summaryRatingService;
+    public static SummaryRatingService getSummaryRatingService() {
+        return SUMMARY_RATING_SERVICE;
     }
 }

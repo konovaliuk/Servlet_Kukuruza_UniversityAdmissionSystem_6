@@ -22,7 +22,7 @@ public class FindUserSendingNotification implements ICommand {
         String firstName = req.getParameter(RequestParameters.FIRST_NAME);
         String secondName = req.getParameter(RequestParameters.SECOND_NAME);
 
-        List<User> users = ServiceFactory.getInstance().getAdminService().findUsers(firstName, secondName);
+        List<User> users = ServiceFactory.getAdminService().findUsers(firstName, secondName);
         if (users.isEmpty()) {
             LOGGER.info("There aren't any available users");
             req.setAttribute(AttributeNames.FIRST_NAME, firstName);

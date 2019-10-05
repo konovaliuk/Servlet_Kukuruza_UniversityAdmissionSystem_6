@@ -16,7 +16,7 @@ public class SetGrade implements ICommand {
         Integer subjectId = Integer.valueOf(req.getParameter(RequestParameters.SUBJECT_ID));
         Integer result = Integer.valueOf(req.getParameter(RequestParameters.RESULT));
 
-        ServiceFactory.getInstance().getAdminService().setGrade(userId, subjectId, result);
+        ServiceFactory.getAdminService().setGrade(userId, subjectId, result);
         req.setAttribute(AttributeNames.SUCCESS, "success");
 
         return Path.SET_GRADE_PAGE;

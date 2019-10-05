@@ -13,7 +13,7 @@ public class CheckStatus implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = (User) req.getSession().getAttribute(AttributeNames.USER);
-        User updatedUser = ServiceFactory.getInstance().getCheckStatusService().getUpdatedUser(user.getId());
+        User updatedUser = ServiceFactory.getCheckStatusService().getUpdatedUser(user.getId());
         req.getSession().setAttribute(AttributeNames.USER, updatedUser);
         return Path.CHECK_STATUS_PAGE;
     }

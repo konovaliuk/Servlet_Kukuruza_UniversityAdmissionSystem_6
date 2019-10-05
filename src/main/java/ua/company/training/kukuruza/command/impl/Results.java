@@ -14,7 +14,7 @@ public class Results implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = (User) req.getSession().getAttribute(AttributeNames.USER);
-        Map<String, Integer> userGrades = ServiceFactory.getInstance().getResultService().getUserGrades(user.getId());
+        Map<String, Integer> userGrades = ServiceFactory.getResultService().getUserGrades(user.getId());
         req.setAttribute(AttributeNames.USER_GRADES, userGrades);
         return Path.RESULTS_PAGE;
     }

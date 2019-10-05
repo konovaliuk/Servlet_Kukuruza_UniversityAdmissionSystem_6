@@ -13,7 +13,7 @@ public class ChangeSpecialty implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = (User) req.getSession().getAttribute(AttributeNames.USER);
-        ServiceFactory.getInstance().getEducationService().dropRequest(user.getId());
+        ServiceFactory.getEducationService().dropRequest(user.getId());
         return Path.UNIVERSITY_SELECTION_COMMAND;
     }
 }

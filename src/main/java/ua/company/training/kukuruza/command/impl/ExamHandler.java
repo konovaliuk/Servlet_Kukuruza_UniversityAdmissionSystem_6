@@ -5,7 +5,6 @@ import ua.company.training.kukuruza.util.Path;
 import ua.company.training.kukuruza.entity.Exam;
 import ua.company.training.kukuruza.entity.User;
 import ua.company.training.kukuruza.command.ICommand;
-import ua.company.training.kukuruza.service.ExamService;
 import ua.company.training.kukuruza.service.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +16,10 @@ public class ExamHandler implements ICommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = (User) req.getSession().getAttribute(AttributeNames.USER);
-        ExamService service = ServiceFactory.getInstance().getExamService();
 
-        Map<Integer, String> subjectIdToSubjectName = service.getSubjectIdToSubjectName();
-        List<Exam> userExams = service.getUserExams(user.getId());
-        List<Exam> availableExams = service.getAvailableExams(userExams);
+        Map<Integer, String> subjectIdToSubjectName = ServiceFactory.getExamService().getSubjectIdToSubjectName();
+        List<Exam> userExams = ServiceFactory.getExamService().getUserExams(user.getId());
+        List<Exam> availableExams = ServiceFactory.getExamService().getAvailableExams(userExams);
 
         req.setAttribute(AttributeNames.SUBJECT_ID_TO_SUBJECT_NAME, subjectIdToSubjectName);
         req.setAttribute(AttributeNames.USER_EXAMS, userExams);

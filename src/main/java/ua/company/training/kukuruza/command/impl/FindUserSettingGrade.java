@@ -23,14 +23,14 @@ public class FindUserSettingGrade implements ICommand {
         String firstName = req.getParameter(RequestParameters.FIRST_NAME);
         String secondName = req.getParameter(RequestParameters.SECOND_NAME);
 
-        List<User> users = ServiceFactory.getInstance().getAdminService().findUsers(firstName, secondName);
+        List<User> users = ServiceFactory.getAdminService().findUsers(firstName, secondName);
         if (users.isEmpty()) {
             LOGGER.info("There aren't any available users");
             req.setAttribute(AttributeNames.FIRST_NAME, firstName);
             req.setAttribute(AttributeNames.SECOND_NAME, secondName);
         } else {
             LOGGER.info("Users were successfully found");
-            List<Subject> subjects = ServiceFactory.getInstance().getAdminService().getSubjects();
+            List<Subject> subjects = ServiceFactory.getAdminService().getSubjects();
             req.setAttribute(AttributeNames.SUBJECTS, subjects);
             req.setAttribute(AttributeNames.USERS, users);
         }

@@ -18,7 +18,7 @@ public class SummaryRating implements ICommand {
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = (User) req.getSession().getAttribute(AttributeNames.USER);
 
-        SummaryRatingService service = ServiceFactory.getInstance().getSummaryRatingService();
+        SummaryRatingService service = ServiceFactory.getSummaryRatingService();
         Optional<Request> userRequest = service.getUserRequest(user.getId());
         if (userRequest.isPresent()) {
             Map<Long, Integer> userIdToRating = service.

@@ -25,7 +25,7 @@ public class UniversitySelection implements ICommand {
         LOGGER.info("Start of university selection process");
         User user = (User) req.getSession().getAttribute(AttributeNames.USER);
 
-        EducationService service = ServiceFactory.getInstance().getEducationService();
+        EducationService service = ServiceFactory.getEducationService();
         Optional<Specialty> chosenSpecialty = service.getChosenSpecialty(user.getId());
         if (chosenSpecialty.isPresent()) {
             LOGGER.info("User already chose a specialty");

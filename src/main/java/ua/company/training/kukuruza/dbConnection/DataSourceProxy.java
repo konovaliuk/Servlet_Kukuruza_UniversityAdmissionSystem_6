@@ -10,12 +10,21 @@ import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.Objects;
 
+/**
+ * The class is a {@link javax.sql.DataSource } wrapper.
+ * It allows to share a connection to different dao methods
+ * inside transaction body.
+ *
+ * @see ConnectionProxy
+ * @see ua.company.training.kukuruza.transaction.ITransaction
+ * @author Andrii Kukuruza
+ */
 public class DataSourceProxy implements DataSource {
     private final static Logger LOGGER = LogManager.getLogger(DataSourceProxy.class);
     private DataSource dataSource;
     private ThreadLocal<ConnectionProxy> connectionProxyThreadLocal = new ThreadLocal<>();
 
-    public DataSourceProxy(DataSource dataSource) {
+    DataSourceProxy(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

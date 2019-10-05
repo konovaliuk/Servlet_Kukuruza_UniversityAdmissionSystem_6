@@ -16,6 +16,8 @@ import java.util.Objects;
  * with a datasource proxy and a connection proxy
  * which are inside dbConnection package.
  *
+ * @see ua.company.training.kukuruza.dbConnection.DataSourceProxy
+ * @see ua.company.training.kukuruza.dbConnection.ConnectionProxy
  * @author Andrii Kukuruza
  */
 @FunctionalInterface

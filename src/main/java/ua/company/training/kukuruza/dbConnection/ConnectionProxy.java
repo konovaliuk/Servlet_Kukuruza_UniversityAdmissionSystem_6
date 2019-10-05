@@ -8,13 +8,22 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * The class is a {@link java.sql.Connection } wrapper.
+ * It allows to share a connection to different dao methods
+ * inside transaction body.
+ *
+ * @see DataSourceProxy
+ * @see ua.company.training.kukuruza.transaction.ITransaction
+ * @author Andrii Kukuruza
+ */
 public class ConnectionProxy implements Connection {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionProxy.class);
     private Connection connection;
     private DataSourceProxy dataSourceProxy;
     private int closeCounter = 0;
 
-    public ConnectionProxy(Connection connection, DataSourceProxy dataSourceProxy) {
+    ConnectionProxy(Connection connection, DataSourceProxy dataSourceProxy) {
         this.connection = connection;
         this.dataSourceProxy = dataSourceProxy;
     }

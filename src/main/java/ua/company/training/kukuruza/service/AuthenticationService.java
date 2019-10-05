@@ -12,7 +12,7 @@ public class AuthenticationService {
     private static final Logger LOGGER = LogManager.getLogger(AuthenticationService.class);
     private AbstractDaoFactory factory;
 
-    public AuthenticationService(AbstractDaoFactory factory) {
+    AuthenticationService(AbstractDaoFactory factory) {
         this.factory = factory;
     }
 

@@ -13,7 +13,7 @@ public class EducationService {
     private static final Logger LOGGER = LogManager.getLogger(EducationService.class);
     private AbstractDaoFactory factory;
 
-    public EducationService(AbstractDaoFactory factory) {
+    EducationService(AbstractDaoFactory factory) {
         this.factory = factory;
     }
 

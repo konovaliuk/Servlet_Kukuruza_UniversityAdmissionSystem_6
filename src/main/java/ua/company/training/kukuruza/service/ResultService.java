@@ -15,7 +15,7 @@ public class ResultService {
     private static final Logger LOGGER = LogManager.getLogger(ResultService.class);
     private AbstractDaoFactory factory;
 
-    public ResultService(AbstractDaoFactory factory) {
+    ResultService(AbstractDaoFactory factory) {
         this.factory = factory;
     }
 

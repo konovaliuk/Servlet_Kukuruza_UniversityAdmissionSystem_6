@@ -14,7 +14,7 @@ public class RegistrationService {
     private static final Logger LOGGER = LogManager.getLogger(RegistrationService.class);
     private AbstractDaoFactory factory;
 
-    public RegistrationService(AbstractDaoFactory factory) {
+    RegistrationService(AbstractDaoFactory factory) {
         this.factory = factory;
     }
 

@@ -6,7 +6,7 @@ import ua.company.training.kukuruza.entity.User;
 public class CheckStatusService {
     private AbstractDaoFactory factory;
 
-    public CheckStatusService(AbstractDaoFactory factory) {
+    CheckStatusService(AbstractDaoFactory factory) {
         this.factory = factory;
     }
 

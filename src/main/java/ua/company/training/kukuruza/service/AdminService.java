@@ -16,7 +16,7 @@ public class AdminService {
     private static final Logger LOGGER = LogManager.getLogger(AdminService.class);
     private AbstractDaoFactory factory;
 
-    public AdminService(AbstractDaoFactory factory) {
+    AdminService(AbstractDaoFactory factory) {
         this.factory = factory;
     }
 

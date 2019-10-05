@@ -13,7 +13,7 @@ public class SummaryRatingService {
     private static final Logger LOGGER = LogManager.getLogger(SummaryRatingService.class);
     private AbstractDaoFactory factory;
 
-    public SummaryRatingService(AbstractDaoFactory factory) {
+    SummaryRatingService(AbstractDaoFactory factory) {
         this.factory = factory;
     }
 

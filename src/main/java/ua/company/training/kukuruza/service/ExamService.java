@@ -17,7 +17,7 @@ public class ExamService {
     private final static Logger LOGGER = LogManager.getLogger(ExamService.class);
     private AbstractDaoFactory factory;
 
-    public ExamService(AbstractDaoFactory factory) {
+    ExamService(AbstractDaoFactory factory) {
         this.factory = factory;
     }
 

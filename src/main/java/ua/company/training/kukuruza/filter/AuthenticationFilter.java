@@ -21,7 +21,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
         String rootURI = req.getContextPath() + "/";
-        String assertURI = req.getContextPath() + ASSETS;
+        String assetURI = req.getContextPath() + ASSETS;
         String indexURI = req.getContextPath() + INDEX_PAGE;
         String registrationURI = req.getContextPath() + REGISTRATION_PAGE;
         String signInURI = req.getContextPath() + SIGN_IN_PAGE;
@@ -29,7 +29,7 @@ public class AuthenticationFilter implements Filter {
 
         boolean isLoggedIn = Objects.nonNull(session) && Objects.nonNull(session.getAttribute(AttributeNames.USER));
         boolean isRootRequest = req.getRequestURI().equals(rootURI);
-        boolean isAssertRequest = req.getRequestURI().startsWith(assertURI);
+        boolean isAssetRequest = req.getRequestURI().startsWith(assetURI);
         boolean isIndexRequest = req.getRequestURI().equals(indexURI);
         boolean isRegistrationRequest = req.getRequestURI().equals(registrationURI);
         boolean isSignInRequest = req.getRequestURI().equals(signInURI);
@@ -47,7 +47,7 @@ public class AuthenticationFilter implements Filter {
             }
         } else {
             if (isIndexRequest || isLocalizationCommand || isRegistrationRequest || isRootRequest ||
-                    isSignInRequest || isRegistrationCommand || isSignInCommand || isAssertRequest) {
+                    isSignInRequest || isRegistrationCommand || isSignInCommand || isAssetRequest) {
                 chain.doFilter(req, resp);
             } else {
                 resp.sendRedirect(signInURI);

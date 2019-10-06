@@ -17,6 +17,11 @@ import java.util.Set;
 
 import static ua.company.training.kukuruza.util.CommandNames.*;
 
+/**
+ * The filter restricts access for non-authorized users.
+ *
+ * @author Andrii Kukuruza
+ */
 public class AuthorizationFilter implements Filter {
     private static final Set<String> secureCommands = new HashSet<>();
 

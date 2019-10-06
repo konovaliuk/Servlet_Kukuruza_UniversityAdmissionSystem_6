@@ -13,6 +13,11 @@ import java.util.Objects;
 import static ua.company.training.kukuruza.util.CommandNames.*;
 import static ua.company.training.kukuruza.util.Path.*;
 
+/**
+ * The filter restricts access for non-authenticated users.
+ *
+ * @author Andrii Kukuruza
+ */
 public class AuthenticationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

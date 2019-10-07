@@ -5,13 +5,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ua.company.training.kukuruza.dao.AbstractDaoFactory;
-import ua.company.training.kukuruza.dao.IDaoExam;
-import ua.company.training.kukuruza.dao.IDaoSubject;
-import ua.company.training.kukuruza.dao.IDaoUserExam;
-import ua.company.training.kukuruza.entity.Exam;
-import ua.company.training.kukuruza.entity.Subject;
-import ua.company.training.kukuruza.entity.UserExam;
+import ua.company.training.kukuruza.persistence.dao.AbstractDaoFactory;
+import ua.company.training.kukuruza.persistence.dao.IDaoExam;
+import ua.company.training.kukuruza.persistence.dao.IDaoSubject;
+import ua.company.training.kukuruza.persistence.dao.IDaoUserExam;
+import ua.company.training.kukuruza.persistence.entity.Exam;
+import ua.company.training.kukuruza.persistence.entity.Subject;
+import ua.company.training.kukuruza.persistence.entity.UserExam;
 
 import java.util.*;
 

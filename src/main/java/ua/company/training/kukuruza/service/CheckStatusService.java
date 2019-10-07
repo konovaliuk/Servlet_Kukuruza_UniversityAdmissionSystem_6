@@ -1,7 +1,7 @@
 package ua.company.training.kukuruza.service;
 
-import ua.company.training.kukuruza.dao.AbstractDaoFactory;
-import ua.company.training.kukuruza.entity.User;
+import ua.company.training.kukuruza.persistence.dao.AbstractDaoFactory;
+import ua.company.training.kukuruza.persistence.entity.User;
 
 public class CheckStatusService {
     private AbstractDaoFactory factory;

@@ -1,7 +1,7 @@
 package ua.company.training.kukuruza.service;
 
-import ua.company.training.kukuruza.dao.AbstractDaoFactory;
-import ua.company.training.kukuruza.dao.daoMySql.MySqlDaoFactory;
+import ua.company.training.kukuruza.persistence.dao.AbstractDaoFactory;
+import ua.company.training.kukuruza.persistence.dao.daoMySql.MySqlDaoFactory;
 
 public class ServiceFactory {
     private static final AbstractDaoFactory FACTORY = MySqlDaoFactory.getInstance();

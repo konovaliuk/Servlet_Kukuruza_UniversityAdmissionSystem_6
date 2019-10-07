@@ -5,8 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ua.company.training.kukuruza.dao.*;
-import ua.company.training.kukuruza.entity.*;
+import ua.company.training.kukuruza.persistence.dao.*;
+import ua.company.training.kukuruza.persistence.entity.*;
 
 import java.util.*;
 

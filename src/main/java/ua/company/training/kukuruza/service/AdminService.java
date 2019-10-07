@@ -2,10 +2,10 @@ package ua.company.training.kukuruza.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.company.training.kukuruza.dao.AbstractDaoFactory;
-import ua.company.training.kukuruza.entity.Grade;
-import ua.company.training.kukuruza.entity.Subject;
-import ua.company.training.kukuruza.entity.User;
+import ua.company.training.kukuruza.persistence.dao.AbstractDaoFactory;
+import ua.company.training.kukuruza.persistence.entity.Grade;
+import ua.company.training.kukuruza.persistence.entity.Subject;
+import ua.company.training.kukuruza.persistence.entity.User;
 
 import java.util.Collections;
 import java.util.List;

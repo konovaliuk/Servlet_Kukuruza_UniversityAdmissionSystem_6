@@ -5,9 +5,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ua.company.training.kukuruza.dao.AbstractDaoFactory;
-import ua.company.training.kukuruza.dao.IDaoUser;
-import ua.company.training.kukuruza.entity.User;
+import ua.company.training.kukuruza.persistence.dao.AbstractDaoFactory;
+import ua.company.training.kukuruza.persistence.dao.IDaoUser;
+import ua.company.training.kukuruza.persistence.entity.User;
 
 import java.util.Optional;
 
